@@ -1,0 +1,172 @@
+            <div th:fragment = "left-sidebar" class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                  <div class="navbar nav_title" style="border: 0;">
+                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Lawbase</span></a>
+                  </div>
+      
+                  <div class="clearfix"></div>
+      
+                  <!-- menu profile quick info -->
+                  <div class="profile">
+                    <div class="profile_info">
+                      <h2>Welcome, John Doe</h2>
+                    </div>
+                  </div>
+                  
+                  <div class="clearfix"></div>
+                  <!-- /menu profile quick info -->
+      
+                  <br />
+      
+                  <!-- sidebar menu -->
+                  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                      <div class="menu_section">
+                          <h3>NAVIGATION</h3>
+                          <ul class="nav side-menu">
+                              <li>
+                                  <a><i class="fa fa-home"></i> Court books <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/courtbook/add}">Add</a></li>
+                                      <li><a th:href="@{/admin/courtbook/index}">Manage</a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a><i class="fa fa-home"></i> Acts <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/act/add}">Add</a></li>
+                                      <li><a th:href="@{/admin/act/manage}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/category/add?forEntity=act}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/category/manage?forEntity=act}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a><i class="fa fa-edit"></i> Cases <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/case/index}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/category/add?forEntity=case}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/category/manage?forEntity=case}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                              
+                              <li>
+                                  <a><i class="fa fa-desktop"></i> Journals <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/journal/add}">Add</a></li>
+                                      <li><a th:href="@{/admin/journal/index}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/classpath/add}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/classpath/manage}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                               <li>
+                                  <a><i class="fa fa-edit"></i> Articles <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/article/index}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/category/add?forEntity=article}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/category/manage?forEntity=article}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a><i class="fa fa-table"></i> Books <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/classpath/add}">Add</a></li>
+                                      <li><a th:href="@{/admin/classpath/manage}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/classpath/add}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/classpath/manage}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a><i class="fa fa-bar-chart-o"></i> Users <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/user/add}">Add</a></li>
+                                      <li><a th:href="@{/admin/user/index}">Manage</a></li>
+                                      <li>
+                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu" style="display: block;">
+                                              <li class="sub_menu">
+                                                  <a th:href="@{/admin/classpath/add}">Add</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/classpath/manage}">Manage</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                              </li>
+                              
+                              <li>
+                                  <a><i class="fa fa-archive"></i> Search Engine <span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li><a th:href="@{/admin/searchIndexing/index}">Manage</a></li>
+                                  </ul>
+                              </li>
+                              
+                          </ul>
+                      </div>
+
+                  </div>
+                  <!-- /sidebar menu -->
+      
+                  <!-- /menu footer buttons -->
+                  <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                      <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout">
+                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                  <!-- /menu footer buttons -->
+                </div>
+            </div>
+    

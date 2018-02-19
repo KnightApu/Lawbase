@@ -1,0 +1,252 @@
+
+<div class="page-title">
+	<div class="title_left" th:if=" ${ null != articleBook } ">
+		<h3 th:text="${ articleBook.title }"></h3>
+	</div>
+</div>
+
+<div class="clearfix"></div>
+<br>
+
+<!-- overlay section -->
+<div class="position-relative">
+
+	<div class='x_panel'>
+
+		<div class='x_title'>
+			<h2>Basic information</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+
+
+		<div class='x_content'>
+
+			<form th:object="${articleBook}" id="formBasicInformation" action=""
+				method="get" data-parsley-validate=""
+				class="form-horizontal form-label-left" novalidate=""
+				onsubmit=" return false; ">
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Title
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{title}" type="text" id="title" name="title"
+							required="required" class="form-control col-md-7 col-xs-12">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Year
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{year}" type="text" id="year" name="year"
+							required="required" class="form-control col-md-7 col-xs-12"
+							readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Volume
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{volume}" type="text" id="volume" name="volume"
+							required="required" class="form-control col-md-7 col-xs-12"
+							readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Issue
+						No <span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{issueNo}" type="text" id="issue" name="issue"
+							required="required" class="form-control col-md-7 col-xs-12">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">
+						Status </label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<!--  <input th:value="*{volume}" type="text" id="" name="" required="required" class="form-control col-md-7 col-xs-12" disabled >
+                                   	 -->
+						<div>
+							<div>
+								<input type="radio" th:name="@{status}" value="DRAFT"
+									th:checked="${articleBook.getStatus().name()=='DRAFT'}" />Draft
+
+
+							</div>
+
+							<div>
+								<input type="radio" th:name="@{status}" value="PUBLIC"
+									th:checked="${articleBook.getStatus().name()=='PUBLIC'}" />Public
+
+							</div>
+							
+
+
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Author
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{externalAuthor}" type="text"
+							id="externalAuthor" name="externalAuthor" required="required"
+							class="form-control col-md-7 col-xs-12">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">
+						Author's Description </label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<textarea th:text="*{externalAuthorDescription}"
+							class="form-control richEditor" id="authorDescriptor"
+							name="description" rows="3"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Search Terms </label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{searchTerms}" type="text" id="searchTerms"
+							name="searchTerms" required="required"
+							class="form-control col-md-7 col-xs-12">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Subject</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input th:value="*{subject}" type="text" id="subject"
+							name="subject" required="required"
+							class="form-control col-md-7 col-xs-12">
+					</div>
+				</div>
+				
+				<label class="control-label col-md-6 col-sm-3 col-xs-12" for=""><h1>Article</h1>
+					</label>
+				
+					
+					<div class="col-md-12 ">
+						<textarea th:text="*{description}" class="form-control richEditor"
+							id="article" name="article" rows="20"></textarea>
+					</div>
+				
+				<div class="ln_solid"></div>
+				
+					<div class="col-md-6 col-sm-6 col-xs-12 ">
+						<button id="submitArticle" type="submit" class="btn btn-success">Save
+							All</button>
+						<!--<input type="hidden" name="updateType" value="article">-->
+						<div id="loadingSection"></div>
+					</div>
+				
+				<input type="hidden" name="updateType" value="article"> 
+
+			</form>
+		
+	</div>
+
+
+
+	<script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                    var articleBookId = /*[[ ${ articleBook.getStringId() } ]]*/ 0;
+                    var rootNodeId = /*[[ ${ articleBook.getRootNode().getStringId() } ]]*/ 0;
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+
+	<script th:src="@{/tinymce/tinymce.min.js}"></script>
+	<script>
+                    tinymce.init({ 
+                    	
+                      selector:'.richEditor',
+                   	  theme: 'modern',
+                   	  
+                   	  plugins: [
+                   	    'advlist autolink lists link charmap print preview hr anchor pagebreak',
+                   	    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                   	    'insertdatetime media nonbreaking save table contextmenu directionality',
+                   	    'emoticons template paste textcolor colorpicker textpattern toc'
+                   	  ],
+                   	  
+                   	  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link ',
+                   	  toolbar2: 'print preview media | forecolor backcolor emoticons', 
+
+                      setup: function (editor) {
+                          editor.on('change', function () {
+                              editor.save();
+                          });
+                      }
+                    	
+                    });
+               </script>
+
+	<script>
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "articleList" : "#articleList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "articleModal" : "#articleModal"
+                           
+                   }
+                   $( document ).ready( function(e) { 
+                	   
+                	   $('#hiddenElements').hide();
+
+                       var bookProcessor = new BookProcessor ( articleBookId, loadingSelector );
+                       
+                       mApp.setUpRestPaths ( bookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+                       console.log( bookProcessor );
+                       
+                       var book = new Book( articleBookId, bookProcessor, env );
+                       console.log( book );
+                       
+                       ConvertToArticleBook( book, bookProcessor );
+                       console.log( book );
+
+                       $( "#submitArticle" ).click( function() {
+                           
+                           book.update( '#formBasicInformation' );                          
+                           
+                       });
+ 						
+                	   
+                   } );
+               
+               </script>

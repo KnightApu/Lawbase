@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace = "admin/components/html-head :: html-head"></head>
+
+    <body class="nav-md">
+        <div class="container body">
+          <div class="main_container">
+            
+            <!-- LEFT SIDEBAR -->
+            <section th:replace = "admin/components/sidebar :: left-sidebar"></section>
+            <!-- / LEFT SIDEBAR -->
+            
+            <!-- top navigation -->
+            <section th:replace = "admin/components/top-nav :: top-nav"></section>
+            <!-- /top navigation -->
+    
+            <!-- page content -->
+            <div class="right_col" role="main">
+                              
+                <div th:replace = "'admin/components/act-' + ${templatePart}" ></div>
+    
+            </div>
+            <!-- /page content -->
+    
+            <!-- footer content -->
+            <footer>
+              <div class="pull-right">
+                Powered by <a href="https://www.revesoft.com">Reve</a>
+              </div>
+              <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+          </div>
+        </div>
+  
+  
+        <section th:replace = "admin/components/html-footer :: html-footer"> </section>
+        
+        <!--  end of html-footer -->
+        <script th:inline="javascript">
+                /*<![CDATA[*/
+                 
+                    var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                    
+                    var controllerPaths = {
+                         
+                         "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                         "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                         "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                         "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                         "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                         
+                    }
+
+                /*]]>*/
+                </script>
+         <script th:src="@{/admin/js/book.js}"></script>
+        <script th:src="@{/admin/js/act.js}"></script>
+    </body>
+</html>

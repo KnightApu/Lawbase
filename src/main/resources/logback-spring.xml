@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    
+    <springProfile name="dev,staging">
+    
+        <logger name = "com.lawbase" level="DEBUG" />
+        <logger name = "com.adhocmaster" level="DEBUG" />
+        <logger name = "org.springframework.security" level= "WARN" />
+        
+        <root level="warn">
+            <appender-ref ref="FILE" />
+            <appender-ref ref="CONSOLE" />
+        </root>
+        
+    </springProfile>
+    
+    <springProfile name="production">
+        
+        <root level="error">
+            <appender-ref ref="FILE" />
+            <appender-ref ref="CONSOLE" />
+        </root>
+        
+    </springProfile>
+    
+ </configuration>

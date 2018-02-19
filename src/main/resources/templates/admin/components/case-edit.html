@@ -1,0 +1,539 @@
+
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != caseBook } ">
+                    <h3 th:text="${ caseBook.title }"></h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                    
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Basic information</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+                             <form th:object="${caseBook}" id="formBasicInformation" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+            
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Claimant <span class="required">*</span>
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{firstParty}" type="text" id="firstParty" name="firstParty" required="required" class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Defendant 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{secondParty}"  type="text" id="secondParty" name="secondParty" required="required" class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Sources 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea th:text="${ caseBook.getSourcesAsCSV() }"  class="form-control" id="sources" name="sources" rows="3"></textarea>
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Search terms 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea th:text="${ caseBook.getKeywordsAsCSV() }" class="form-control" id="keywords" name="keywords" rows="3"></textarea>
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Court 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{courtBookTitle}" type="text" id="" name="" required="required" class="form-control col-md-7 col-xs-12" disabled >
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Year 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{year}" type="text" id="" name="" required="required" class="form-control col-md-7 col-xs-12" disabled >
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Volume 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{volume}" type="text" id="" name="" required="required" class="form-control col-md-7 col-xs-12" disabled >
+                                   </div>
+                                 </div>
+                                 
+                                 
+                                 
+                                 <div class="form-group">
+                
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Treatment 
+                                   </label>
+                
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                   
+                						<div>
+	             							<div >
+	             								<input type="radio" th:name="@{treatment}" value="NT"  
+									              		th:checked="${caseBook.getTreatment().name()=='NT'}" />
+									              		<img th:src="@{/images/Negative treatment.png}">Negative									                
+	             							</div>
+	             							
+	             							<div >
+	             								<input type="radio" th:name="@{treatment}" value="CT"  
+									              		th:checked="${caseBook.getTreatment().name()=='CT'}"/>
+									              		<img th:src="@{/images/Caution.jpg}">Cautionary									              
+	             							</div>
+	             							
+	             							<div >
+	             								<input type="radio" th:name="@{treatment}" value="PT"  
+									              		th:checked="${caseBook.getTreatment().name()=='PT'}"/>
+									              <img th:src="@{/images/positive treatment.png}">Positive									            
+	             							</div>
+	             							
+	             							<div>
+	             								<input type="radio" th:name="@{treatment}" value="NHOT"  
+									              		th:checked="${caseBook.getTreatment().name()=='NHOT'}"/>
+									              		<img th:src="@{/images/Neutral.png}">Natural History or Treatment									              
+	             							</div>
+	             							
+	             							<div>
+	             								<input type="radio" th:name="@{treatment}" value="CI"  
+									              		th:checked="${caseBook.getTreatment().name()=='CI'}"/>
+									              		<img th:src="@{/images/Citator Information.png}">Citator Information             
+	             							</div>
+	             							
+	             							<div>
+	             								<input type="radio" th:name="@{treatment}" value="NA"  
+									              		th:checked="${caseBook.getTreatment().name()=='NA'}"/>Not Available
+									              	             							
+	             							</div>
+	            
+	       								</div>
+	
+	                                  </div>
+                                   
+								</div>
+								
+								<div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Status 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                   		<div>
+	                                   		<div class="col-md-6 col-sm-6 col-xs-12">
+		             							<input type="radio" th:name="@{status}" value="DRAFT"  
+										              		th:checked="${caseBook.getStatus().name()=='DRAFT'}" />
+										              		DRAFT									                
+		             						</div>
+		             							
+		             						<div class="col-md-6 col-sm-6 col-xs-12" >
+		             							<input type="radio" th:name="@{status}" value="PUBLIC"  
+										              		th:checked="${caseBook.getStatus().name()=='PUBLIC'}"/>
+										              		PUBLIC									              
+		             						</div> 
+	             						</div>
+                                   </div>
+                                 </div>
+								
+                                 
+                                 <div class="ln_solid"></div>
+                                 <div class="form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                   
+                                     <button id="submitBasicInformation" type="submit" class="btn btn-success">Save basic information</button>
+                                     <input type="hidden" name="updateType" value="basicInformation">
+                                     
+                                     <div id="loading"></div>
+                                   </div>
+                                 </div>
+            
+                             </form>
+                   
+                        </div>
+                   </div>
+                   
+                   
+                   <!-- 
+                   
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Category</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                            <h4>the bonsai tree with check box is coming</h4>
+                            	
+								<form th:object="${caseBook}" id="formCategoryInformation" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+									
+									<div id="output">
+									    <!-- for bonsai tree from json -->
+										 <!--  
+									
+									</div>
+									
+									<div class="ln_solid"></div>
+	                                 <div class="form-group">
+	                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+	                                   		<!-- 
+	                                     <button id="submitCategoryInformation" type="submit" class="btn btn-success">Save category information</button>
+	                                     <input type="hidden" name="updateType" value="categoryInformation">
+	                                      -->
+	                                	<!-- 	
+	                                	     
+	                                     <div id="loading"></div>
+	                                   </div>
+	                                 </div>
+                                 </form>
+                            
+                        </div>
+                   </div>
+                
+                -->	
+                                	
+                	
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Digest</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                            
+                           <div th:replace = "admin/components/case-digest-form" ></div>
+                    
+                        </div>
+                   </div>
+                   <div class='x_panel'>
+                        <div class='x_title'>
+                            <h2>Transcript</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+                             <form th:object="${caseBook}" id="formTranscript" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+            
+                                 <div class="form-group">
+                                   <div class="col-md-12 ">
+                                        <textarea th:text="*{transcript}"  class="form-control richEditor" id="transcript" name="transcript" rows="20"></textarea>
+                                   </div>
+                                 </div>
+                                 <div class="ln_solid"></div>
+                                 <div class="form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                     <button id="submitTranscript" type="submit" class="btn btn-success">Save transcript</button>
+                                     <input type="hidden" name="updateType" value="transcript">
+                                     <div id="loading"></div>
+                                   </div>
+                                 </div>
+            
+                             </form>
+                   
+                        </div>
+                        
+					    <div class="x_content">
+					    	<div class="ln_solid"></div>
+						<!--  	<form method="POST" id="formUploadTranscript" enctype="multipart/form-data" th:action="@{'/data-api/extra/media'}" >
+							-->
+							<form th:object="${caseBook}" enctype="multipart/form-data" id="formUploadTranscript" action="" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+								<div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> File to upload:
+                                   </label>
+                                   <input type="file" name="file" />
+                                   
+                                    <input type="hidden" name="updateType" value="transcriptMedia"> 
+                                
+                                </div>
+                                
+                                <div class="ln_solid"></div>
+                                 <div class="form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <button id="uploadTranscript" value="upload" type="submit" class="btn btn-success">Upload transcript</button>
+                                    
+                                     <div id="loading"></div>
+                                   </div>
+                                 </div>
+                                 
+                            
+							</form>
+								
+								
+						</div>
+						
+						<div class="x_content">
+					    	<div class="ln_solid"></div>
+						<!--  	<form method="POST" id="formUploadTranscript" enctype="multipart/form-data" th:action="@{'/data-api/extra/media'}" >
+							-->
+							<form th:object="${caseBook}" enctype="multipart/form-data" id="downloadTranscript" action="" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+								<div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Existing File:
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     
+                                     <table>
+                                     <tr th:each="media : ${caseBook.mediaSet}">
+                                     	<td> <a th:href="@{ '/media?id=' + ${ media.id }  }" class="btn btn-info btn-xs" text="${media.name}"><i class="fa fa-download"></i> </a></td>
+	    								<!-- // TODO add delete  
+	    								<td> <a th:href="@{ '/mediaDelete?id=' + ${ media.id }  }" class="btn btn-info btn-xs" text="${media.name}"><i class="fa fa-close"></i> </a></td>
+	    								-->
+	    								
+	    								<td th:text="${media.name}">mediaName</td>
+	    								
+	    							<!--   <a th:href="@{ ${ controllerPaths['edit'] } + ${ book.id } }" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                     -->
+                                     
+                                     </tr>
+                                     </table>
+                                     
+                                   </div>
+                                 </div>
+                                
+                                <div class="ln_solid"></div>
+                                 
+                            
+							</form>
+								
+								
+						</div>
+						
+                   </div>
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+                
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                    var caseBookId = /*[[ ${ caseBook.getStringId() } ]]*/ 0;
+                    var rootNodeId = /*[[ ${ caseBook.getRootNode().getStringId() } ]]*/ 0;
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+                <script th:src="@{/tinymce/tinymce.min.js}"></script>
+                <script>
+                    tinymce.init({ 
+                    	
+                      selector:'.richEditor',
+                   	  theme: 'modern',
+                   	  
+                   	  plugins: [
+                   	    'advlist autolink lists link charmap print preview hr anchor pagebreak',
+                   	    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                   	    'insertdatetime media nonbreaking save table contextmenu directionality',
+                   	    'emoticons template paste textcolor colorpicker textpattern toc'
+                   	  ],
+                   	  
+                   	  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link ',
+                   	  toolbar2: 'print preview media | forecolor backcolor emoticons', 
+
+                      setup: function (editor) {
+                          editor.on('change', function () {
+                              editor.save();
+                          });
+                      }
+                    	
+                    });
+               </script>
+               
+               <script>
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "caseList" : "#caseList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "caseModal" : "#caseModal"
+                           
+                   }
+                   $( document ).ready( function(e) { 
+                	   
+                	   $('#hiddenElements').hide();
+
+                       var bookProcessor = new BookProcessor ( caseBookId, loadingSelector );
+                       
+                       mApp.setUpRestPaths ( bookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+                       console.log( bookProcessor );
+                       
+                       var book = new Book( caseBookId, bookProcessor, env );
+                       console.log( book );
+                       
+                       ConvertToCaseBook( book, bookProcessor );
+                       console.log( book );
+
+                       $( "#submitBasicInformation" ).click( function() {
+                           
+                           book.update( '#formBasicInformation' );                          
+                           
+                       });
+
+                       $( "#submitDigest" ).click( function() {
+                           
+                           book.update( '#formDigest' );
+                           
+                       });
+                       $( "#submitTranscript" ).click( function() {
+                           
+                           book.update( '#formTranscript' );
+                           
+                       });
+ 						$( "#uploadTranscript" ).click( function() {
+                           
+                        	book.updateMedia('#formUploadTranscript');
+                         	
+                       });
+ 						$( "#submitReference" ).click( function() {
+ 	                           
+ 	                    	book.update( '#formReference' );
+ 	                           
+ 	                   });	
+ 						$( "#submitCategoryInformation" ).click( function() {
+	                           
+ 	                    	//book.update( '#formCategoryInformation' );
+ 	                           
+ 	                   });
+ 						//since catrgory is hidden this function is commented out
+ 						//loadCategoryTree();
+ 						
+                	   
+                   } );
+               
+               </script>
+               
+             
+        
+        		<script> 		
+    			
+        		function convertToHtml(json)
+        		{
+        			var result="";
+        			
+        			//alert("Size:"+json.length);
+        			
+        			for(var i = 0; i < json.length; i++)
+        			{
+        				var tempJson = json[i];
+        				
+        				var tempResult="";
+        				
+        				if(tempJson.children.length > 0)
+        				{
+        					
+        					tempResult += convertToHtml(tempJson.children);
+        				
+        					result += "<li data-value='"+tempJson.name+"' data-name='categoryList'>"+tempJson.name+"<ol>" + tempResult + "</ol></li>";
+           				 	        					//value is id. change.now testing with name
+        				}
+        				else
+        				{
+        					result += "<li data-value='"+tempJson.name +"' data-name='categoryList'>"+tempJson.name+"</li>";		
+        					//value is id. change.now testing with name
+        				}
+        				
+        				
+        			}
+        			return result;
+        		}
+        		
+        		</script>
+        		
+        		
+               <script>
+               
+				function loadCategoryTree()
+				{
+					var jsonData;
+					
+	               	$.getJSON('/admin/rest/category?forEntity=case', function(data) {
+	            	    //data is the JSON string
+						jsonData = data;
+	            	    
+						var finalString = "<ol id='categoryCheckbox'><li class='expanded' data-value='all' data-name='categoryList'>All";
+	            	    
+	            	   	finalString += "<ol >" + convertToHtml(jsonData['aaData']) + "</ol>";
+	            	    	
+	            	    finalString += "</li></ol>";
+	               		
+	            	    document.getElementById('output').innerHTML = finalString;//createHTML(jsonData['aaData'], true);
+	               		
+	               		
+	               		$('#categoryCheckbox').bonsai({
+	                  	   expandAll: true,
+	                  	   checkboxes: true, // depends on jquery.qubit plugin
+	                  	   createInputs: 'checkbox', // takes values from data-name and data-value, and data-name is inherited
+	                  	   addExpandAll: false, // add a link to expand all items
+	                  	   addSelectAll: false, // add a link to select all checkboxes
+	                  	   expand: null, // optional function to expand an item
+	                  	   collapse: null // optional function to collapse an item
+	                  	 });
+	               		
+	               		$(":checkbox").on("change",function() {
+ 							console.log("a box is changeded" + $(this).val());  
+ 							//alert("event");
+ 							
+ 							//mApp.loadingOverlayAction().show();
+ 							//ajax call to update category info
+ 							//in callback function of the ajax need to call mApp.loadingOverlayAction().hide()
+ 							
+ 						});
+	               		
+	               		
+	            	});
+               
+				}
+				
+               </script>
+               
+        
+                

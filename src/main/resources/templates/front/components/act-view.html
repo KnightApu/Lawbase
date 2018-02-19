@@ -1,0 +1,184 @@
+				
+				<!--  
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != actBook } ">
+                    <h3 th:text="${ actBook.title }"></h3>
+                  </div>
+                </div>
+               
+               -->
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                    
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h4>Basic information</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        	<table class="table table-striped" id=formBasicInformation th:object="${actBook}">
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Title</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getTitle()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Act Number</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getNumber()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Published Date</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getDateForInputMask(actBook.datePublished)}></td>                        			
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Treatment</b></td>
+                        			<!--  
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getTreatment().getText()}></td>
+                        			-->
+                        			
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'NYIF'" ><img th:src="@{/images/Not in force.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'LIF'" ><img th:src="@{/images/Law in force.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'R'" ><img th:src="@{/images/Repealed.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'PBIS'" ><img th:src="@{/images/Pending.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'AA'" ><img th:src="@{/images/Annotation available.jpg}"></td>
+                        			
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${actBook.getTreatment().name()} == 'NA'" th:text=${actBook.getTreatment().getText()}></td>
+                        			
+                        			
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Description</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getDescription()} id="description"></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Year</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getYear()}></td>
+                        		</tr>
+                        		
+                        		
+                        	
+                        		
+                        	</table>
+                        	                   
+                        </div>
+                   </div>
+                
+                   
+                   <div class='x_panel'>
+                        <div class='x_title'>
+                            <h4>Section</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+            				<table class="table table-striped" th:object="${actBook}">
+            					<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Sections</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${actBook.getSections()} id="sections"></td>
+                        		</tr>
+                    				
+                   			</table>
+                   			
+                        </div>
+                  </div>
+                  
+                    <div class='x_panel'>
+                        <div class='x_title'>
+                            <h4>Documents</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+						
+						<div class="x_content">
+					    	<div class="ln_solid"></div>
+						
+							<table class="table table-striped" th:object="${actBook}">
+								<tr>
+                        			
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Existing File</b></td>
+                        			
+                        			<td class="col-md-9 col-sm-9 col-xs-6">
+                        				<table>
+		                                     <tr th:each="media : ${actBook.mediaSet}">
+		                                     	
+		                                     	<td> <a th:href="@{ '/media?id=' + ${ media.id }  }"  class="btn btn-info btn-xs" text="${media.name}"><i class="fa fa-download"></i> </a></td>
+			    									    								
+		                                     	<td> <a th:href="@{ '/mediaOpen?id=' + ${ media.id }  }" target="_blank"  th:text="${media.name}"> </a>  </td>
+		                                    
+		                                     </tr>
+                                     	</table>
+                        			
+                        			</td>
+                        		</tr>
+							</table>
+								
+								
+						</div>
+						
+                   </div>
+                   <!-- 
+                   <div th:replace = "admin/components/content-loader" ></div>
+                 -->
+                </div>
+                
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                    var actBookId = /*[[ ${ actBook.getStringId() } ]]*/ 0;
+                    var rootNodeId = /*[[ ${ actBook.getRootNode().getStringId() } ]]*/ 0;
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "view"   : /*[[ @{ ${ controllerPaths['view'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+               
+               
+               <script type="text/javascript">
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "actList" : "#actList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "actModal" : "#actModal"
+                           
+                   }
+                 
+               
+               </script>

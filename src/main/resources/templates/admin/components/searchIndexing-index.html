@@ -1,0 +1,287 @@
+
+                <div class="page-title">
+                  <div class="title_left" >
+                    <h3 th:text="@{'Search Engine Indexing'}"></h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                    
+                   <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">                      
+                        
+                        <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                        	<thead>
+                         		<tr role="row">
+                            		<th>Sl No</th>
+                            		<th>Component</th>
+                            		<th>Action</th>
+                        	 	</tr>
+                       		</thead>
+                       		<tbody>
+                        		<tr>
+                        			<td>1.</td>
+                        			<td>Case</td>
+                        			<td>
+                        				<button type="button" id="caseIndexStatus" class="btn btn-info" ><i class="fa fa-folder"></i> Status</button>
+                        				
+                        				<!-- Small modal -->
+                        				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#caseRebuildModal"><i class="fa fa-gavel"></i> Rebuild Search Index</button>
+
+                  						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="caseRebuildModal">
+                    						<div class="modal-dialog modal-sm">
+                      							<div class="modal-content">
+
+                        							<div class="modal-header">
+                          								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                          								</button>
+                          								<h4 class="modal-title" id="myModalLabel2">Rebuild Search Index</h4>
+                        							</div>
+                        							<div class="modal-body">
+                          								<h4>Case</h4>
+                          								<p>Do you really want to rebuild the index for <b><i>Case</i></b>?</p>
+                          							</div>
+                        							<div class="modal-footer">
+                          								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                          								<button id="rebuildCaseButton" type="button" class="btn btn-primary">Yes</button>
+                        							</div>
+
+                      							</div>
+                    						</div>
+                  						</div>
+                 						 <!-- /modals -->
+                        				
+                        			</td>                        	
+                        		</tr>
+                        		<tr>
+                        			<td>2.</td>
+                        			<td>Act</td>
+                        			<td>
+                        				<button type="button" id="actIndexStatus" class="btn btn-info" ><i class="fa fa-folder"></i> Status</button>
+                        				
+                        				<!-- Small modal -->
+                  						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actRebuildModal"><i class="fa fa-gavel"></i> Rebuild Search Index</button>
+
+                  						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="actRebuildModal">
+                    						<div class="modal-dialog modal-sm">
+                      							<div class="modal-content">
+
+                        							<div class="modal-header">
+                          								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                          								</button>
+                          								<h4 class="modal-title" id="myModalLabel2">Rebuild Search Index</h4>
+                        							</div>
+                        							<div class="modal-body">
+                          								<h4>Act</h4>
+                          								<p>Do you really want to rebuild the index for <b><i>Act</i></b>?</p>
+                          							</div>
+                        							<div class="modal-footer">
+                          								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                          								<button id="rebuildActButton" type="button" class="btn btn-primary">Yes</button>
+                        							</div>
+
+                      							</div>
+                    						</div>
+                  						</div>
+                 						<!-- /modals -->
+                        			
+                        			</td>                        	
+                        		</tr>
+                        	</tbody>
+                        </table>
+                   
+                       
+                   </div>
+            
+                   
+                	
+                   
+                   
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+                
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                	
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+                
+               
+               <script>
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "caseList" : "#caseList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "caseModal" : "#caseModal"
+                           
+                   }
+                   $( document ).ready( function(e) { 
+                	   /*
+                	   $('#hiddenElements').hide();
+
+                       var bookProcessor = new BookProcessor ( caseBookId, loadingSelector );
+                       
+                       mApp.setUpRestPaths ( bookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+                       console.log( bookProcessor );
+                       
+                       var book = new Book( caseBookId, bookProcessor, env );
+                       console.log( book );
+                       
+                       ConvertToCaseBook( book, bookProcessor );
+                       console.log( book );
+                       */
+                       
+                       //mApp.setUpRestPaths ( user, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+						
+						$( "#rebuildCaseButton" ).click( function() {
+	                        
+							searchIndexingProcessor.rebuild( "case" );                       
+                           
+                       });
+	                       
+						$( "#rebuildActButton" ).click( function() {
+                           
+							searchIndexingProcessor.rebuild( "act" );                       
+                           
+                       });
+
+						$( "#caseIndexStatus" ).click( function() {
+	                        
+							searchIndexingProcessor.checkStatus( "case" );                       
+                           
+                       });
+						
+						$( "#actIndexStatus" ).click( function() {
+	                        
+							searchIndexingProcessor.checkStatus( "act" );                       
+                           
+                       });
+                       	
+ 						$( "#submitCategoryInformation" ).click( function() {
+	                           
+ 	                    	//book.update( '#formCategoryInformation' );
+ 	                           
+ 	                   });
+ 						//since catrgory is hidden this function is commented out
+ 						//loadCategoryTree();
+ 						
+                	   
+                   } );
+               
+               </script>
+               
+             
+        
+        		<script> 		
+    			
+        		function convertToHtml(json)
+        		{
+        			var result="";
+        			
+        			//alert("Size:"+json.length);
+        			
+        			for(var i = 0; i < json.length; i++)
+        			{
+        				var tempJson = json[i];
+        				
+        				var tempResult="";
+        				
+        				if(tempJson.children.length > 0)
+        				{
+        					
+        					tempResult += convertToHtml(tempJson.children);
+        				
+        					result += "<li data-value='"+tempJson.name+"' data-name='categoryList'>"+tempJson.name+"<ol>" + tempResult + "</ol></li>";
+           				 	        					//value is id. change.now testing with name
+        				}
+        				else
+        				{
+        					result += "<li data-value='"+tempJson.name +"' data-name='categoryList'>"+tempJson.name+"</li>";		
+        					//value is id. change.now testing with name
+        				}
+        				
+        				
+        			}
+        			return result;
+        		}
+        		
+        		</script>
+        		
+        		
+               <script>
+               
+				function loadCategoryTree()
+				{
+					var jsonData;
+					
+	               	$.getJSON('/admin/rest/category?forEntity=case', function(data) {
+	            	    //data is the JSON string
+						jsonData = data;
+	            	    
+						var finalString = "<ol id='categoryCheckbox'><li class='expanded' data-value='all' data-name='categoryList'>All";
+	            	    
+	            	   	finalString += "<ol >" + convertToHtml(jsonData['aaData']) + "</ol>";
+	            	    	
+	            	    finalString += "</li></ol>";
+	               		
+	            	    document.getElementById('output').innerHTML = finalString;//createHTML(jsonData['aaData'], true);
+	               		
+	               		
+	               		$('#categoryCheckbox').bonsai({
+	                  	   expandAll: true,
+	                  	   checkboxes: true, // depends on jquery.qubit plugin
+	                  	   createInputs: 'checkbox', // takes values from data-name and data-value, and data-name is inherited
+	                  	   addExpandAll: false, // add a link to expand all items
+	                  	   addSelectAll: false, // add a link to select all checkboxes
+	                  	   expand: null, // optional function to expand an item
+	                  	   collapse: null // optional function to collapse an item
+	                  	 });
+	               		
+	               		$(":checkbox").on("change",function() {
+ 							console.log("a box is changeded" + $(this).val());  
+ 							//alert("event");
+ 							
+ 							//mApp.loadingOverlayAction().show();
+ 							//ajax call to update category info
+ 							//in callback function of the ajax need to call mApp.loadingOverlayAction().hide()
+ 							
+ 						});
+	               		
+	               		
+	            	});
+               
+				}
+				
+               </script>
+               
+        
+                

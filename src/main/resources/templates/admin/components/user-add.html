@@ -1,0 +1,147 @@
+
+                <div class="page-title">
+                  <div class="title_left">
+                    <h3>Create new User</h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                <div class="position-relative">
+                
+                   <form id="userCreateForm" action="" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+  
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">User Name <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="userName" name="userName" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>  
+                     
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>                   
+                     
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>                     
+                     
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>
+                     
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">Role <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <select class="form-control" field="role" name="role" id="role">
+                            <option th:value="@{'USER'}">User</option>
+                            <option th:value="@{'ADMIN'}">Admin</option>
+                            <option th:value="@{'ENTERPRISE'}">Enterprise</option>
+                          </select>                         
+                    	 </div>
+                    </div>
+                    
+                    <div class="form-group" id="ipAddressPart">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ipAddress">Ip Address <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="ipAddress" name="ipAddress" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                    </div>
+                     
+                     <div class="ln_solid"></div>
+                     <div class="form-group">
+                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                         <button id="addSubmit" type="submit" class="btn btn-success">Submit</button>
+                         <div id="loading"></div>
+                       </div>
+                     </div>
+  
+                   </form>
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+               
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+               	 
+                    var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                    
+                    var controllerPaths = {
+                   		 
+                   		 "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                   		 "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                         "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                         "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                         "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                   		 
+                    }
+
+                /*]]>*/
+                </script>
+                <script type="text/javascript">
+                
+                    var loadingSelector = "#loading";
+                
+                    $( document ).ready( function() {
+                    	
+                    	$("#ipAddressPart").hide();
+                    	
+                    	console.log( "document.ready has been called - > it will print four info." );
+                        
+                        console.log( mApp );
+                        console.log( action );
+                        console.log( controllerPaths );
+                        console.log( "done printing this four info" );
+                        
+                        var tempRole = $("#role").val();
+                        
+                        console.log("role is:" + tempRole);
+                        
+                        $("#role").change( function(){
+                        	 
+                        	tempRole = $("#role").val();
+                             
+                            if( tempRole == "ENTERPRISE" ){
+                            	
+                            	$("#ipAddressPart").show();
+                            	
+                            }
+                            else{
+                            
+                            	$("#ipAddressPart").hide();
+                            
+                            }
+                        });
+                        
+
+                        $( "#addSubmit" ).click( function() {
+                            
+                         	 $( "#loadingOverlay").css( "display", "block" );
+
+                            console.log( "6. before calling user procecssor add" );
+                            
+                            user.add( "#userCreateForm" );
+                            
+                            return false;
+                            
+                        });
+                   	 
+                    } );
+                
+                </script>
+                

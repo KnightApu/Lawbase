@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head th:replace = "front/components/html-head">
+
+	</head>
+	
+        
+		<section th:replace = "front/components/section-head"></section>
+		
+        <body>
+        
+        <section >
+            <div class="container">
+				
+				<div class="heading text-center ">
+					<h2>Search Act</h2>
+				</div>	
+				<br>
+				<button id="editSearchButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-search" >Change Search Criteria<i id="icon" class="fa fa-chevron-down"></i></button>
+	       	                
+	            
+	            <div class="col-md-12" id="edit-search">
+							
+					<div th:replace = "front/components/searchAct-edit" ></div>
+							
+	            </div>
+	            
+	            <!-- page content -->
+					
+				<div class="col-md-12" role="main">		
+						   
+					<div th:replace = "'front/components/act-' + ${templatePart}" ></div>
+					   
+					<!--  	                
+					<div th:replace = "front/components/case-index" ></div>
+					-->
+						                
+				 </div>
+	            <!-- /page content -->
+	                
+              
+            </div>
+        </section>
+
+	    <div th:replace = "front/components/html-footer"></div>
+
+		
+		
+		<script>
+		$(document).ready(function(){
+			//alert("working");
+			$("#edit-search").hide();
+		  	
+			$("#editSearchButton").click(function(){
+		        $("#edit-search").show();
+		        $("#icon").toggleClass('fa fa-chevron-up fa fa-chevron-down');
+		        //$(this).hide();
+			});
+			
+			var field = $.urlParam('field');
+			var value = $.urlParam('value');
+			
+			var parameter = "field="+field+"&value="+value;
+			console.log(parameter);
+			
+			if(field != null)
+			{
+				dataTableLoadFromData(parameter);
+			}
+
+			
+			$( "#solrActSearchCriteriaSubmit" ).click( function() {
+	            
+	       		var dataFromForm = $("#searchCriteriaForm").serialize();
+	       		
+	       		var inputWord = $("#value").val(); 
+	       		
+	       		if(inputWord == "")  //if(dataFromForm.match("value=&"))	       		
+	       		{
+	       			alert("Please write the TEXT you want to search in the search box first");	
+	       		}
+	       		else
+	       		{
+	       			dataTableLoadFromData(dataFromForm);
+		         		
+	       		}
+	         	//alert("hi data from form"+dataFromForm );
+	                
+	        });
+			
+
+			/*  hide the table when no data */
+			var tableBody = $("#datatable tbody");
+
+			if (tableBody.children().length == 0) {
+				//tableBody.html("<tr><td></td><td></td><td>message foo</td></tr>");
+				//$("#datatable").hide();
+				//$("#tableTitle").hide();
+			    
+			}
+			
+					
+		});
+		</script>
+		<script>
+		$.urlParam = function(name){
+		    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		    if (results==null){
+		       return null;
+		    }
+		    else{
+		       return decodeURI(results[1]) || 0;
+		    }
+		}
+		</script>
+
+	</body>
+</html>

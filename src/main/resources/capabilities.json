@@ -1,0 +1,80 @@
+{
+    "roles" : [
+        "USER",
+        "ADMIN",
+        "ENTERPRISE",
+        "TEACHER",
+        "STUDENT"
+    ],
+    
+    "USER" : [
+    
+        "READ_CASE",
+        
+        "READ_ACT",
+        
+        "READ_COURT"
+    
+    ],
+    
+    "ENTERPRISE" : [
+    
+        "READ_CASE"
+    
+    ],
+    
+    "TEACHER" : [
+    
+        "ADD_CONTENT",
+        "EDIT_CONTENT",
+        "DELETE_CONTENT",
+            
+        "ADD_ACTIVITY",
+        "EDIT_ACTIVITY",
+        "DELETE_ACTIVITY",
+        "MANAGE_ACTIVITY",
+        
+        "ADD_STUDENT",
+        "EDIT_STUDENT",
+        
+        "ADD_PERIOD",
+        "EDIT_PERIOD"
+    
+    ],
+    
+    "ADMIN" : [
+    
+        "ADD_USER",
+        "EDIT_USER",
+        "DELETE_USER",
+        "MANAGE_USER",
+        
+        "ADD_STUDENT",
+        "EDIT_STUDENT",
+        "DELETE_STUDENT",
+        "MANAGE_STUDENT",
+        
+        "ADD_TEACHER",
+        "EDIT_TEACHER",
+        "DELETE_TEACHER",
+        "MANAGE_TEACHER",
+        
+        "MANAGE_CASE",
+        
+        "MANAGE_ACT",
+        
+        "MANAGE_COURT"
+    
+    ],
+    
+    "STUDENT" : [
+    
+        "READ_CASE",
+        
+        "READ_ACT",
+        
+        "READ_COURT"
+    
+    ]
+    
+}

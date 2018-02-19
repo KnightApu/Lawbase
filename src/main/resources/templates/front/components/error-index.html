@@ -1,0 +1,61 @@
+
+
+				<div class="heading text-center">
+                  <div class="title_left" th:if=" ${ null != errorMessage } ">
+                    <h3 th:text="${ errorMessage }"></h3>
+                  </div>
+                </div>
+ 
+ <!--  
+               	<div id="tableTitle" class="page-title">
+                  <div class="title_left">
+                    <h4>Please consult the adminstrator if you want access to this page</h4>
+                  </div>
+                </div>
+-->
+
+				<div class="heading text-center">
+                  <div class="title_left">
+                    <p th:text="@{'You might not have enough permissions to view this page'}"></p>
+                  </div>
+                </div>
+
+				<div class="text-center">
+                  <div class="title_left" th:if=" ${ null != time } ">
+                    <p th:text="@{ 'The time is:' + ${ time } }"></p>
+                  </div>
+                </div>
+
+				<div class="text-center">
+                  <div class="title_left">
+                    <p th:if="${ null != status }" th:text="@{ 'Status: ' + ${ status } }"></p>
+                    <p th:if="${ null != error }" th:text="@{ 'Error: ' + ${ error } }"></p>
+                    <p th:if="${ null != message }" th:text="@{ 'Message: ' + ${ message } }"></p>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+                
+                    
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                 
+                    var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                    
+                    var controllerPaths = {
+                         
+                         "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                         "view"   : /*[[ @{ ${ controllerPaths['view'] } } ]]*/,
+                         "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                         "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                         "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                         
+                    }
+
+                /*]]>*/
+                </script>
+                
+
+                
+               

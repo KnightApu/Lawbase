@@ -1,0 +1,89 @@
+
+                <!-- modal year -->
+                <div id="yearModal" class="modal fade" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add year</h4>
+                      </div>
+                      <div class="modal-body">
+                      
+                            <input class="form-control" id="yearTextBox" name="yearTextBox" required="required" type="text">
+                      
+                      </div>
+                      <div class="modal-footer">
+                        
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="addYear" type="button" class="btn btn-primary">Submit</button>
+                        <div id="loading"></div>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal year-->
+                
+                <!-- modal volume -->
+                <div id="volumeModal" class="modal fade" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add volume</h4>
+                      </div>
+                      <form id="volumeForm">  
+                         <div class="modal-body">
+                               
+                               Choose year:
+                               <select class="form-control yearSelector">
+                               </select>
+                               
+                               <br>
+                               Name:
+                               <input class="form-control" id="volumeTextBox" name="volumeTextBox" required="required" type="text">
+                         
+                         </div>
+                         <div class="modal-footer">
+                           
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                           <button id="addVolume" type="button" class="btn btn-primary">Submit</button>
+                           <div id="loading"></div>
+                         </div>
+                      </form>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal volume-->
+                
+                <!-- modal case -->
+                <div id="caseModal" class="modal fade" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add case</h4>
+                      </div>
+                      <form id="caseForm">  
+                          <div class="modal-body">
+                                
+                                Choose year:
+                                <select class="form-control yearSelector">
+                                </select>
+                                
+                                <br>
+                                Choose volume:
+                                <select class="form-control volumeSelector">
+                                </select>
+                                
+                                <br>
+                                <input class="form-control" id="caseTextBox" name="caseTextBox" required="required" type="text">
+                          
+                          </div>
+                          <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="addCase" type="button" class="btn btn-primary">Submit</button>
+                            <div id="loading"></div>
+                          </div>
+                      </form>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal case-->

@@ -1,0 +1,45 @@
+
+                <div class="page-title">
+                  <div class="title_left">
+                    <h3>Create a Category</h3>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+               
+                 <form id="demo-form2" th:action="@{'/admin/category/add?forEntity=' + ${forEntityParam}}" th:object="${category}" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                   <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input type="text" id="first-name" th:field="*{name}" required="required" class="form-control col-md-7 col-xs-12">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Parent <span class="required">*</span>
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                     
+                          <select th:field="*{parent}" class="form-control" th:if="${entityCategories !=null}">
+                          
+                          	<option th:value="@{''}" th:text="@{'no parent'}"></option>
+                            <option th:each="entityCat : ${entityCategories}" th:value="${entityCat.id}" th:text="${entityCat.name}"></option>
+                            
+                          
+                          </select>
+                          
+                     </div>
+                   </div>
+                   
+                   <div class="ln_solid"></div>
+                   <div class="form-group">
+                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                       <button type="submit" class="btn btn-primary">Cancel</button>
+                       <button type="submit" class="btn btn-success">Submit</button>
+                     </div>
+                   </div>
+
+                 </form>
+                
+    

@@ -1,0 +1,8 @@
+##
+#If the configuration directory for a Solr core contains a file named solrcore.properties that file can #contain
+#any arbitrary user defined property names and values using the Java standard properties file format, and #those
+#properties can be used as variables in the XML configuration files for that Solr core.
+#For example, the following solrcore.properties file could be created in the conf/ directory of a #collection
+#using one of the example configurations, to override the lockType used.
+#conf/solrcore.properties
+#solr.lock.type=none

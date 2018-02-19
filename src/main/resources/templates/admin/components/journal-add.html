@@ -1,0 +1,87 @@
+
+                <div class="page-title">
+                  <div class="title_left">
+                    <h3>Create new Journal</h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                <div class="position-relative">
+                
+                   <form id="demo-form2" action="" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+  
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Title <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="journal_title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>
+                     
+                     <div class="ln_solid"></div>
+                     <div class="form-group">
+                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                         <button id="submit" type="submit" class="btn btn-success">Submit</button>
+                         <div id="loading"></div>
+                       </div>
+                     </div>
+  
+                   </form>
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+               
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+               	 
+                    var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                    
+                    var controllerPaths = {
+                   		 
+                   		 "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                   		 "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                         "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                         "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                         "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                   		 
+                    }
+
+                /*]]>*/
+                </script>
+                <script type="text/javascript">
+                
+                    var loadingSelector = "#loading";
+                
+                    $( document ).ready( function() {
+                    	
+                    	
+                    	console.log( "document.ready has been called - > it will print four info." );
+                        
+                        console.log( mApp );
+                        console.log( action );
+                        console.log( controllerPaths );
+                        console.log( "done printing this four info" );
+                        
+                        
+
+                        $( "#submit" ).click( function() {
+                                                         
+                            //$( loadingSelector ).html( mApp.getLoadingHtml() );
+                            
+                         	 $( "#loadingOverlay").css( "display", "block" );
+
+                            //return false;
+                            console.log( "6. before calling courtbook procecssor add" );
+                            console.log($( "#journal_title" ).val());
+                            journalProcessor.add( $( "#journal_title" ).val() );
+                            //journalProcessor.print();
+                            
+                            return false;
+                            
+                        });
+                   	 
+                    } );
+                
+                </script>
+                

@@ -1,0 +1,452 @@
+
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != caseBook } ">
+                    <h3 th:text="${user.userName}"></h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                    
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Basic information</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+                             <form th:object="${ user }" id="formBasicInformation" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+            
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">UserName <span class="required" >*</span>
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ userName }" type="text" id="userName" name="userName" required="required" class="form-control col-md-7 col-xs-12" disabled>
+                                   </div>
+                                 </div>
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Name <span class="required">*</span>
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ name }" type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Email 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ email }"  type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Contact No <span class="required">*</span>
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ contactNo }" type="text" id="contactNO" name="contactNo" required="required" class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Occupation 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ occupation }" type="text" id="occupation" name="occupation"  class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Institute 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ institute }" type="text" id="institute" name="institute"  class="form-control col-md-7 col-xs-12">
+                                   </div>
+                                 </div>
+                                 
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Role 
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value="*{ role }" type="text" id="" name="" required="required" class="form-control col-md-7 col-xs-12" disabled >
+                                   </div>
+                                 </div>
+                                 
+                                 
+                                 <div class="form-group">
+                
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for=""> Status 
+                                   </label>
+                
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                   
+                						<div>
+	             							<div >
+	             								<input type="radio" th:name = "@{ status }" value="ACTIVE"  
+									              		th:checked = "${ user.getStatus().toString() == 'ACTIVE' }" />
+									              		ACTIVE									                
+	             							</div>
+	             							<div >
+	             								<input type="radio" th:name = "@{ status }" value="EXPIRED"  
+									              		th:checked = "${ user.getStatus().toString() == 'EXPIRED' }" />
+									              		EXPIRED									                
+	             							</div>
+	             							<div >
+	             								<input type="radio" th:name = "@{ status }" value="SUSPENDED"  
+									              		th:checked = "${ user.getStatus().toString() == 'SUSPENDED' }" />
+									              		SUSPENDED									                
+	             							</div>
+	             							
+	            
+	       								</div>
+	
+	                                  </div>
+                                   
+								</div>
+								
+								
+								
+                                 
+                                 <div class="ln_solid"></div>
+                                 <div class="form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                   
+                                     <button id="submitBasicInformation" type="submit" class="btn btn-success">Save basic information</button>
+                                     <input type="hidden" name="updateType" value="basicInformation">
+                                     
+                                     <div id="loading"></div>
+                                   </div>
+                                 </div>
+            
+                             </form>
+                   
+                        </div>
+                   </div>
+                   
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Services</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+                             <form th:object="${ user }" th:object="${ authorities }" id="formServices" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+            
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Payment Due
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <input th:value = "${ user.duePayment }" type="number" id="duePayment" name="duePayment" class="form-control col-md-7 col-xs-12" >
+                                   </div>
+                                 </div>
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Authorized Capabilities
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <ul>
+		                                   	<li th:each = " authority : ${ authorities } ">
+		                                   		<p th:text="${ authority.getAuthority() }"></p>
+								        	</li>
+                                   		</ul>
+                                   </div>
+                                 </div>
+                                 
+                                 
+                                 <div class="form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Capabilities
+                                   </label>
+                                   <div class="col-md-6 col-sm-6 col-xs-12">                                   	
+                                   		
+                                   	<div class="col-md-4 col-sm-6 col-xs-12">
+                                    
+                                     <input th:value = "READ_CASE" type="checkBox" id="cap1" name="capabilities" class="flat" /> READ_CASE <br>
+                                     <input th:value = "ADD_CASE" type="checkBox" id="cap2" name="capabilities" class="flat" /> ADD_CASE <br>
+                                     <input th:value = "EDIT_CASE" type="checkBox" id="cap3" name="capabilities" class="flat" /> EDIT_CASE <br>
+                                   	 <input th:value = "MANAGE_CASE" type="checkBox" id="cap4" name="capabilities" class="flat" /> MANAGE_CASE <br>
+                                   	
+                                   	</div>
+                                   	
+                                   	<div class="col-md-4 col-sm-6 col-xs-12">
+                                 
+                                   		<input th:value = "READ_ACT" type="checkBox" id="cap5" name="capabilities" class="flat" /> READ_ACT <br>
+	                                     <input th:value = "ADD_ACT" type="checkBox" id="cap6" name="capabilities" class="flat" /> ADD_ACT <br>
+	                                     <input th:value = "EDIT_ACT" type="checkBox" id="cap7" name="capabilities" class="flat" /> EDIT_ACT <br>
+	                                   	 <input th:value = "MANAGE_ACT" type="checkBox" id="cap8" name="capabilities" class="flat" /> MANAGE_ACT <br>
+	                                   
+                                   	</div>
+                                   	
+                                   	<div class="col-md-4 col-sm-6 col-xs-12">
+                                 
+                                   		<input th:value = "READ_COURT" type="checkBox" id="cap9" name="capabilities" class="flat" /> READ_COURT <br>
+	                                     <input th:value = "ADD_COURT" type="checkBox" id="cap10" name="capabilities" class="flat" /> ADD_COURT <br>
+	                                     <input th:value = "EDIT_COURT" type="checkBox" id="cap11" name="capabilities" class="flat" /> EDIT_COURT <br>
+	                                   	 <input th:value = "MANAGE_COURT" type="checkBox" id="cap12" name="capabilities" class="flat" /> MANAGE_COURT <br>
+	                                   
+                                   	</div>
+                                   
+                                   </div>
+                                 
+                                 </div>
+ 
+                                 
+								
+								
+								
+                                 
+                                 <div class="ln_solid"></div>
+                                 <div class="form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                   
+                                     <button id="submitServices" type="submit" class="btn btn-success">Save Services</button>
+                                     <input type="hidden" name="updateType" value="services">
+                                     
+                                     <div id="loading"></div>
+                                   </div>
+                                 </div>
+            
+                             </form>
+                   
+                        </div>
+                   </div>
+                   
+                   
+                   <!-- 
+                   
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h2>Category</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                            <h4>the bonsai tree with check box is coming</h4>
+                            	
+								<form th:object="${caseBook}" id="formCategoryInformation" action="" method="get" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit=" return false; ">
+									
+									<div id="output">
+									    <!-- for bonsai tree from json -->
+										 <!--  
+									
+									</div>
+									
+									<div class="ln_solid"></div>
+	                                 <div class="form-group">
+	                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+	                                   		<!-- 
+	                                     <button id="submitCategoryInformation" type="submit" class="btn btn-success">Save category information</button>
+	                                     <input type="hidden" name="updateType" value="categoryInformation">
+	                                      -->
+	                                	<!-- 	
+	                                	     
+	                                     <div id="loading"></div>
+	                                   </div>
+	                                 </div>
+                                 </form>
+                            
+                        </div>
+                   </div>
+                
+                -->	
+                                	
+                	
+                   
+                   
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+                
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                    var userId = /*[[ ${ user.getStringId() } ]]*/ 0;
+                	
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+                
+               
+               <script>
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "caseList" : "#caseList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "caseModal" : "#caseModal"
+                           
+                   }
+                   $( document ).ready( function(e) { 
+                	   /*
+                	   $('#hiddenElements').hide();
+
+                       var bookProcessor = new BookProcessor ( caseBookId, loadingSelector );
+                       
+                       mApp.setUpRestPaths ( bookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+                       console.log( bookProcessor );
+                       
+                       var book = new Book( caseBookId, bookProcessor, env );
+                       console.log( book );
+                       
+                       ConvertToCaseBook( book, bookProcessor );
+                       console.log( book );
+                       */
+                       
+                       mApp.setUpRestPaths ( user, controllerPaths, "/admin/", "/admin/rest/" );
+                       
+                       $( "#submitBasicInformation" ).click( function() {
+                           
+                           user.update( '#formBasicInformation' );                          
+                           
+                       });
+ 						
+                       $( "#submitServices" ).click( function() {
+                           
+                           user.update( '#formServices' );                          
+                           
+                       });
+
+                       	
+ 						$( "#submitCategoryInformation" ).click( function() {
+	                           
+ 	                    	//book.update( '#formCategoryInformation' );
+ 	                           
+ 	                   });
+ 						//since catrgory is hidden this function is commented out
+ 						//loadCategoryTree();
+ 						
+                	   
+                   } );
+               
+               </script>
+               
+             
+        
+        		<script> 		
+    			
+        		function convertToHtml(json)
+        		{
+        			var result="";
+        			
+        			//alert("Size:"+json.length);
+        			
+        			for(var i = 0; i < json.length; i++)
+        			{
+        				var tempJson = json[i];
+        				
+        				var tempResult="";
+        				
+        				if(tempJson.children.length > 0)
+        				{
+        					
+        					tempResult += convertToHtml(tempJson.children);
+        				
+        					result += "<li data-value='"+tempJson.name+"' data-name='categoryList'>"+tempJson.name+"<ol>" + tempResult + "</ol></li>";
+           				 	        					//value is id. change.now testing with name
+        				}
+        				else
+        				{
+        					result += "<li data-value='"+tempJson.name +"' data-name='categoryList'>"+tempJson.name+"</li>";		
+        					//value is id. change.now testing with name
+        				}
+        				
+        				
+        			}
+        			return result;
+        		}
+        		
+        		</script>
+        		
+        		
+               <script>
+               
+				function loadCategoryTree()
+				{
+					var jsonData;
+					
+	               	$.getJSON('/admin/rest/category?forEntity=case', function(data) {
+	            	    //data is the JSON string
+						jsonData = data;
+	            	    
+						var finalString = "<ol id='categoryCheckbox'><li class='expanded' data-value='all' data-name='categoryList'>All";
+	            	    
+	            	   	finalString += "<ol >" + convertToHtml(jsonData['aaData']) + "</ol>";
+	            	    	
+	            	    finalString += "</li></ol>";
+	               		
+	            	    document.getElementById('output').innerHTML = finalString;//createHTML(jsonData['aaData'], true);
+	               		
+	               		
+	               		$('#categoryCheckbox').bonsai({
+	                  	   expandAll: true,
+	                  	   checkboxes: true, // depends on jquery.qubit plugin
+	                  	   createInputs: 'checkbox', // takes values from data-name and data-value, and data-name is inherited
+	                  	   addExpandAll: false, // add a link to expand all items
+	                  	   addSelectAll: false, // add a link to select all checkboxes
+	                  	   expand: null, // optional function to expand an item
+	                  	   collapse: null // optional function to collapse an item
+	                  	 });
+	               		
+	               		$(":checkbox").on("change",function() {
+ 							console.log("a box is changeded" + $(this).val());  
+ 							//alert("event");
+ 							
+ 							//mApp.loadingOverlayAction().show();
+ 							//ajax call to update category info
+ 							//in callback function of the ajax need to call mApp.loadingOverlayAction().hide()
+ 							
+ 						});
+	               		
+	               		
+	            	});
+               
+				}
+				
+               </script>
+               
+        
+                

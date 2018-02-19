@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace = "admin/components/html-head :: html-head"></head>
+
+    <body class="nav-md">
+        <div class="container body">
+          <div class="main_container">
+            
+            <!-- LEFT SIDEBAR -->
+            <section th:replace = "admin/components/sidebar :: left-sidebar"></section>
+            <!-- / LEFT SIDEBAR -->
+            
+            <!-- top navigation -->
+            <section th:replace = "admin/components/top-nav :: top-nav"></section>
+            <!-- /top navigation -->
+    
+            <!-- page content -->
+            <div class="right_col" role="main">
+              
+                
+                <div th:replace = "'admin/components/user-' + ${templatePart}" ></div>
+                
+                <div th:replace = "'admin/components/content-loader'" ></div> 
+                
+            </div>
+            <!-- /page content -->
+    
+            <!-- footer content -->
+            <footer>
+              <div class="pull-right">
+                Powered by <a href="https://www.revesoft.com">Reve M</a>
+              </div>
+              <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+          </div>
+        </div>
+  
+        <section th:replace = "admin/components/html-footer :: html-footer"> </section>
+        
+        <script th:src="@{/admin/js/user.js}"></script>
+        
+    </body>
+</html>

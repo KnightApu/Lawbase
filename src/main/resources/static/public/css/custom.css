@@ -1,0 +1,24 @@
+/* your styles go here */
+
+.headingError{
+	
+	display: block;	
+  	border-bottom: solid 5px #467fbf;  
+	line-height: 1.1;
+  	margin-bottom: 0;
+  	
+  	padding-top: 40px;	
+ 	vertical-align: middle;
+  	text-transform: uppercase;
+  	letter-spacing: 0.06em;
+	font-weight: 600; 
+  	
+  
+}
+
+.blockForEmptySpace{
+	
+	display: block;	
+	padding-top: 40px;	
+	
+}

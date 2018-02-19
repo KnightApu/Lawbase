@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="front/components/html-head">
+
+</head>
+
+
+<section th:replace="front/components/section-head"></section>
+
+<body>
+	<div class="container">
+		
+		<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+		</div>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<section class="signup_content">
+					<form id="userForm"  method="post" onsubmit=" return false; ">
+						<h1>Sign Up</h1>
+						<div>
+							<input type="text" class="form-control" placeholder="name" name="name"
+								required="">
+						</div>
+						<br>
+						<div>
+							<input type="text" class="form-control" placeholder="Username" name="userName"
+								required="">
+						</div>
+						<br>
+						<div>
+							<input type="text" class="form-control" placeholder="Mobile" name="mobile"
+								required="">
+						</div>
+						<br>
+						<div>
+							<input type="text" class="form-control" placeholder="Email" name="email"
+								required="">
+						</div>
+						<br>
+						
+						<div>
+							<input type="password" class="form-control" name="password"
+								placeholder="Password" required="">
+						</div>
+						<br>
+						<div>
+							<input type="password" class="form-control" name="confirmedPassword"
+								placeholder="Confirm Password" required="">
+						</div>
+						<br>
+						
+						<div>
+							<input type="text" class="form-control" placeholder="Occupation" name="occupation"
+								required="">
+						</div>
+						<br>
+						
+						<div>
+							<input type="text" class="form-control" placeholder="Institution" name="institution"
+								required="">
+						</div>
+						<br>
+						<div>
+							<a class="btn btn-default submit" id="signup">Sign Up</a> 
+						</div>
+						<br>
+
+						<div class="clearfix"></div>
+
+						<div class="separator">
+							<p class="change_link">
+								Already have an account? <a href="/login" class="to_login"> Login </a>
+							</p>
+
+							<div class="clearfix"></div>
+							<br>
+
+						</div>
+						<input type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}"/>
+					</form>
+				</section>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+			
+			</div> 
+		</div>
+	</div>
+
+
+
+	<div th:replace="front/components/html-footer"></div>
+
+
+	<script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelectorBasic = "#loadingBasic";
+                    var loadingSelectorSection = "#loadingSection";
+                 
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+	<script>
+		$(document).ready(function() {
+			//alert("working");
+
+			var refContent = $("#reference").text();
+			var htmlRef = $.parseHTML(refContent);
+
+			$("#reference").html(htmlRef);
+
+			var transcriptContent = $("#transcript").text();
+			var htmlTranscript = $.parseHTML(transcriptContent);
+			//alert("this is it! "+htmlTranscript);		
+			$("#transcript").html(htmlTranscript);
+			
+			mApp.setUpRestPaths ( user, controllerPaths, "/registration/", "/rest/registration/" );
+			
+			$("#signup").click( function() {
+				
+				user.add("#userForm");
+				
+			
+			})
+
+		});
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <body>
+  
+    <div th:fragment="search-legislation-short" class="search-legislation-short">
+    
+        <form class="form-horizontal" action="/front/act" id="searchActModalForm">
+            <div class="form-group">
+                <label for="title" class="col-sm-5 control-label">Title</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="actTitle" name="title" placeholder="words in title">
+                </div>
+            </div>   
+
+        
+            <div class="form-group">
+                <label for="year" class="col-sm-5 control-label">Year enacted</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="actYear" name="year" placeholder="year">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="treeTitle" class="col-sm-5 control-label">Part or section</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="actSection" name="treeTitle" placeholder="words in section title">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="terms" class="col-sm-5 control-label">Search terms</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="actSearchTerms" name="terms" placeholder="will be searched in content">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="search" class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                    <button type="button" class="btn btn-template-main " id="searchActButton">Search</button> 
+                </div>
+            </div>  
+            <div class="form-group">
+                <label for="search" class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                    <a href="/front/act"><b>Advanced search</b></a> 
+                </div>
+            </div>   
+            
+        </form>  
+
+    </div>
+    
+    
+    <div th:fragment="search-case-short" class="search-case-short">
+    
+    <!-- changing here adding the action to the form. calling a controller with action attribute -->
+         <form class="form-horizontal" action="/front/case" id="searchCaseModalForm">   
+       <!--   <form class="form-horizontal" action="search_result.html" />" >  -->
+            
+            <div class="form-group">
+                <label for="title" class="col-sm-5 control-label">Case name</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="firstParty" name="title1" placeholder="Claimant">
+                    <div class="text-center">
+                        VS
+                    </div>
+                    <input type="text" class="form-control" id="secondParty" name="title2" placeholder="Defendant">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="year" class="col-sm-5 control-label">Year</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="caseYear" name="year" placeholder="Year">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="year" class="col-sm-5 control-label">Source</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="caseSource" name="source" placeholder="Source">
+                </div>
+            </div>   
+            <!-- 
+            <div class="form-group">
+                <label for="treeTitle" class="col-sm-5 control-label">Part or section</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="treeTitle" name="treeTitle" placeholder="words in section title">
+                </div>
+            </div> 
+            -->
+              
+            <div class="form-group" th:object="${courtBooks}">
+                <label for="treeTitle" class="col-sm-5 control-label">Court</label>
+                <div class="col-sm-7" >
+                	<select id="caseCourtBook">
+                		<ul th:each="court : ${courtBooks}">
+	                    	<option th:text=${court.getTitle()} th:value=${court.getTitle()}></option>
+	                 	</ul>
+                    </select>
+                </div>
+            </div>   
+            
+            <div class="form-group">
+                <label for="terms" class="col-sm-5 control-label">Search terms</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="caseSearchterms" name="terms" placeholder="will be searched in content">
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="search" class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                    <button type="button" class="btn btn-template-main " id="searchCaseButton">Search</button> 
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="search" class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                    <a href="/front/case"><b>Advanced search</b></a> 
+                </div>
+            </div>   
+            
+        </form>  
+
+    </div>
+  
+  </body>
+  
+</html>

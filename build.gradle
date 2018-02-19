@@ -1,0 +1,96 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'lawbase'
+	version = '1.4'
+	
+    manifest {
+        attributes 'Main-Class': 'com.lawbase.LawbaseApplication.Class'
+    }
+}
+
+springBoot {
+    executable = true
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+bootRun {
+
+    addResources = true
+    
+}
+
+task devRun <<{
+    bootRun { systemProperty "spring.profiles.active", "dev" }
+}
+
+devRun.finalizedBy bootRun
+
+task farinRun <<{
+    bootRun { systemProperty "spring.profiles.active", "farin" }
+}
+
+farinRun.finalizedBy bootRun
+
+task apuRun <<{
+    bootRun { systemProperty "spring.profiles.active", "apu" }
+}
+
+apuRun.finalizedBy bootRun
+
+
+task mukRun <<{
+    bootRun { systemProperty "spring.profiles.active", "muktadir" }
+}
+
+mukRun.finalizedBy bootRun
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
+    
+    
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.session:spring-session-data-mongo")
+    
+    
+    compile('org.apache.commons:commons-lang3:3.5')
+    compile("net.sourceforge.nekohtml:nekohtml")
+    compile("commons-io:commons-io:2.5")
+    compile('org.json:json:20160212')
+    compile("com.jayway.jsonpath:json-path")
+    
+    compile("org.springframework.data:spring-data-solr:2.1.7.RELEASE")
+    
+    compile( "io.reactivex.rxjava2:rxjava:2.1.1" )       
+    
+    compile("org.springframework.boot:spring-boot-starter-cache")
+    
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

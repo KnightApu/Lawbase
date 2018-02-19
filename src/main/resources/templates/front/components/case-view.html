@@ -1,0 +1,238 @@
+				
+				<!--  
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != caseBook } ">
+                    <h3 th:text="${ caseBook.title }"></h3>
+                  </div>
+                </div>
+               
+               -->
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                    
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h4>Basic information</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        	<table class="table table-striped" id=formBasicInformation th:object="${caseBook}">
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Claimant</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getFirstParty()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Defendant</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getSecondParty()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Sources</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getSourcesAsCSV()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Search Terms</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getKeywordsAsCSV()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Court</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getCourtBookTitle()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Year</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getYear()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Volume</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getVolume()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Treatment</b></td>
+                        			<!--
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getTreatment().getText()}></td>
+                        			 -->
+                        			 
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'NT'" ><img th:src="@{/images/Negative treatment.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'CT'" ><img th:src="@{/images/Caution.jpg}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'PT'" ><img th:src="@{/images/positive treatment.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'NHOT'" ><img th:src="@{/images/Neutral.png}"></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'CI'" ><img th:src="@{/images/Citator Information.png}"></td>
+                        			
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:if="${caseBook.getTreatment().name()} == 'NA'" th:text=${caseBook.getTreatment().getText()}></td>
+                        			
+                        		</tr>
+                        	
+                        		
+                        	</table>
+                        	                   
+                        </div>
+                   </div>
+                
+                   <div class='x_panel'>
+                   
+                        <div class='x_title'>
+                            <h4>Digest</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                            <!-- 
+                           <div th:replace = "admin/components/case-digest-form" ></div>
+                    		-->
+						
+							<table class="table table-striped" th:object="${caseBook}">
+                    			<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Case No.</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getCaseNo()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Date</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text="${ caseBook.getDateForInputMask( caseBook.caseDate ) }" ></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Judge</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getJudge()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Counsels</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getCounsels()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Subject</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getSubject()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Summary</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getSummary()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Abstract</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.get_abstract()}></td>
+                        		</tr>
+                        		<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Disposition</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getDisposition()}></td>
+                        		</tr>
+                    			<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Reference</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getReference()} id="reference"></td>
+                        		</tr>
+                    			
+                    		</table>
+                        
+                        
+                        </div>
+                   </div>
+                   <div class='x_panel'>
+                        <div class='x_title'>
+                            <h4>Transcript</h4>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                              </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        
+                        <div class='x_content'>
+                        
+            				<table class="table table-striped" th:object="${caseBook}">
+            					<tr>
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Transcript</b></td>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getTranscript()} id="transcript"></td>
+                        		</tr>
+                    				
+                   			</table>
+                   			
+                        </div>
+                        
+						
+						<div class="x_content">
+					    	<div class="ln_solid"></div>
+						
+							<table class="table table-striped" th:object="${caseBook}">
+								<tr>
+                        			
+                        			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Existing File</b></td>
+                        			
+                        			<td class="col-md-9 col-sm-9 col-xs-6">
+                        				<table>
+		                                     <tr th:each="media : ${caseBook.mediaSet}">
+		                                     	
+		                                     	<td> <a th:href="@{ '/media?id=' + ${ media.id }  }"  class="btn btn-info btn-xs" text="${media.name}"><i class="fa fa-download"></i> </a></td>
+			    									    								
+		                                     	<td> <a th:href="@{ '/mediaOpen?id=' + ${ media.id }  }" target="_blank"  th:text="${media.name}"> </a>  </td>
+		                                    
+		                                     </tr>
+                                     	</table>
+                        			
+                        			</td>
+                        		</tr>
+							</table>
+								
+								
+						</div>
+						
+                   </div>
+                   <!-- 
+                   <div th:replace = "admin/components/content-loader" ></div>
+                 -->
+                </div>
+                
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelector = "#loading";
+                    var caseBookId = /*[[ ${ caseBook.getStringId() } ]]*/ 0;
+                    var rootNodeId = /*[[ ${ caseBook.getRootNode().getStringId() } ]]*/ 0;
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "view"   : /*[[ @{ ${ controllerPaths['view'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+                
+               
+               
+               <script type="text/javascript">
+
+                   /** all environment values go here **/
+                   var env = {
+                           
+                       "yearList" : "#yearList",
+                       "volumeList" : "#volumeList",
+                       "caseList" : "#caseList",
+                       
+                       "yearSelector": ".yearSelector",
+                       "volumeSelector" : ".volumeSelector",
+    
+                       "switchYearList": ".switchYearList",
+                       "switchVolumeList": ".switchVolumeList",
+                       
+                       "caseModal" : "#caseModal"
+                           
+                   }
+                 
+               
+               </script>

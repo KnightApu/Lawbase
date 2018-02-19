@@ -1,0 +1,184 @@
+
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != journal } ">
+                    <h3 th:text="${ journal.title }"></h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                
+                   <div class="row">
+                   
+                       <div class="col-sm-2">
+                           
+                           <h4>Year</h4>
+                           <div>
+                               <button class="btn btn-info btn-default btn-xs" data-toggle="modal" data-target="#yearModal">add</button>
+                           </div>
+                           <ul id="yearList">
+                           
+                           </ul>
+                           
+                       </div>
+                       
+                       <div class="col-sm-2">
+                           
+                           <h4>Volume</h4>
+                           <div>
+                               <button class="btn btn-info btn-default btn-xs" data-toggle="modal" data-target="#volumeModal">add</button>
+                           </div>
+                           <ul id="volumeList">
+                           
+                           </ul>
+                           
+                       </div>
+                       
+                       <div class="col-sm-8">
+                           
+                           <h4>Article</h4>
+                           <div>
+                               <button class="btn btn-info btn-default btn-xs" data-toggle="modal" data-target="#articleModal">add</button>
+                           </div>
+                           <ul id="articleList">
+                           
+                           </ul>
+                           
+                       </div>
+                   
+                   </div>
+                
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+	                <!-- ./overlay section --> 
+	                
+	                <!-- journal modals -->
+	                
+	                <div th:replace = "admin/components/journal-modals" ></div>
+	                
+	                <!-- ./courtbook modals -->
+	                
+	                <script th:inline="javascript">
+	                /*<![CDATA[*/
+                             
+                	var journalId = /*[[ ${ journal.getStringId() } ]]*/ 0;
+                    var rootNodeId = /*[[ ${ journal.getRootNode().getStringId() } ]]*/ 0;
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/,
+                            "editArticle"  : /*[[ @{ ${ controllerPaths['editArticle'] } } ]]*/
+                            
+                    }
+
+	                /*]]>*/
+	                </script>
+	                
+	                <script type="text/javascript">
+
+                    
+                    var loadingSelector = "#loading";
+                    
+                    var courtBook = null;
+                    
+                    /** all environment values go here **/
+                    var env = {
+                    		
+                    	"yearList" : "#yearList",
+                    	"volumeList" : "#volumeList",
+                    	"articleList" : "#articleList",
+                    	
+                    	"yearSelector": ".yearSelector",
+                    	"volumeSelector" : ".volumeSelector",
+
+                        "switchYearList": ".switchYearList",
+                        "switchVolumeList": ".switchVolumeList",
+                        
+                        "articleModal" : "#articleModal"
+                    		
+                    }
+                    
+                    $( document ).ready( function () {
+
+                        console.log( mApp );
+                        console.log("inside the edit");
+                        mApp.loadingOverlayAction().show();
+                    	/** fire up book processor **/
+                        var bookProcessor = new BookProcessor ( journalId, loadingSelector );
+                        console.log("new book processor has been created");
+                        mApp.setUpRestPaths ( bookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+                        
+                        console.log( bookProcessor );
+                        console.log("book processor has been printed");
+
+                        /** end book processor **/
+                        
+                        /** load book **/
+                        
+                        var book = new Book( journalId, bookProcessor, env );
+                        console.log( book );
+                        
+                        ConvertToJournal( book, bookProcessor );
+                        console.log( book );
+                    	
+                    	/** wire buttons **/
+                        $( "#addYear" ).click( function() {
+                            
+                           var year = $( "#yearTextBox" ).val();
+
+                            //$( loadingSelector ).html( mApp.getLoadingHtml() );
+                            
+                            book.addYear( year );
+                            
+                            $( "#yearModal" ).modal( 'hide' );
+                            
+                            //alert( year );
+                            
+                        });
+                        
+                        $( "#addVolume" ).click( function() {
+
+                            var yearId = $( "#volumeForm").find( ".yearSelector" ).val();
+                            var volume = $( "#volumeForm").find( "#volumeTextBox" ).val();
+                            
+                            //alert( yearId );
+                            //alert(volume);
+
+                            //$( loadingSelector ).html( mApp.getLoadingHtml() );
+                            
+                            book.addVolume( yearId, volume );
+                            
+                            $( "#volumeModal" ).modal( 'hide' );
+                            
+                            //alert( year );
+                            
+                        });
+                        
+                        $( "#addArticle" ).click( function() {
+							
+                        	
+                        	console.log("add article e call paise");
+                            //var yearId = $( "#caseForm").find( ".yearSelector" ).val();
+                            var volumeId = $( "#articleForm").find( ".volumeSelector" ).val();
+                            var articleName = $( "#articleForm").find( "#articleTextBox" ).val();
+                            
+                            console.log(volumeId + articleName);
+                            
+                            book.addArticle( volumeId, articleName );
+                            
+                            $( "#articleModal" ).modal( 'hide' );
+                            
+                            //alert( year );
+                            
+                        });
+                    	
+                    });
+                
+                </script>

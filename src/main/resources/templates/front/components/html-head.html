@@ -1,0 +1,89 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <title>Legislib</title>
+
+    <meta name="keywords" content="">
+	
+	<!-- i adeed -->
+	<!-- jQuery -->
+         <script th:src="@{/public/vendors/jquery/dist/jquery.min.js}"></script>
+         <script th:src="@{/public/js/user.js}"> </script>
+		<script th:src="@{/public/js/utility-adhocmaster.js}"> </script>
+         
+        <!-- Bootstrap -->
+        <link th:href="@{/public/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link th:href="@{/public/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+        <!-- NProgress -->
+        <link th:href="@{/public/vendors/nprogress/nprogress.css}" rel="stylesheet">
+        <!-- bootstrap-wysiwyg -->
+        <link th:href="@{/public/vendors/google-code-prettify/bin/prettify.min.css}" rel="stylesheet">
+    
+       
+        
+        <!-- Datatables -->
+        <link th:href="@{/public/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/public/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/public/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/public/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css}" rel="stylesheet">
+        
+        
+        <!-- bootstrap-daterangepicker -->
+        <link th:href="@{/public/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+	
+	<!-- i added -->
+	
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap and Font Awesome css -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Css animations  -->
+    <link th:href="@{/public/css/animate.css}" rel="stylesheet">
+
+    <!-- Theme stylesheet, if possible do not edit this stylesheet -->
+    <link th:href="@{/public/css/style.default.css}" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- Custom stylesheet - for your changes -->
+    <link th:href="@{/public/css/custom.css}" rel="stylesheet">
+    <link th:href="@{/public/css/lawbase.css}" rel="stylesheet">
+    
+     <!-- gentelella-master files -->
+
+
+    <!-- Responsivity for older IE -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+    <!-- Favicon and apple touch icons-->
+    <link rel="shortcut icon" th:href="@{/public/img/favicon.ico}" type="image/x-icon" />
+    <link rel="apple-touch-icon" th:href="@{/public/img/apple-touch-icon.png}" />
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/public/img/apple-touch-icon-57x57.png}" />
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/public/img/apple-touch-icon-72x72.png}" />
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/public/img/apple-touch-icon-76x76.png}" />
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/public/img/apple-touch-icon-114x114.png}" />
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/public/img/apple-touch-icon-120x120.png}" />
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/public/img/apple-touch-icon-144x144.png}" />
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/public/img/apple-touch-icon-152x152.png}" />
+    <!-- owl carousel css -->
+
+    <link th:href="@{/public/css/owl.carousel.css}" rel="stylesheet">
+    <link th:href="@{/public/css/owl.theme.css}" rel="stylesheet">
+</head>
+
+<body>
+
+    <div th:include="front/components/test-security :: security"></div>
+
+    <div id="all">

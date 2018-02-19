@@ -1,0 +1,33 @@
+
+                <div class="page-title">
+                  <div class="title_left" th:if=" ${ null != courtBook } ">
+                    <h3 th:text="${ courtBook.title }"></h3>
+                  </div>
+                </div>
+               
+                <div class="clearfix"></div>
+                <br>
+                
+                <!-- overlay section --> 
+                <div class="position-relative">
+                
+                   <div th:replace = "admin/components/content-loader" ></div>
+                
+                </div>
+                <script th:inline="javascript">
+                /*<![CDATA[*/
+                 
+                    var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                    
+                    var controllerPaths = {
+                         
+                         "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                         "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                         
+                    }
+
+                /*]]>*/
+                </script>
