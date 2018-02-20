@@ -45,10 +45,11 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .and()
             .formLogin()
             	.loginPage("/login").defaultSuccessUrl("/",true)
-              .and()
-              .logout().logoutUrl("/logout").logoutSuccessUrl("/");
-           // .exceptionHandling()
-            	//.accessDeniedPage("/error/accessDenied");
+            	.and()
+            	.logout().logoutUrl("/logout").logoutSuccessUrl("/")
+            	.and()
+            .exceptionHandling()
+            	.accessDeniedPage("/error/accessDenied");
             	
 //        http
 //            .authorizeRequests()
