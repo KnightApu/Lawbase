@@ -67,6 +67,12 @@ public class User extends SimpleAuthor {
         setDefaultPassword();
 
     }
+    
+    protected User(String name, String password) {
+		
+    	super( name );
+    	setPasswordHash(password);
+	}
 
     /**
      * Needed for mongo reflexion or serialization
@@ -78,7 +84,10 @@ public class User extends SimpleAuthor {
 
     }
 
-    private void setDefaultPassword() {
+    
+
+
+	private void setDefaultPassword() {
 
         try {
 

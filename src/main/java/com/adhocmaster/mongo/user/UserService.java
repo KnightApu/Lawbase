@@ -46,9 +46,9 @@ public class UserService extends RepositoryService<User> {
 	public User createUserfromRegistrationForm(String name, String userName, String email, String contactNo,
 			String password, String occupation, String institute) throws PasswordException, PersistenceException {
 		
-		UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName,  email );
+		UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName,  email, password );
 		userCreator.setContactNo(contactNo);
-		userCreator.setPassword(password);
+		//userCreator.setPassword(password);
 		userCreator.setOccupation(occupation);
 		userCreator.setInstitute(institute);
 		userCreator.setRole(Role.USER);

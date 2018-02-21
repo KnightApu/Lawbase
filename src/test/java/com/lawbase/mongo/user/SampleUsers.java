@@ -11,6 +11,7 @@ import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.sequence.SequenceDao;
 import com.adhocmaster.mongo.user.MongoUserRepository;
 import com.adhocmaster.mongo.user.UserCreator;
+import com.adhocmaster.user.role.Role;
 
 
 @RunWith(SpringRunner.class)
@@ -39,6 +40,7 @@ public class SampleUsers {
             email = userName + "@test.com";
             
             userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
+            //userCreator.setRole(Role.USER);
             
             userCreator.createAndPersist();
             
