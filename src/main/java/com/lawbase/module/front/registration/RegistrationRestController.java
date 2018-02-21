@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,20 +22,24 @@ import util.restApi.RestInternalServerException;
 import util.restApi.RestSuccess;
 
 @RestController
-@RequestMapping( "front/rest/registration" )
+@RequestMapping( "rest/registration" )
 public class RegistrationRestController {
 	
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping( "/add" )
-    public Serializable add(HttpSession httpSession,
+	@PostMapping( "/add" )
+    public User add(HttpSession httpSession,
             @RequestParam Map<String, String> params) throws RestBadDataException, RestInternalServerException, PasswordException, PersistenceException  {
 			System.out.println("controller is printing in system console");     
 			
-			userService.registrationFromFormData( params );
+			User user = userService.registrationFromFormData( params );
 			
-			return new RestSuccess( RestSuccess.Codes.SAVE_DB );
+			System.out.println(user.getName());
+			
+			
+			//return new RestSuccess( RestSuccess.Codes.SAVE_DB );
+			return user;
 			
 			
     }
