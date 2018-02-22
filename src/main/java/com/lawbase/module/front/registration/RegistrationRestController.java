@@ -22,7 +22,7 @@ import util.restApi.RestInternalServerException;
 import util.restApi.RestSuccess;
 
 @RestController
-@RequestMapping( "rest/registration" )
+@RequestMapping( "public/rest/registration" )
 public class RegistrationRestController {
 	
 	@Autowired

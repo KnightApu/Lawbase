@@ -23,7 +23,7 @@ import com.lawbase.controller.FrontCommonController;
 
 
 @Controller
-@RequestMapping( "/error" )
+@RequestMapping( "/index/error" )
 public class CustomErrorController extends FrontCommonController  implements ErrorController {
 	
 	private static final Logger logger = LoggerFactory.getLogger( CustomErrorController.class );
