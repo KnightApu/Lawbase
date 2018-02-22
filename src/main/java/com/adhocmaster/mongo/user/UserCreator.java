@@ -22,16 +22,7 @@ public class UserCreator {
         user.setEmail( email );
         
     }
-	public UserCreator( SequenceDao sequenceDao, MongoUserRepository userRepository,  String name, String userName, String email, String password ) {
-	        
-	        this.sequenceDao = sequenceDao;
-	        this.userRepository = userRepository;
-	        
-	        user = new User( name, password );
-	        user.setUserName( userName );
-	        user.setEmail( email );
-	        
-	    }
+	
 
 
     
@@ -71,7 +62,7 @@ public class UserCreator {
     }
     public void setPassword( String password ) throws PasswordException {
     
-        user.setPasswordHash( PasswordHelper.getHash( password ) );
+        user.setPasswordHash(  password  );
     }
     public void setIpAddress( String ipAddress ) {
 		
