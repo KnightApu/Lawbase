@@ -62,7 +62,7 @@ public class UserCreator {
     }
     public void setPassword( String password ) throws PasswordException {
     
-        user.setPasswordHash(  password  );
+        user.setPasswordHashFromPassword(  password  );
     }
     public void setIpAddress( String ipAddress ) {
 		

@@ -129,8 +129,14 @@ public class User extends SimpleAuthor {
 
     public void setPasswordHash( String passwordHash ) {
 
+        this.passwordHash = passwordHash;
+
+    }
+    
+    public void setPasswordHashFromPassword( String password ) {
+
         try {
-            this.passwordHash = PasswordHelper.getHash( passwordHash );
+            this.passwordHash = PasswordHelper.getHash( password );
 
         } catch ( PasswordException e ) {
 
