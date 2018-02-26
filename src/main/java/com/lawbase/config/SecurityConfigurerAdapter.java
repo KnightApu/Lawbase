@@ -40,7 +40,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 //.antMatchers( HttpMethod.GET, "/" ).permitAll()
                 .antMatchers( HttpMethod.GET, "/indexPublic" ).permitAll()
                 .antMatchers( "/admin/**" ).hasAuthority("ADMIN")
-                .antMatchers( "/front/**" ).access( "( hasAuthority('ENTERPRISE') ) or ( hasAuthority('USER') ) or ( hasAuthority('ADMIN') )" )
+                .antMatchers( "/front/case/view/**" ).access( "( hasAuthority('ENTERPRISE') ) or ( hasAuthority('USER') ) or ( hasAuthority('ADMIN') )" )
                 .anyRequest().permitAll()
                 .and()
             .formLogin()
