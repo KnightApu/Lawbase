@@ -4,12 +4,19 @@
             <div id="top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xs-5 contact">
-                            <p class="hidden-sm hidden-xs">Contact us on +880 00000 000 000 or hello@muktadir.com.</p>
+                        <div class="col-md-2 contact">
+                            <p class="hidden-sm hidden-xs"><b>Contact us on +8801828128129</b></p>
                             <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                             </p>
                         </div>
-                        <div class="col-xs-7">
+                        
+                        <div sec:authorize="isAuthenticated()" class="col-md-5">
+                        	<div  class="logout">
+                               <a href="/logout"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Sign out</span></a>
+                            </div>
+                        </div>
+                        
+                        <div sec:authorize="isAnonymous()" class="col-md-5">
                             <div class="social">
                                 <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
                                 <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
@@ -17,12 +24,15 @@
                                 <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                             </div>
 
-                            <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
+                            <div  class="login">
+                                <a href="#" data-toggle="modal" data-target="#login-modal" ><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
                                 <a href="/registration"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
                             </div>
+                            
 
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
