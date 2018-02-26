@@ -109,9 +109,9 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div sec:authorize="isAuthenticated()" class="col-sm-5">
                                                         <h5>Search Acts</h5>
-                                                        <div th:replace = "front/components/search-blocks :: search-legislation-short" >Search Form</div>
+                                                        <div  th:replace = "front/components/search-blocks :: search-legislation-short" >Search Form</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,9 +165,9 @@
                                                             </li>
                                                         </ul>                                                            
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div sec:authorize="isAuthenticated()" class="col-sm-5">
                                                         <h5>Search Cases</h5>
-                                                        <div th:replace = "front/components/search-blocks :: search-case-short" >Search Form</div>
+                                                        <div  th:replace = "front/components/search-blocks :: search-case-short" >Search Form</div>
                                                     </div>
                                                 </div>
                                             </div>
