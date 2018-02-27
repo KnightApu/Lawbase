@@ -23,12 +23,15 @@ public class ActTest {
 	public void test() {
 		
 		User user = new User();
+		
 		Act act = new Act("testAct", user, "12313");	
 		actService.save(act);	
 		Act act2 = (Act) actRepository.findByTitle("testAct");
 		
 		assertEquals(act, act2);
 	}
+	
+	
 	
 
 }
