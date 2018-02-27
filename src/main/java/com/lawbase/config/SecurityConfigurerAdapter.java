@@ -58,7 +58,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
             .sessionManagement()
             	.maximumSessions(100)
             	.maxSessionsPreventsLogin( false )
-            	.expiredUrl("/error")
+            	.expiredUrl("/login")
             	.sessionRegistry(sessionRegistry())
             	;
             	
