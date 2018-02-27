@@ -12,8 +12,6 @@ import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.PasswordException;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserService;
-import util.restApi.RestBadDataException;
-import util.restApi.RestInternalServerException;
 
 @RestController
 @RequestMapping( "public/rest/registration" )
@@ -24,15 +22,14 @@ public class RegistrationRestController {
 	
 	@PostMapping( "/add" )
     public User add(HttpSession httpSession,
-            @RequestParam Map<String, String> params) throws RestBadDataException, RestInternalServerException, PasswordException, PersistenceException  {
+            @RequestParam Map<String, String> params) throws PasswordException, PersistenceException  {
+		
 			System.out.println("controller is printing in system console");     
 			
 			User user = userService.registrationFromFormData( params );
 			
 			System.out.println(user.getName());
 			
-			
-			//return new RestSuccess( RestSuccess.Codes.SAVE_DB );
 			return user;
 			
 			
