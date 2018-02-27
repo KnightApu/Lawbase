@@ -48,18 +48,18 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
             .formLogin()
-            	.loginPage("/login").defaultSuccessUrl("/",true)
+            	.loginPage( "/login" ).defaultSuccessUrl( "/" , true )
             	.and()
-            	.logout().logoutUrl("/logout").logoutSuccessUrl("/")
+            	.logout().logoutUrl( "/logout" ).logoutSuccessUrl( "/" )
             	.and()
             .exceptionHandling()
-            	.accessDeniedPage("/error/accessDenied")
+            	.accessDeniedPage( "/error/accessDenied" )
             	.and()
             .sessionManagement()
-            	.maximumSessions(100)
+            	.maximumSessions( 100 )
             	.maxSessionsPreventsLogin( false )
-            	.expiredUrl("/login")
-            	.sessionRegistry(sessionRegistry())
+            	.expiredUrl( "/login" )
+            	.sessionRegistry( sessionRegistry() )
             	;
             	
 //        http
@@ -68,14 +68,19 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         
     }
     
+    
     @Bean
-    SessionRegistry sessionRegistry() {			
+    SessionRegistry sessionRegistry() {
+    	
         return new SessionRegistryImpl();
+    
     }
     
     @Bean
     public static ServletListenerRegistrationBean httpSessionEventPublisher() {	
-        return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    
+    	return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    
     }
     
 
