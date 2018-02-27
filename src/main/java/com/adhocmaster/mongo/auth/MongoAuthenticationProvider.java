@@ -19,7 +19,6 @@ import com.adhocmaster.mongo.user.PasswordHelper;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserService;
 import com.adhocmaster.user.role.CapabilityAuthority;
-import com.adhocmaster.user.role.CapabilityAuthorityProvider;
 import com.adhocmaster.user.role.CapabilityNotFoundException;
 import com.adhocmaster.user.role.Role;
 import com.adhocmaster.user.role.RoleCapabilitiesNotFoundException;

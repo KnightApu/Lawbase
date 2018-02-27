@@ -1,10 +1,7 @@
 package com.adhocmaster.mongo.user;
 
-import java.util.Map;
-
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.adhocmaster.user.role.Role;
 import com.book.simpleBook.author.SimpleAuthor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

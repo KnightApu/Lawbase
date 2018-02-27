@@ -3,7 +3,6 @@ package com.adhocmaster.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorController;
 
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserHelper;

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.adhocmaster.service.RepositoryService;
-import com.lawbase.court.CourtBookRepository;
 
 @Service
 public class JournalService extends RepositoryService<Journal> {
