@@ -5,18 +5,18 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-2 contact">
-                            <p class="hidden-sm hidden-xs"><b>Contact us on +8801828128129</b></p>
+                            <p class="hidden-sm hidden-xs"><b>Contact us on <i>+8801828128129</i></b></p>
                             <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                             </p>
                         </div>
                         
-                        <div sec:authorize="isAuthenticated()" class="col-md-5">
+                        <div sec:authorize="isAuthenticated()" class="col-md-10">
                         	<div  class="logout">
                                <a href="/logout"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Sign out</span></a>
                             </div>
                         </div>
                         
-                        <div sec:authorize="isAnonymous()" class="col-md-5">
+                        <div sec:authorize="isAnonymous()" class="col-md-10">
                             <div class="social">
                                 <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
                                 <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
