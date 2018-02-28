@@ -46,7 +46,7 @@ public class FrontIndexController extends FrontCommonController  {
         return "front/index";
         
     }
-    @Secured("ROLE_USER")
+    @Secured("ROLE_INDIVIDUAL")
     @RequestMapping("index2")
     String index2(Model model) {
         

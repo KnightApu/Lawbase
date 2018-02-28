@@ -2,7 +2,7 @@ package com.adhocmaster.user.role;
 
 public enum Role {
     
-    USER,
+    INDIVIDUAL,
     ADMIN,
     ENTERPRISE;
     

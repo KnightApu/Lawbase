@@ -97,7 +97,7 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             		            		
             	}
             	
-            	if( user.getRole() == Role.findByName( "USER" ) )
+            	if( user.getRole() == Role.findByName( "INDIVIDUAL" ) )
             	{
             		
             		logger.debug( "user trying to log in has role: user" );

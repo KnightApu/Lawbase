@@ -32,7 +32,7 @@ public class UserExpirableCapabilityAuthorityProvider implements CapabilityAutho
 
     private void loadAuthorities() {
 
-        // **** USER ****
+        // **** INDIVIDUAL ****
         Set<CapabilityAuthority> userCapabilities = new HashSet<CapabilityAuthority>();
         
         for ( Capability capability : StaticCapabilityProvider.userCapabilities ) {
@@ -41,7 +41,7 @@ public class UserExpirableCapabilityAuthorityProvider implements CapabilityAutho
             
         }
         
-        roleAuthorities.put(Role.USER, userCapabilities);
+        roleAuthorities.put( Role.INDIVIDUAL, userCapabilities );
         
         // **** ADMIN ****
         Set<CapabilityAuthority> adminAuthorities = new HashSet<CapabilityAuthority>();
@@ -52,7 +52,7 @@ public class UserExpirableCapabilityAuthorityProvider implements CapabilityAutho
             
         }
         
-        roleAuthorities.put(Role.ADMIN, adminAuthorities);
+        roleAuthorities.put( Role.ADMIN, adminAuthorities );
         
         // **** ENTERPRISE ****
         Set<CapabilityAuthority> enterpriseAuthorities = new HashSet<CapabilityAuthority>();
@@ -63,7 +63,7 @@ public class UserExpirableCapabilityAuthorityProvider implements CapabilityAutho
             
         }
         
-        roleAuthorities.put(Role.ENTERPRISE, enterpriseAuthorities);
+        roleAuthorities.put( Role.ENTERPRISE, enterpriseAuthorities );
         
     }
 	
