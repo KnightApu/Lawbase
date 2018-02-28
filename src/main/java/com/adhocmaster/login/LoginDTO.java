@@ -22,7 +22,7 @@ public class LoginDTO implements Serializable {
     
     private String passwordHash = "";
     
-    private Role role = Role.USER;
+    private Role role = Role.INDIVIDUAL;
 
     
     public ObjectId getId() {

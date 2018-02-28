@@ -28,7 +28,7 @@ public class StaticCapabilityProviderTest {
     @Test
     public void test() throws RoleNotFoundException, RoleCapabilitiesNotFoundException {
 
-        Set<Capability> capabilities = staticCapabilityProvider.getCapabilities( "USER" );
+        Set<Capability> capabilities = staticCapabilityProvider.getCapabilities( "INDIVIDUAL" );
         
         assertTrue( capabilities.size() > 0 );
 
