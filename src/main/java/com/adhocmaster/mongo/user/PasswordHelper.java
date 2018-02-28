@@ -49,6 +49,7 @@ public class PasswordHelper {
     public static boolean check( String password, String hash ) throws PasswordException {
         
         String newHash = getHash( password );
+        System.out.println(newHash + "----------" + hash);
         
         if ( newHash.equals( hash ) )
             return true;

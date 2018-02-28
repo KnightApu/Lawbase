@@ -125,6 +125,11 @@ public class UserService extends RepositoryService<User> {
 
         return userRepository.findByUserName( userName );
     }
+    
+    public User findById( String id ) {
+    	
+    	return userRepository.findById(id);
+    }
 
     /**
      * 
@@ -325,7 +330,7 @@ public class UserService extends RepositoryService<User> {
     }
 
 
-	public void registrationFromFormData(Map<String, String> params) throws PasswordException, PersistenceException {
+	public User registrationFromFormData(Map<String, String> params) throws PasswordException, PersistenceException {
 		
 		if ( StringUtils.isBlank( params.get( "userName" ) ) )
             throw new PersistenceException( "userName not set" );
@@ -377,7 +382,8 @@ public class UserService extends RepositoryService<User> {
 	
         }
 			
-			createUserfromRegistrationForm(name, userName, email, contactNo, password, occupation, institute);
+			User user = createUserfromRegistrationForm(name, userName, email, contactNo, password, occupation, institute);
+			return user;
 		
 	}
 

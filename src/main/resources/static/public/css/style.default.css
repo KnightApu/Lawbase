@@ -288,6 +288,18 @@ ul.list-style-none {
   font-weight: 700;
   letter-spacing: 0.10em;
 }
+#top .logout {
+  float: right;
+}
+#top .logout a {
+  font-size: 12px;
+  color: #eeeeee;
+  margin-right: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+}
 @media (max-width: 767px) {
   #top .login {
     float: left;

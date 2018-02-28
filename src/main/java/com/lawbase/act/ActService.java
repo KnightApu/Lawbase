@@ -21,8 +21,6 @@ import com.book.simpleBook.Status;
 import com.mongo.media.Media;
 import com.mongo.media.MediaRepository;
 import com.utility.form.FormValidationException;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 import io.reactivex.subjects.Subject;
 import javassist.NotFoundException;
 

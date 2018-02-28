@@ -13,7 +13,7 @@ import com.lawbase.controller.FrontCommonController;
 public class RegistrationController extends FrontCommonController {
 	
 	private static final String viewRoot = "front/registration-";
-    private static final String pathRoot = "/front/registration";
+    private static final String pathRoot = "public/registration";
     
     @Override
     protected void generateControllerPaths() {

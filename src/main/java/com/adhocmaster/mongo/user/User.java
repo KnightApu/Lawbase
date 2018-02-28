@@ -1,10 +1,7 @@
 package com.adhocmaster.mongo.user;
 
-import java.util.Map;
-
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.adhocmaster.user.role.Role;
 import com.book.simpleBook.author.SimpleAuthor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -67,6 +64,8 @@ public class User extends SimpleAuthor {
         setDefaultPassword();
 
     }
+    
+  
 
     /**
      * Needed for mongo reflexion or serialization
@@ -78,7 +77,10 @@ public class User extends SimpleAuthor {
 
     }
 
-    private void setDefaultPassword() {
+    
+
+
+	private void setDefaultPassword() {
 
         try {
 
@@ -124,8 +126,14 @@ public class User extends SimpleAuthor {
 
     public void setPasswordHash( String passwordHash ) {
 
+        this.passwordHash = passwordHash;
+
+    }
+    
+    public void setPasswordHashFromPassword( String password ) {
+
         try {
-            this.passwordHash = PasswordHelper.getHash( passwordHash );
+            this.passwordHash = PasswordHelper.getHash( password );
 
         } catch ( PasswordException e ) {
 
