@@ -1,8 +1,10 @@
 package com.adhocmaster.mongo.auth;
 
 
+import java.util.List;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +37,9 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
     
     @Autowired
     UserService userService;
+    
+    @Autowired
+    private SessionRegistry sessionRegistry;
     
     //i edited
 //    @Autowired
@@ -93,6 +100,15 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
                     throw new MongoAuthenticationException( "Incorrect location" );
             		            		
             	}
+            	
+            	if( user.getRole() == Role.findByName( "INDIVIDUAL" ) )
+            	{
+            		
+            		logger.debug( "user trying to log in has role: user" );
+            		
+            		expireOtherUserSessions( userName );
+            
+            	}
                 
                 return getAuthToken( user );
                 
@@ -119,6 +135,33 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
 
     }
 
+    private void expireOtherUserSessions( String userName ) {
+        
+    	for (Object principal : sessionRegistry.getAllPrincipals()) {
+    		
+    		List<SessionInformation> sessionInfo = sessionRegistry.getAllSessions(principal, false);
+    		
+    		ObjectId id = (ObjectId) principal;
+    		
+    		User user = userService.findOne( id );
+    		
+    		logger.info( "user in conversion:" + user.toString() );
+    		
+    		if( user.getUserName().equals( userName ) )
+    		{    		
+    			for ( SessionInformation information : sessionInfo ) 
+    			{                
+					logger.info( "expriring other session now for: " + userName );
+					
+					information.expireNow();
+                
+            	}
+    		
+    		}
+        
+    	}
+    
+    }
 
     private boolean isPasswordCorrect( User user, String password ) throws PasswordException {
         

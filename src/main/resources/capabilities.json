@@ -1,13 +1,13 @@
 {
     "roles" : [
-        "USER",
+        "INDIVIDUAL",
         "ADMIN",
         "ENTERPRISE",
         "TEACHER",
         "STUDENT"
     ],
     
-    "USER" : [
+    "INDIVIDUAL" : [
     
         "READ_CASE",
         

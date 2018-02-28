@@ -10,8 +10,8 @@ public class StaticCapabilityProvider implements CapabilityProvider {
 
     protected static Capability[] userCapabilities = new Capability[] {
 
-            Capability.USER,
-            Capability.ROLE_USER,
+            Capability.INDIVIDUAL,
+            Capability.ROLE_INDIVIDUAL,
             Capability.READ_CASE,
             Capability.READ_ACT,
             Capability.READ_COURT
@@ -49,26 +49,26 @@ public class StaticCapabilityProvider implements CapabilityProvider {
     
     private void loadRoleCapabilities() {
 
-        // USER
+        // INDIVIDUAL
         Set<Capability> userCapabilitiesSet = new HashSet<Capability>();
         
         userCapabilitiesSet.addAll( Arrays.asList( userCapabilities ) );
                
-        capabilities.put(Role.USER, userCapabilitiesSet);
+        capabilities.put( Role.INDIVIDUAL, userCapabilitiesSet );
         
         // ADMIN
         Set<Capability> adminCapabilitiesSet = new HashSet<Capability>();
         
         adminCapabilitiesSet.addAll( Arrays.asList( adminCapabilities ) );
                
-        capabilities.put(Role.ADMIN, adminCapabilitiesSet);
+        capabilities.put( Role.ADMIN, adminCapabilitiesSet );
         
         // ENTERPRISE
         Set<Capability> enterpriseCapabilitiesSet = new HashSet<Capability>();
         
         enterpriseCapabilitiesSet.addAll( Arrays.asList( adminCapabilities ) );
                
-        capabilities.put(Role.ENTERPRISE, enterpriseCapabilitiesSet);
+        capabilities.put( Role.ENTERPRISE, enterpriseCapabilitiesSet );
         
     }
     

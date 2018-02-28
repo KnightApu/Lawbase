@@ -24,7 +24,7 @@ public class StaticCapabilityAuthorityProvider implements CapabilityAuthorityPro
 
     private void loadAuthorities() {
 
-        // **** USER ****
+        // **** INDIVIDUAL ****
         Set<CapabilityAuthority> userCapabilities = new HashSet<CapabilityAuthority>();
         
         for ( Capability capability : StaticCapabilityProvider.userCapabilities ) {
@@ -33,7 +33,7 @@ public class StaticCapabilityAuthorityProvider implements CapabilityAuthorityPro
             
         }
         
-        roleAuthorities.put(Role.USER, userCapabilities);
+        roleAuthorities.put( Role.INDIVIDUAL, userCapabilities);
         
         // **** ADMIN ****
         Set<CapabilityAuthority> adminAuthorities = new HashSet<CapabilityAuthority>();
@@ -44,7 +44,7 @@ public class StaticCapabilityAuthorityProvider implements CapabilityAuthorityPro
             
         }
         
-        roleAuthorities.put(Role.ADMIN, adminAuthorities);
+        roleAuthorities.put( Role.ADMIN, adminAuthorities);
         
      // **** ENTERPRISE ****
         Set<CapabilityAuthority> enterpriseAuthorities = new HashSet<CapabilityAuthority>();
@@ -55,7 +55,7 @@ public class StaticCapabilityAuthorityProvider implements CapabilityAuthorityPro
             
         }
         
-        roleAuthorities.put(Role.ENTERPRISE, enterpriseAuthorities);
+        roleAuthorities.put( Role.ENTERPRISE, enterpriseAuthorities);
         
     }
 

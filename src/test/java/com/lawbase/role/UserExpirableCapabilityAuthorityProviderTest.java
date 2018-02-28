@@ -57,7 +57,7 @@ public class UserExpirableCapabilityAuthorityProviderTest {
 		UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName,  userName + "@test.com" );
 		User user = userCreator.createAndPersist();
 		
-		user.setRole( Role.USER );
+		user.setRole( Role.INDIVIDUAL );
 		
 		
 		Set<Capability> userCapabilities = new HashSet<Capability>();

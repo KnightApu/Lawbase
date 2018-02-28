@@ -1,12 +1,18 @@
 package com.lawbase.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+
 import com.adhocmaster.mongo.auth.MongoAuthenticationProvider;
 
 @Configuration
@@ -48,12 +54,34 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
             	.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
             	.and()
             .exceptionHandling()
-            	.accessDeniedPage("/error/accessDenied");
+            	.accessDeniedPage( "/error/accessDenied" )
+            	.and()
+            .sessionManagement()
+            	.maximumSessions( 100 )
+            	.maxSessionsPreventsLogin( false )
+            	.expiredUrl( "/login" )
+            	.sessionRegistry( sessionRegistry() )
+            	;
             	
 //        http
 //            .authorizeRequests()
 //                .antMatchers( HttpMethod.GET, "/indexPublic" ).permitAll();
         
+    }
+    
+    
+    @Bean
+    SessionRegistry sessionRegistry() {
+    	
+        return new SessionRegistryImpl();
+    
+    }
+    
+    @Bean
+    public static ServletListenerRegistrationBean httpSessionEventPublisher() {	
+    
+    	return new ServletListenerRegistrationBean( new HttpSessionEventPublisher() );
+    
     }
     
 

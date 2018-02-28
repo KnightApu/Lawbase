@@ -3,8 +3,8 @@ package com.adhocmaster.user.role;
 
 public enum Capability {
     
-    USER,
-    ROLE_USER,
+	INDIVIDUAL,
+    ROLE_INDIVIDUAL,
     ADMIN,
     ROLE_ADMIN,
     ENTERPRISE,
