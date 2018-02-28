@@ -29,8 +29,8 @@ public class StaticCapabilityAuthorityProviderTest {
     @Test
     public void test() throws RoleNotFoundException, RoleCapabilitiesNotFoundException {
 
-        Set<CapabilityAuthority> capabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( "USER" );
-        Set<CapabilityAuthority> roleCapabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( Role.USER );
+        Set<CapabilityAuthority> capabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( "INDIVIDUAL" );
+        Set<CapabilityAuthority> roleCapabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( Role.INDIVIDUAL );
         
         assertTrue( capabilityAuthorities.equals( roleCapabilityAuthorities ) );
         

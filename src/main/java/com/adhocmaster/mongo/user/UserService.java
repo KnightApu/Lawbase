@@ -51,7 +51,7 @@ public class UserService extends RepositoryService<User> {
 		userCreator.setPassword(password);
 		userCreator.setOccupation(occupation);
 		userCreator.setInstitute(institute);
-		userCreator.setRole(Role.USER);
+		userCreator.setRole(Role.INDIVIDUAL);
 		
 		User user = userCreator.createAndPersist();
 		

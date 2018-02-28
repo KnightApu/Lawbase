@@ -32,7 +32,7 @@ public class User extends SimpleAuthor {
 
     private String passwordHash = "";
 
-    private Role role = Role.USER;
+    private Role role = Role.INDIVIDUAL;
 
     private UserStatus status = UserStatus.ACTIVE;
 
