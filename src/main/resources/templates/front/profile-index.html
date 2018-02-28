@@ -135,6 +135,7 @@
                              
                     var loadingSelectorBasic = "#loadingBasic";
                     var loadingSelectorSection = "#loadingSection";
+                    var id =  /*[[ @{ ${ id } } ]]*/ 0;
                  
                     var controllerPaths = {
                             
@@ -163,14 +164,13 @@
 			//alert("this is it! "+htmlTranscript);		
 			$("#transcript").html(htmlTranscript);
 			
-			mApp.setUpRestPaths ( user, controllerPaths, "/profile/", "/rest/registration/" );
+			mApp.setUpRestPaths ( user, controllerPaths, "/front/", "/admin/rest/" );
 			
-			$("#signup").click( function() {
-				
-				user.add("#userForm");
-				
-			
-			})
+			$( "#submitBasicInformation" ).click( function() {
+                
+                user.update( '#formBasicInformation' );                          
+                
+            });
 
 		});
 	</script>
