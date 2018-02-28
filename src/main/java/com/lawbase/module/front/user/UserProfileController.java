@@ -17,7 +17,7 @@ import com.lawbase.controller.FrontCommonController;
 public class UserProfileController extends FrontCommonController {
 	
 	private static final String viewRoot = "front/profile-";
-    private static final String pathRoot = "/front/profile";
+    private static final String pathRoot = "/front/user/edit";
     
     @Override
     protected void generateControllerPaths() {
@@ -46,6 +46,7 @@ public class UserProfileController extends FrontCommonController {
 		User user = userService.findById( id );
 		
 		model.addAttribute( "user", user );
+		model.addAttribute("id", id);
 		addCommonModelAttributes( model, "index" ); 
 		addCommonFrontMenuAttributes(model);
 		
