@@ -73,8 +73,6 @@ public class UserService extends RepositoryService<User> {
 
         userCreator.setRole( Role.findByName( role ) );
 
-       // userCreator.setPassword( password );
-
         User user = userCreator.createAndPersist();
 
         return user;
@@ -87,8 +85,6 @@ public class UserService extends RepositoryService<User> {
     	 UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
 
          userCreator.setRole( Role.findByName( role ) );
-
-        // userCreator.setPassword( password );
 
          userCreator.setIpAddress( ipAddress );
          

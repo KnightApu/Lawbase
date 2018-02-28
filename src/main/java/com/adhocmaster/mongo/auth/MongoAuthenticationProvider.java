@@ -63,10 +63,8 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             return authentication;
                 
         String userName = authentication.getName();
-        String password = authentication.getCredentials().toString();
-        
-        System.out.println(userName + "---------"+ password  );
-        
+        String password = authentication.getCredentials().toString();        
+              
         User user = userService.findByUserName( userName );
         
         if ( null == user ) {
@@ -114,21 +112,18 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
                 
             }
             
-            System.out.println(userName + "---password vul------"+ password  );
 
             logger.debug( userName + " Incorrect password." );
             throw new MongoAuthenticationException( "Incorrect password" );
             
         } catch ( PasswordException e ) {
         	
-        	System.out.println(userName + "---password exception------"+ password  );
-            logger.debug( "Password exception: " + e.getMessage() );
+        	logger.debug( "Password exception: " + e.getMessage() );
             throw new MongoAuthenticationException( "Password exception: " + e.getMessage() );
             
         } catch (RoleNotFoundException e) {
 			// TODO Auto-generated catch block
-        	System.out.println(userName + "---role vul------"+ password  );
-        	logger.debug( "Role exception: " + e.getMessage() );
+        	 logger.debug( "Role exception: " + e.getMessage() );
         	 throw new MongoAuthenticationException( "Role exception: " + e.getMessage() );
 		}
 

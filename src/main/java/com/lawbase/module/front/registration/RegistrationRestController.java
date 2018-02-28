@@ -24,11 +24,7 @@ public class RegistrationRestController {
     public User add(HttpSession httpSession,
             @RequestParam Map<String, String> params) throws PasswordException, PersistenceException  {
 		
-			System.out.println("controller is printing in system console");     
-			
 			User user = userService.registrationFromFormData( params );
-			
-			System.out.println(user.getName());
 			
 			return user;
 			
