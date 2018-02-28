@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="front/components/html-head">
+
+</head>
+
+
+<section th:replace="front/components/section-head"></section>
+
+<body>
+	<div class="container">
+
+		<div class='x_panel'>
+
+			<div class='x_title'>
+				<div class="heading text-center">
+
+					<h2>Basic information</h2>
+
+				</div>
+
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+
+
+			<div class='x_content'>
+
+				<form th:object="${ user }" id="formBasicInformation" action=""
+					method="get" data-parsley-validate=""
+					class="form-horizontal form-label-left" novalidate=""
+					onsubmit=" return false; ">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">UserName
+							<span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ userName }" type="text" id="userName"
+								name="userName" required="required"
+								class="form-control col-md-7 col-xs-12" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Name
+							<span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ name }" type="text" id="name" name="name"
+								required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Email
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ email }" type="text" id="email" name="email"
+								required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Contact
+							No <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ contactNo }" type="text" id="contactNO"
+								name="contactNo" required="required"
+								class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Occupation
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ occupation }" type="text" id="occupation"
+								name="occupation" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Institute
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ institute }" type="text" id="institute"
+								name="institute" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="">
+							Role </label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input th:value="*{ role }" type="text" id="" name=""
+								required="required" class="form-control col-md-7 col-xs-12"
+								disabled>
+						</div>
+					</div>
+
+
+
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+							<button id="submitBasicInformation" type="submit"
+								class="btn btn-success">Save basic information</button>
+							<input type="hidden" name="updateType" value="basicInformation">
+
+							<div id="loading"></div>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div th:replace="front/components/html-footer"></div>
+
+
+	<script th:inline="javascript">
+                /*<![CDATA[*/
+                             
+                    var loadingSelectorBasic = "#loadingBasic";
+                    var loadingSelectorSection = "#loadingSection";
+                 
+                    var controllerPaths = {
+                            
+                            "add"    : /*[[ @{ ${ controllerPaths['add'] } } ]]*/,
+                            "edit"   : /*[[ @{ ${ controllerPaths['edit'] } } ]]*/,
+                            "delete" : /*[[ @{ ${ controllerPaths['delete'] } } ]]*/,
+                            "manage" : /*[[ @{ ${ controllerPaths['manage'] } } ]]*/,
+                            "index"  : /*[[ @{ ${ controllerPaths['index'] } } ]]*/
+                            
+                    }
+
+                /*]]>*/
+                </script>
+
+	<script>
+		$(document).ready(function() {
+			//alert("working");
+
+			var refContent = $("#reference").text();
+			var htmlRef = $.parseHTML(refContent);
+
+			$("#reference").html(htmlRef);
+
+			var transcriptContent = $("#transcript").text();
+			var htmlTranscript = $.parseHTML(transcriptContent);
+			//alert("this is it! "+htmlTranscript);		
+			$("#transcript").html(htmlTranscript);
+			
+			mApp.setUpRestPaths ( user, controllerPaths, "/profile/", "/rest/registration/" );
+			
+			$("#signup").click( function() {
+				
+				user.add("#userForm");
+				
+			
+			})
+
+		});
+	</script>
+
+
+</body>
+</html>

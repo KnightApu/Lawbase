@@ -18,10 +18,15 @@
 
 				<div sec:authorize="isAuthenticated()" class="col-md-10">
 					<div class="logout">
-						<a href="#" onclick="document.getElementById('logOutForm').submit();" class="anchorLogout"><i class="fa fa-sign-out"></i> <span
-							class="hidden-xs text-uppercase">Sign out</span></a>
+						
+						<a href="front/profile/"><i class="fa fa-user"></i> <span
+							class="hidden-xs text-uppercase">Profile</span></a>
 							
+						<a href="#" onclick="document.getElementById('logOutForm').submit();"><i class="fa fa-sign-out"></i> <span
+							class="hidden-xs text-uppercase">Sign out</span></a>
+						
 					</div>
+					
 				</div>
 
 				<div sec:authorize="isAnonymous()" class="col-md-10">
@@ -37,7 +42,8 @@
 					<div class="login">
 						<a href="#" data-toggle="modal" data-target="#login-modal"><i
 							class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign
-								in</span></a> <a href="/registration"><i class="fa fa-user"></i> <span
+								in</span></a> 
+						<a href="/registration"><i class="fa fa-user"></i> <span
 							class="hidden-xs text-uppercase">Sign up</span></a>
 					</div>
 

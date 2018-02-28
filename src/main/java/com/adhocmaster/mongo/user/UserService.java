@@ -125,6 +125,11 @@ public class UserService extends RepositoryService<User> {
 
         return userRepository.findByUserName( userName );
     }
+    
+    public User findById( String id ) {
+    	
+    	return userRepository.findById(id);
+    }
 
     /**
      * 
