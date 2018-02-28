@@ -39,18 +39,15 @@ public class UserProfileController extends FrontCommonController {
 	UserService userService;
 	
 	@RequestMapping("/")
-    String index(Model model, Principal principal) {
-        
-		System.out.println("front profile test");
+    String index(Model model, Principal principal) {        
+		
 		String id = principal.getName();
 		User user = userService.findById( id );
 		
 		model.addAttribute( "user", user );
 		model.addAttribute("id", id);
 		addCommonModelAttributes( model, "index" ); 
-		addCommonFrontMenuAttributes(model);
-		
-		System.out.println(user);    	
+		addCommonFrontMenuAttributes(model);			 	
     	
         return viewRoot + "index";
         
