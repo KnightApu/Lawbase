@@ -13,11 +13,11 @@ import com.adhocmaster.mongo.user.UserService;
 import com.lawbase.controller.FrontCommonController;
 
 @Controller
-@RequestMapping("/front/profile")
+@RequestMapping("/front/user")
 public class UserProfileController extends FrontCommonController {
 	
-	private static final String viewRoot = "front/profile-";
-    private static final String pathRoot = "/front/user/edit";
+	private static final String viewRoot = "front/user-";
+    private static final String pathRoot = "/front/user/";
     
     @Override
     protected void generateControllerPaths() {
@@ -30,7 +30,8 @@ public class UserProfileController extends FrontCommonController {
         controllerPaths.put( "add", pathRoot + "/add" );
         controllerPaths.put( "view", pathRoot + "/view?id=" );
         controllerPaths.put( "delete", pathRoot + "/delete?id=" );
-        controllerPaths.put( "manage", pathRoot + "/manage" );   
+        controllerPaths.put( "manage", pathRoot + "/manage" ); 
+        controllerPaths.put( "edit", pathRoot + "/edit?id=" );
         
         
     }
@@ -38,7 +39,7 @@ public class UserProfileController extends FrontCommonController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/edit")
     String index(Model model, Principal principal) {        
 		
 		String id = principal.getName();

@@ -153,6 +153,8 @@
 	<script>
 		$(document).ready(function() {
 			//alert("working");
+			
+			//console.log(id);
 
 			var refContent = $("#reference").text();
 			var htmlRef = $.parseHTML(refContent);
@@ -168,7 +170,7 @@
 			
 			$( "#submitBasicInformation" ).click( function() {
                 
-                user.update( '#formBasicInformation' );                          
+                user.update( '#formBasicInformation', id );                          
                 
             });
 

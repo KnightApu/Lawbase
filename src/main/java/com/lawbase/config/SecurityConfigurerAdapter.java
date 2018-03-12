@@ -45,7 +45,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.GET, "/indexPublic" ).permitAll()
                 .antMatchers( "/admin/**" ).hasAuthority("ADMIN")
                 .antMatchers( "/front/case/view/**" ).access( "( hasAuthority('ENTERPRISE') ) or ( hasAuthority('INDIVIDUAL') ) or ( hasAuthority('ADMIN') )" )
-                .antMatchers("/front/profile/").access("( hasAuthority('INDIVIDUAL') )")
+                .antMatchers("/front/user/**").access("( hasAuthority('INDIVIDUAL') )")
                 .anyRequest().permitAll()
                 .and()
             .formLogin()

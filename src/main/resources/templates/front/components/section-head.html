@@ -19,7 +19,7 @@
 				<div sec:authorize="isAuthenticated()" class="col-md-10">
 					<div class="logout">
 						
-						<a href="front/profile/"><i class="fa fa-user"></i> <span
+						<a href="front/user/edit"><i class="fa fa-user"></i> <span
 							class="hidden-xs text-uppercase">Profile</span></a>
 							
 						<a href="#" onclick="document.getElementById('logOutForm').submit();"><i class="fa fa-sign-out"></i> <span
@@ -244,6 +244,7 @@ _________________________________________________________ -->
 			<div class="modal-header" class="heading text-center">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
+					<br>
 				<h4 class="modal-title" id="Login">Sign In</h4>
 			</div>
 			<div class="modal-body" class="heading text-center">
@@ -270,7 +271,7 @@ _________________________________________________________ -->
 
 				<p class="text-center text-muted">Not registered yet?</p>
 				<p class="text-center text-muted">
-					<a href="/register"><strong>Register now</strong></a>! It is easy
+					<a href="/registration"><strong>Register now</strong></a>! It is easy
 					and done in 1&nbsp;minute and gives you access to special discounts
 					and much more!
 				</p>

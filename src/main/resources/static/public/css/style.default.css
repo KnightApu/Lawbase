@@ -300,6 +300,9 @@ ul.list-style-none {
   font-weight: 700;
   letter-spacing: 0.10em;
 }
+#top .logout a: hover {
+	color: red;
+}
 @media (max-width: 767px) {
   #top .login {
     float: left;
