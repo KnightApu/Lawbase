@@ -1,4 +1,3 @@
-
 var user = {
 
 	loadingOverlay : "#loadingOverlay",
@@ -26,7 +25,7 @@ var user = {
 
 	},
 
-	update : function(formData) {
+	update : function(formData, userId) {
 
 		mApp.loadingOverlayAction().show();
 
@@ -37,13 +36,14 @@ var user = {
 
 		console.log(data);
 
-		mApp.callAjax(url, data, "post", this, "userTest");
+		mApp.callAjax(url, data, "post", this, "userProfileUpdate");
 
 	},
 
-	userTest : function(data) {
-		console.log("user added test e call asche.");
-		alert("data");
+	userProfileUpdate : function(user) {
+		
+		console.log(user);
+		
 	},
 
 	userAdded : function(user) {

@@ -249,7 +249,7 @@ public class UserService extends RepositoryService<User> {
      * @throws NotFoundException
      * @throws PersistenceException
      */
-    public void updateBasicInformation( ObjectId userId, Map<String, String> params )
+    public User updateBasicInformation( ObjectId userId, Map<String, String> params )
             throws FormValidationException, NotFoundException, PersistenceException {
 
         User user = findOne( userId );
@@ -299,6 +299,7 @@ public class UserService extends RepositoryService<User> {
             throw new PersistenceException( e.getMessage() );
 
         }
+        return user;
 
     }
 
