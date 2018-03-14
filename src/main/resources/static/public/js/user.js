@@ -43,7 +43,8 @@ var user = {
 	userProfileUpdate : function(user) {
 		
 		console.log(user);
-		
+		location.reload();
+		console.log("refreshing");
 	},
 
 	userAdded : function(user) {

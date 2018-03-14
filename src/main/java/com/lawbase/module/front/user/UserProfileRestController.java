@@ -25,7 +25,7 @@ import util.restApi.RestBadDataException;
 import util.restApi.RestInternalServerException;
 
 @RestController
-@RequestMapping("/public/rest/user2")
+@RequestMapping("/public/rest/user/")
 public class UserProfileRestController extends MongoRestController<User> {
 
 	@Autowired
@@ -62,9 +62,5 @@ public class UserProfileRestController extends MongoRestController<User> {
 
 	}
 	
-	@PostMapping("/hello")
-	public String hello() {
-		return "Hello Boot";
-	}
 
 }
