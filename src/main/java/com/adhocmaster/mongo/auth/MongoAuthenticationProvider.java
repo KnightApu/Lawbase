@@ -69,10 +69,8 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
         
         if ( null == user ) {
             
-            //logger.debug( userName + " user not found." );
-        	System.out.println(userName + "----user not found-----"+ password  );
-        	
-            throw new MongoAuthenticationException( "User not found" );
+            logger.debug( userName + " user not found." );
+        	throw new MongoAuthenticationException( "User not found" );
             
         }
 
