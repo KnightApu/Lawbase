@@ -21,28 +21,28 @@
 					<h2>Sign In</h2>
 
 				</div>
-				<div th:if="${param.error}">Invalid username and password.</div>
+				<div th:if="${param.error}" class="p-3 mb-2 bg-danger text-white"><h6>Invalid username and password.</h6></div>
 
-				<div th:if="${param.logout}">You have been logged out.</div>
-				<section class="signin_content">
+				<div th:if="${param.logout}" class="p-3 mb-2 bg-warning text-dark"><h6>You have been logged out.</h6></div>
+				<section class="signin_content" >
 					<form th:action="@{/login}" method="post">
 
 
 						<div>
-							<label> User Name : <input type="text"
+							<label class="p-3 mb-2 bg-primary text-white"> User Name : <input type="text"
 								class="form-control" placeholder="User Name" name="username"
 								required=""></label>
 						</div>
 						<br>
 						<div>
-							<label> Password: <input type="password"
+							<label class="p-3 mb-2 bg-primary text-white"> Password: <input type="password"
 								class="form-control" placeholder="Password" name="password"
 								required=""></label>
 						</div>
 						<br>
 						<div>
 							<input type="submit" value="Sign In"
-								class="btn btn-default submit" />
+								class="btn btn-success" />
 						</div>
 						<br>
 

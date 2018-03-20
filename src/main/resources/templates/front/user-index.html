@@ -117,6 +117,9 @@
 							<div id="loading"></div>
 						</div>
 					</div>
+					
+					<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
 
 				</form>
 
@@ -135,6 +138,7 @@
                              
                     var loadingSelectorBasic = "#loadingBasic";
                     var loadingSelectorSection = "#loadingSection";
+                    var id =  /*[[ @{ ${ id } } ]]*/ 0;
                  
                     var controllerPaths = {
                             
@@ -152,6 +156,8 @@
 	<script>
 		$(document).ready(function() {
 			//alert("working");
+			
+			//console.log(id);
 
 			var refContent = $("#reference").text();
 			var htmlRef = $.parseHTML(refContent);
@@ -163,14 +169,13 @@
 			//alert("this is it! "+htmlTranscript);		
 			$("#transcript").html(htmlTranscript);
 			
-			mApp.setUpRestPaths ( user, controllerPaths, "/profile/", "/rest/registration/" );
+			mApp.setUpRestPaths ( user, controllerPaths, "/front/", "/public/rest/" );
 			
-			$("#signup").click( function() {
-				
-				user.add("#userForm");
-				
-			
-			})
+			$( "#submitBasicInformation" ).click( function() {
+                
+                user.update( '#formBasicInformation', id );                          
+                
+            });
 
 		});
 	</script>

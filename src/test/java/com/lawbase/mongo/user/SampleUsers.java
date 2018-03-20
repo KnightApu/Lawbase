@@ -40,7 +40,6 @@ public class SampleUsers {
             email = userName + "@test.com";
             
             userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
-            //userCreator.setRole(Role.USER);
             
             userCreator.createAndPersist();
             
