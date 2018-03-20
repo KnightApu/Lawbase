@@ -58,6 +58,11 @@ task apuRun <<{
 
 apuRun.finalizedBy bootRun
 
+task shohanRun <<{
+    bootRun { systemProperty "spring.profiles.active", "shohan" }
+}
+
+shohanRun.finalizedBy bootRun
 
 task mukRun <<{
     bootRun { systemProperty "spring.profiles.active", "muktadir" }
