@@ -13,9 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.lawbase.cases.CaseRepository;
 import com.lawbase.controller.FrontCommonController;
 
-
-
-
 @Controller
 public class FrontIndexController extends FrontCommonController  {
 	
@@ -24,10 +21,8 @@ public class FrontIndexController extends FrontCommonController  {
 	@Autowired
     private CaseRepository caseRepository;
 	
-
-	
     @RequestMapping("/")
-    String base(Model model) {
+    public String base(Model model) {
         
     	addCommonFrontMenuAttributes(model);
     	
@@ -36,26 +31,29 @@ public class FrontIndexController extends FrontCommonController  {
         return "front/index";
         
     }
+    
     @PreAuthorize( "hasAuthority('READ_CASE')" )
     @RequestMapping("/case")
-    String readCase(Model model) {
+    public String readCase(Model model) {
         
     	addCommonFrontMenuAttributes(model);
     	
         return "front/index";
         
     }
+    
     @RequestMapping("index")
-    String index(Model model) {
+    public String index(Model model) {
     	
     	addCommonFrontMenuAttributes(model);
         
         return "front/index";
         
     }
+    
     @Secured("ROLE_INDIVIDUAL")
     @RequestMapping("index2")
-    String index2(Model model) {
+    public String index2(Model model) {
         
     	addCommonFrontMenuAttributes(model);
     	
@@ -64,7 +62,7 @@ public class FrontIndexController extends FrontCommonController  {
     }
 
     @RequestMapping( value = "/indexPublic", method = RequestMethod.GET )
-    String index3(Model model) {
+    public String index3(Model model) {
 
     	addCommonFrontMenuAttributes(model);
     	
