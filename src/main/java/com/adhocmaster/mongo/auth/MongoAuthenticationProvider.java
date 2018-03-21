@@ -98,18 +98,27 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             		            		
             	}
             	
-            	if( ( user.getRole() == Role.findByName( "INDIVIDUAL" )) && ( user.getStatus() == UserStatus.ACTIVE ) )
+            	if ( user.getRole() == Role.findByName( "INDIVIDUAL" ) )
             	{
             		
             		logger.debug( "user trying to log in has role: user" );
             		
             		expireOtherUserSessions( userName );
             		
-            		return getAuthToken( user );
+            		if ( user.getStatus() == UserStatus.ACTIVE ) {
+            			
+            			return getAuthToken( user );
+            		}
+            		
+            		
             
             	}
-                
-            	throw new MongoAuthenticationException( "User status is pending" );
+            	if ( user.getRole() == Role.findByName( "ADMIN" )) {
+            		
+            		return getAuthToken( user );
+            	}
+            	
+
                 
                 
             }
