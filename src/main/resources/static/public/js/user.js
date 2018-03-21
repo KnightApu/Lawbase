@@ -56,7 +56,7 @@ var user = {
 		if (mApp.isResponseValid(user)) {
 
 			mApp.showSuccessModal(user.message);
-			window.location.replace("/login");
+			mApp.redirect("/login", 100);
 
 		} else {
 

@@ -4,6 +4,7 @@ public enum UserStatus {
 
 	ACTIVE,
 	SUSPENDED,
-	EXPIRED;
+	EXPIRED,
+	PENDING;
 	
 }
