@@ -73,8 +73,6 @@ public class UserService extends RepositoryService<User> {
 
         userCreator.setRole( Role.findByName( role ) );
 
-       // userCreator.setPassword( password );
-
         User user = userCreator.createAndPersist();
 
         return user;
@@ -87,8 +85,6 @@ public class UserService extends RepositoryService<User> {
     	 UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
 
          userCreator.setRole( Role.findByName( role ) );
-
-        // userCreator.setPassword( password );
 
          userCreator.setIpAddress( ipAddress );
          
@@ -253,7 +249,7 @@ public class UserService extends RepositoryService<User> {
      * @throws NotFoundException
      * @throws PersistenceException
      */
-    public void updateBasicInformation( ObjectId userId, Map<String, String> params )
+    public User updateBasicInformation( ObjectId userId, Map<String, String> params )
             throws FormValidationException, NotFoundException, PersistenceException {
 
         User user = findOne( userId );
@@ -303,6 +299,7 @@ public class UserService extends RepositoryService<User> {
             throw new PersistenceException( e.getMessage() );
 
         }
+        return user;
 
     }
 

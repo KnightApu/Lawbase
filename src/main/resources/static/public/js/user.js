@@ -1,4 +1,3 @@
-
 var user = {
 
 	loadingOverlay : "#loadingOverlay",
@@ -26,7 +25,7 @@ var user = {
 
 	},
 
-	update : function(formData) {
+	update : function(formData, userId) {
 
 		mApp.loadingOverlayAction().show();
 
@@ -37,13 +36,15 @@ var user = {
 
 		console.log(data);
 
-		mApp.callAjax(url, data, "post", this, "userTest");
+		mApp.callAjax(url, data, "post", this, "userProfileUpdate");
 
 	},
 
-	userTest : function(data) {
-		console.log("user added test e call asche.");
-		alert("data");
+	userProfileUpdate : function(user) {
+		
+		console.log(user);
+		location.reload();
+		console.log("refreshing");
 	},
 
 	userAdded : function(user) {
@@ -55,7 +56,7 @@ var user = {
 		if (mApp.isResponseValid(user)) {
 
 			mApp.showSuccessModal(user.message);
-			window.location.replace("/login");
+			mApp.redirect("/login", 100);
 
 		} else {
 
