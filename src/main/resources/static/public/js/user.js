@@ -56,7 +56,7 @@ var user = {
 		if (mApp.isResponseValid(user)) {
 
 			mApp.showSuccessModal(user.message);
-			mApp.redirect("/login", 100);
+			mApp.redirect("/registration/pricingTable", 100);
 
 		} else {
 

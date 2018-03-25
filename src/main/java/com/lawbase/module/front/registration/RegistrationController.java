@@ -41,4 +41,13 @@ public class RegistrationController extends FrontCommonController {
         
     }
 
+	@RequestMapping("/pricingTable")
+	String showPricingTable( Model model ){
+		
+		addCommonModelAttributes( model, "pricing-tables" ); 
+        addCommonFrontMenuAttributes( model );
+    	
+    	return viewRoot + "index";
+	}
+	
 }
