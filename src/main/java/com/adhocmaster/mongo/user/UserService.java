@@ -1,5 +1,6 @@
 package com.adhocmaster.mongo.user;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,6 @@ import com.adhocmaster.service.RepositoryService;
 import com.adhocmaster.user.role.Role;
 import com.adhocmaster.user.role.RoleNotFoundException;
 import com.utility.form.FormValidationException;
-
 import javassist.NotFoundException;
 
 @Service
@@ -120,6 +120,11 @@ public class UserService extends RepositoryService<User> {
     public User findByUserName( String userName ) {
 
         return userRepository.findByUserName( userName );
+    }
+    
+    public List<User> findByStatus( String status ) {
+
+        return  userRepository.findByStatus(status);
     }
     
     public User findById( String id ) {

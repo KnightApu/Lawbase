@@ -125,13 +125,19 @@
                                       <li><a th:href="@{/admin/user/add}">Add</a></li>
                                       <li><a th:href="@{/admin/user/index}">Manage</a></li>
                                       <li>
-                                          <a>Category<span class="fa fa-chevron-down"></span></a>
+                                          <a>Check Status<span class="fa fa-chevron-down"></span></a>
                                           <ul class="nav child_menu" style="display: block;">
                                               <li class="sub_menu">
-                                                  <a th:href="@{/admin/classpath/add}">Add</a>
+                                                  <a th:href="@{/admin/user/pending}">Pending</a>
                                               </li>
                                               <li>
-                                                  <a th:href="@{/admin/classpath/manage}">Manage</a>
+                                                  <a th:href="@{/admin/user/active}">Active</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/user/expired}">EXPIRED</a>
+                                              </li>
+                                              <li>
+                                                  <a th:href="@{/admin/user/suspended}">SUSPENDED</a>
                                               </li>
                                           </ul>
                                       </li>

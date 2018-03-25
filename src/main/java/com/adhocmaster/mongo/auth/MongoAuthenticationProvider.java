@@ -22,6 +22,7 @@ import com.adhocmaster.mongo.user.PasswordException;
 import com.adhocmaster.mongo.user.PasswordHelper;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserService;
+import com.adhocmaster.mongo.user.UserStatus;
 import com.adhocmaster.user.role.CapabilityAuthority;
 import com.adhocmaster.user.role.CapabilityNotFoundException;
 import com.adhocmaster.user.role.Role;
@@ -97,16 +98,28 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             		            		
             	}
             	
-            	if( user.getRole() == Role.findByName( "INDIVIDUAL" ) )
+            	if ( user.getRole() == Role.findByName( "INDIVIDUAL" ) )
             	{
             		
             		logger.debug( "user trying to log in has role: user" );
             		
             		expireOtherUserSessions( userName );
+            		
+            		if ( user.getStatus() == UserStatus.ACTIVE ) {
+            			
+            			return getAuthToken( user );
+            		}
+            		
+            		
             
             	}
+            	if ( user.getRole() == Role.findByName( "ADMIN" )) {
+            		
+            		return getAuthToken( user );
+            	}
+            	
+
                 
-                return getAuthToken( user );
                 
             }
             

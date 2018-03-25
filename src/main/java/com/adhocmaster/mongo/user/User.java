@@ -31,7 +31,7 @@ public class User extends SimpleAuthor {
 
     private Role role = Role.INDIVIDUAL;
 
-    private UserStatus status = UserStatus.ACTIVE;
+    private UserStatus status = UserStatus.PENDING;
 
     private String contactNo;
 
