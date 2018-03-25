@@ -70,7 +70,7 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
         
         if ( null == user ) {
             
-            logger.debug( userName + " user not found." );
+            logger.info( userName + " user not found." );
         	throw new MongoAuthenticationException( "User not found" );
             
         }
@@ -79,16 +79,22 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             
             if ( isPasswordCorrect( user, password )) {
                 
+            	logger.info( " password correct" );
+            	
                 //createSession( user );
             	if( user.getRole() == Role.findByName( "ENTERPRISE" ) )
-            	{
+            	{	
+            	
             		final WebAuthenticationDetails details = ( WebAuthenticationDetails ) authentication.getDetails();
                     
             		String remoteIpAddress = details.getRemoteAddress();
+            		
+            		logger.info("\nremote ip:" + remoteIpAddress + " stored ip:" + user.getIpAddress() + " matched");
                    
                     if( remoteIpAddress.equals( user.getIpAddress() ))
                     {
                     	logger.debug( "\nremote ip:" + remoteIpAddress + " stored ip:" + user.getIpAddress() + " matched" );
+                    	
                     	
                     	return getAuthToken( user );
                     	
@@ -124,7 +130,7 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
             }
             
 
-            logger.debug( userName + " Incorrect password." );
+            logger.info( userName + " Incorrect password." );
             throw new MongoAuthenticationException( "Incorrect password" );
             
         } catch ( PasswordException e ) {
