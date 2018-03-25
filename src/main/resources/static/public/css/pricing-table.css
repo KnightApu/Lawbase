@@ -1,0 +1,92 @@
+.title {
+	background: #1ABB9C;
+	height: 165px;
+    color: #fff;
+    padding: 15px 0 0;
+    text-align: center;
+}
+
+.pricing_features {
+	background: #FAFAFA;
+    padding: 20px 15px;
+    min-height: 230px;
+    font-size: 13.5px;
+}
+
+.pricing_footer {
+	
+}
+
+.btn {
+    border-radius: 3px;
+}
+
+.btn, .buttons, .modal-footer .btn+.btn, button {
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+div {
+    display: block;
+}
+
+a {
+    color: #5A738E;
+    background-color: transparent;
+    color: #337ab7;
+    text-decoration: none;
+    text-align: center;
+}
+
+
+body {
+    color: #73879C;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 200%;
+}
+
+
+element.style {
+}
+.pricing_footer p {
+    font-size: 13px;
+    padding: 10px 0 2px;
+    display: block;
+}
+p {
+    margin: 0 0 10px;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.registration-status {
+	height: 125px;
+    padding: 15px 0 0;
+	color: #73879C;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 200%;
+    text-align: center;
+    font-color: #000000;
+}
