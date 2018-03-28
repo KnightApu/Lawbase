@@ -26,116 +26,105 @@ import com.lawbase.court.CourtBookService;
 import com.lawbase.module.admin.caseBook.AdminCaseController;
 
 @Controller
-@RequestMapping( "/admin/courtbook" )
+@RequestMapping("/admin/courtbook")
 public class AdminCourtBookController extends MvcUserController {
 
-    private static final Logger logger = LoggerFactory.getLogger( AdminCourtBookController.class );
-    
-    private static final String viewRoot = "admin/courtbook-";
-    private static final String pathRoot = "/admin/courtbook";
-    @Autowired
-    private CourtBookService courtBookService;
-    
-    
-    @Autowired
-    AdminCaseController adminCaseController;
-    
-    
-    @Override
-    protected void generateControllerPaths() {
+	private static final Logger logger = LoggerFactory.getLogger(AdminCourtBookController.class);
 
-        controllerPaths = new HashMap<>();
+	private static final String viewRoot = "admin/courtbook-";
+	private static final String pathRoot = "/admin/courtbook";
+	@Autowired
+	private CourtBookService courtBookService;
 
-        controllerPaths.put( "index", pathRoot );
-        controllerPaths.put( "add", pathRoot + "/add" );
-        controllerPaths.put( "edit", pathRoot + "/edit?id=" );
-        controllerPaths.put( "delete", pathRoot + "/delete?id=" );
-        controllerPaths.put( "manage", pathRoot + "/manage" );   
-        
-        
-        
-    }
-    
-    /**
-     * 
-     */
-    @PostConstruct
-    protected void init() {
-        
-        controllerPaths.put( "editCase", adminCaseController.getControllerPath( "edit" ) ); 
-        // because contructor have no access to autowired elements which are added after construction
-        
-        
-    }
+	@Autowired
+	AdminCaseController adminCaseController;
 
+	@Override
+	protected void generateControllerPaths() {
 
-    @GetMapping( value = { "", "/", "/index" } )
-    public String index(
+		controllerPaths = new HashMap<>();
 
-             Model model, 
-             HttpSession httpSession,
-             @RequestParam Map<String, String> params
-            
-            ) {
+		controllerPaths.put("index", pathRoot);
+		controllerPaths.put("add", pathRoot + "/add");
+		controllerPaths.put("edit", pathRoot + "/edit?id=");
+		controllerPaths.put("delete", pathRoot + "/delete?id=");
+		controllerPaths.put("manage", pathRoot + "/manage");
 
-        // TODO make is paginated
+	}
 
-        // List <CourtBook> courtBooks = courtRepository.findAll();
-        Page<CourtBook> courtBooks = courtBookService.findAll( new PageRequest( 1, 5 ) );
+	/**
+	 * 
+	 */
+	@PostConstruct
+	protected void init() {
 
-        logger.debug( courtBooks.toString() );
+		controllerPaths.put("editCase", adminCaseController.getControllerPath("edit"));
+		// because contructor have no access to autowired elements which are
+		// added after construction
 
-        model.addAttribute( "books", courtBooks );
-        
-        try {
-			model.addAttribute( "authorities", getUser(httpSession).getRole().name() );
-			logger.debug(getUser(httpSession).getRole().toString());
+	}
+
+	@GetMapping(value = { "", "/", "/index" })
+	public String index(
+
+			Model model, HttpSession httpSession, @RequestParam Map<String, String> params
+
+	) {
+
+		// TODO make is paginated
+
+		// List <CourtBook> courtBooks = courtRepository.findAll();
+		Page<CourtBook> courtBooks = courtBookService.findAll(new PageRequest(1, 5));
+
+		logger.debug(courtBooks.toString());
+
+		model.addAttribute("books", courtBooks);
+
+		try {
+
+			model.addAttribute("authorities", getUser(httpSession).getRole().name());
+
+			logger.debug(getUser(httpSession).getRole().name());
+
 		} catch (UserNotFoundInSessionException e) {
-			
+
 			e.printStackTrace();
 		}
-        
-        addCommonModelAttributes( model, "index" );
 
-        return viewRoot + "index";
-        // return "index";
-       
-        
-    }
-    
-    @GetMapping("/add")
-    public String add(
+		addCommonModelAttributes(model, "index");
 
-            Model model
-            
-            ) {
+		return viewRoot + "index";
+		// return "index";
 
-        addCommonModelAttributes( model, "add" );        
-        return viewRoot + "index";
-    	 
-        
-    }
-    
-    
-    
-    
-    @GetMapping("/edit")
-    public String edit(
+	}
 
-            Model model, 
-            @RequestParam ObjectId id
-            
-            ) {
+	@GetMapping("/add")
+	public String add(
 
-        
-        SimpleBook courtBook = courtBookService.findOne( id );
-        
-        if( null == courtBook )
-            courtBook = new SimpleMissingBook();
-        model.addAttribute( "courtBook", courtBook );
-        addCommonModelAttributes( model, "edit" );        
-        return viewRoot + "index";
-        
-    }
+			Model model
+
+	) {
+
+		addCommonModelAttributes(model, "add");
+		return viewRoot + "index";
+
+	}
+
+	@GetMapping("/edit")
+	public String edit(
+
+			Model model, @RequestParam ObjectId id
+
+	) {
+
+		SimpleBook courtBook = courtBookService.findOne(id);
+
+		if (null == courtBook)
+			courtBook = new SimpleMissingBook();
+		model.addAttribute("courtBook", courtBook);
+		addCommonModelAttributes(model, "edit");
+		return viewRoot + "index";
+
+	}
 
 }
