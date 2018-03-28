@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -16,8 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.adhocmaster.controller.MvcUserController;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.court.CourtBook;
@@ -72,6 +73,7 @@ public class AdminCourtBookController extends MvcUserController {
     public String index(
 
              Model model, 
+             HttpSession httpSession,
              @RequestParam Map<String, String> params
             
             ) {
@@ -84,7 +86,15 @@ public class AdminCourtBookController extends MvcUserController {
         logger.debug( courtBooks.toString() );
 
         model.addAttribute( "books", courtBooks );
-
+        
+        try {
+			model.addAttribute( "authorities", getUser(httpSession).getRole().name() );
+			logger.debug(getUser(httpSession).getRole().toString());
+		} catch (UserNotFoundInSessionException e) {
+			
+			e.printStackTrace();
+		}
+        
         addCommonModelAttributes( model, "index" );
 
         return viewRoot + "index";
