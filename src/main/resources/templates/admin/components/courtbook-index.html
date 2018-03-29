@@ -22,7 +22,7 @@
                             <th>action</th>
                            
                          </tr>
-                       </thead>
+                       </thead>you
  
                   <tbody>
                        
@@ -120,7 +120,13 @@
   	    		  			{	
   	    		  				if(authorities=="ADMIN") {
   	    		  					
-  	    		  				return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> <a href="' + controllerPaths.edit +  id + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> <span><a href="#" onclick="anchorDeleteAction();" class="btn btn-danger btn-xs courtbookDelete"><i class="fa fa-trash"></i> Delete </a></span>';
+  	    		  					
+  	    		  				return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a><a href="' 
+  	    		  					+ controllerPaths.edit 
+  	    		  					+ id 
+  	    		  					+ '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> <span><a href="#" onclick="anchorDeleteAction(\'' 
+  	    		  							+ id + '\');" class="btn btn-danger btn-xs courtbookDelete"><i class="fa fa-trash"></i> Delete </a></span>';
+  	    		  				
   	    		  				
   	    		  				}
   	    		  				else {
@@ -150,14 +156,20 @@
   <script>
 
 	  
-	  function anchorDeleteAction() {
+	  function anchorDeleteAction(id) {
 		  
-		  $( ".courtbookDelete" ).click( function() {
+		   	  console.log("delete");
+		   	  console.log(id);
+			  mApp.showDeleteModal();
 			  
-		   	  console.log("delete button e pressed");
-			  mApp.showDeleteModal("Hello");
-	          
-	      });
+			  
+			  $("#delete-yes").click( function() {
+				  
+          		mApp.setUpRestPaths ( courtBookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+          		courtBookProcessor.delete(id);
+          		
+          	});
+	      
 	  }
 		
 	  
@@ -175,6 +187,8 @@
                     	
                     	console.log( "courtbook index" );
                     	console.log( authorities );
+                    	
+                    	
 
                       
                             
