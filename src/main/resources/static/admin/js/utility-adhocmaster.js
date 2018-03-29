@@ -190,9 +190,7 @@ mApp.showSuccessModal = function ( successMessage ) {
 	
 }
 
-mApp.showDeleteModal = function (successMessage) {
-	
-	$('#delete-modal .modal-body').html( successMessage +". <i>Please reload the page.</i>");
+mApp.showDeleteModal = function () {
 	
 	$('#delete-modal').modal();
 	
