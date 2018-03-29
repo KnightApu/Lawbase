@@ -19,6 +19,34 @@ var courtBookProcessor = {
 		
 	},
 	
+	delete: function(id) {
+		console.log(this.restPaths.delete+"/"+id);
+		url = this.restPaths.delete+"/"+id;
+		mApp.callAjax(url, "", "get", this, "deleted");
+		
+	},
+	
+	deleted: function( data ) {
+		
+		
+		if( undefined != this.loadingOverlay ) {
+			
+			$( this.loadingOverlay ).css( "display", "none" );
+		}
+		
+		if( mApp.isResponseValid( data) ) {
+			
+			mApp.showSuccessModal("Successfully Deleted");
+			
+		} else {
+			
+			mApp.showErrorModal( data );
+			
+            $( loadingSelector ).html( "failed to delete" );
+			
+		}
+	},
+	
 	courtAdded: function ( courtBook ) {
 		
 		if( undefined != this.loadingOverlay ) {
