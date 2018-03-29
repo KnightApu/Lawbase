@@ -1,10 +1,13 @@
 package com.lawbase.module.admin.court;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,11 +33,14 @@ import com.lawbase.module.admin.book.RestHelper;
 
 import util.restApi.RestBadDataException;
 import util.restApi.RestInternalServerException;
+import util.restApi.RestSuccess;
 
 @RestController
 @RequestMapping( "/admin/rest/courtbook" )
 public class AdminCourtBookRestController extends MongoRestController<CourtBook> {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(AdminCourtBookRestController.class);
+	
     @Autowired
     protected UserHelper userHelper;
     
@@ -165,6 +171,37 @@ public class AdminCourtBookRestController extends MongoRestController<CourtBook>
 
         }
 
+    }
+    
+    @RequestMapping("/delete/{id}")
+    public RestSuccess delete(
+    		@PathVariable ObjectId id) throws RestInternalServerException {
+    		
+    	logger.info(id.toString());
+    	
+    	CourtBook courtBook = courtBookService.findOne(id);
+    	
+    	List<Case> childCases = caseService.findByCourtBookId(id);
+    	
+    	for (Case childCase: childCases) {
+    		
+    		caseService.delete(childCase);
+    	}
+    	
+    	
+    	try {
+    		
+    		courtBookService.delete(courtBook);
+        	
+        	return new RestSuccess( RestSuccess.Codes.SAVE_DB );
+    		
+    	} catch ( Exception e) {
+    		
+    		throw new RestInternalServerException( e );
+    	}
+    	
+    		
+    	
     }
 
 }
