@@ -35,6 +35,15 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             
         };
     
+    protected static Capability[] superAdminCapabilities = new Capability[] {
+
+            Capability.SUPER_ADMIN,
+            Capability.MANAGE_CASE,
+            Capability.MANAGE_ACT,
+            Capability.MANAGE_COURT
+                
+        };
+    
     Map<Role, Set<Capability>> capabilities;
 
 
@@ -69,6 +78,13 @@ public class StaticCapabilityProvider implements CapabilityProvider {
         enterpriseCapabilitiesSet.addAll( Arrays.asList( adminCapabilities ) );
                
         capabilities.put( Role.ENTERPRISE, enterpriseCapabilitiesSet );
+        
+        // SUPER ADMIN
+        Set<Capability> superAdminCapabilitiesSet = new HashSet<Capability>();
+        
+        superAdminCapabilitiesSet.addAll( Arrays.asList( superAdminCapabilities ) );
+               
+        capabilities.put( Role.SUPER_ADMIN, superAdminCapabilitiesSet );
         
     }
     

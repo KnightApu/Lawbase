@@ -57,6 +57,17 @@ public class StaticCapabilityAuthorityProvider implements CapabilityAuthorityPro
         
         roleAuthorities.put( Role.ENTERPRISE, enterpriseAuthorities);
         
+        // **** SUPER ADMIN ****
+        Set<CapabilityAuthority> superAdminAuthorities = new HashSet<CapabilityAuthority>();
+        
+        for ( Capability capability : StaticCapabilityProvider.superAdminCapabilities ) {
+
+            superAdminAuthorities.add( new CapabilityAuthority( capability ) );
+            
+        }
+        
+        roleAuthorities.put( Role.SUPER_ADMIN, superAdminAuthorities);
+        
     }
 
     @Override

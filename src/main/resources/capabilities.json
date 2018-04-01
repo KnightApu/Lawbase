@@ -3,6 +3,7 @@
         "INDIVIDUAL",
         "ADMIN",
         "ENTERPRISE",
+        "SUPER_ADMIN",
         "TEACHER",
         "STUDENT"
     ],
@@ -50,6 +51,31 @@
         "MANAGE_USER",
         
         
+        
+        "ADD_STUDENT",
+        "EDIT_STUDENT",
+        "DELETE_STUDENT",
+        "MANAGE_STUDENT",
+        
+        "ADD_TEACHER",
+        "EDIT_TEACHER",
+        "DELETE_TEACHER",
+        "MANAGE_TEACHER",
+        
+        "MANAGE_CASE",
+        
+        "MANAGE_ACT",
+        
+        "MANAGE_COURT"
+    
+    ],
+    
+    "SUPER_ADMIN" : [
+    
+        "ADD_USER",
+        "EDIT_USER",
+        "DELETE_USER",
+        "MANAGE_USER",
         
         "ADD_STUDENT",
         "EDIT_STUDENT",
