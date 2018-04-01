@@ -2,7 +2,6 @@ package com.lawbase.mongo.user;
 
 import static org.junit.Assert.*;
 
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.PasswordException;
 import com.adhocmaster.mongo.user.User;
-import com.adhocmaster.mongo.user.UserException;
 import com.adhocmaster.mongo.user.UserService;
 import com.adhocmaster.user.role.RoleNotFoundException;
 
