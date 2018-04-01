@@ -1,5 +1,6 @@
 package com.lawbase.court;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.test.context.TestPropertySource;
@@ -53,6 +55,9 @@ public class CourtBookTest {
 
     @Autowired
     private SequenceDao sequenceDao;
+    
+    @Autowired
+    CourtBookService courtBookService;
 
     @Before
     public void setUp() throws Exception {
@@ -143,6 +148,14 @@ public class CourtBookTest {
         
         return userCreator.createAndPersist();
         
+    }
+    
+    @Test
+    public void courtBookSearchProjectTest() {
+    	
+    	Page<CourtBookSearchProjection> courtPage = courtBookService.findAllSearchProjections(0, 10);
+    	
+    	assertNotNull(courtPage);
     }
 
 }
