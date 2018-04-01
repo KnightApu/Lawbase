@@ -9,6 +9,8 @@ public enum Capability {
     ROLE_ADMIN,
     ENTERPRISE,
     ROLE_ENTERPRISE,
+    SUPER_ADMIN,
+    ROLE_SUPER_ADMIN,
 
     READ_CASE,
     ADD_CASE,
