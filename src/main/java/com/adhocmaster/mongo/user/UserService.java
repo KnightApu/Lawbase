@@ -72,6 +72,8 @@ public class UserService extends RepositoryService<User> {
         UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
 
         userCreator.setRole( Role.findByName( role ) );
+        
+        userCreator.setPassword(password);
 
         User user = userCreator.createAndPersist();
 
