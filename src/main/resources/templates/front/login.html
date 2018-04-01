@@ -21,7 +21,8 @@
 					<h2>Sign In</h2>
 
 				</div>
-				<div th:if="${param.error}" class="p-3 mb-2 bg-danger text-white"><h6>Invalid username and password.</h6></div>
+				<div th:if="${param.error}"  th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="p-3 mb-2 bg-danger text-white">
+					<h6><span th:text="${errorMsg}">Wrong input!</span> </h6></div>
 
 				<div th:if="${param.logout}" class="p-3 mb-2 bg-warning text-dark"><h6>You have been logged out.</h6></div>
 				<section class="signin_content" >

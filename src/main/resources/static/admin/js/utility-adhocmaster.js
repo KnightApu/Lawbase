@@ -190,6 +190,12 @@ mApp.showSuccessModal = function ( successMessage ) {
 	
 }
 
+mApp.showDeleteModal = function () {
+	
+	$('#delete-modal').modal();
+	
+}
+
 mApp.redirect = function ( url, timeout ) {
 	
 	setTimeout( function() {

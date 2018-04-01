@@ -88,6 +88,11 @@ public class CaseService extends RepositoryService<Case> {
 
         return caseRepository.findOne( id );
     }
+    
+    public List<Case> findByCourtBookId(ObjectId id) {
+    	
+    	return caseRepository.findByCourtBookId(id);
+    }
 
     @Override
     public Page<Case> findAll( Pageable pageable ) {
