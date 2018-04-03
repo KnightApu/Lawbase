@@ -5,7 +5,8 @@ public enum Role {
     INDIVIDUAL,
     ADMIN,
     ENTERPRISE,
-    SUPER_ADMIN;
+    SUPER_ADMIN,
+    EDITOR;
     
     
     public static Role findByName( String name ) throws RoleNotFoundException {

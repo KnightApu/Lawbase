@@ -5,7 +5,8 @@
         "ENTERPRISE",
         "SUPER_ADMIN",
         "TEACHER",
-        "STUDENT"
+        "STUDENT",
+        "EDITORS"
     ],
     
     "INDIVIDUAL" : [
@@ -95,13 +96,19 @@
     
     ],
     
-    "STUDENT" : [
+    "EDITORS" : [
     
         "READ_CASE",
         
         "READ_ACT",
         
-        "READ_COURT"
+        "READ_COURT",
+        
+        "ADD_ACT",
+        "ADD_CASE",
+        "ADD_COURT",
+        "ADD_JOURNAL",
+        "ADD_ARTICLE"
     
     ]
     
