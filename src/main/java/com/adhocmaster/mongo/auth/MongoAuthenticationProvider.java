@@ -119,6 +119,11 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
 
 					return getAuthToken(user);
 				}
+				
+				if (user.getRole() == Role.findByName("EDITOR")) {
+
+					return getAuthToken(user);
+				}
 
 			}
 
