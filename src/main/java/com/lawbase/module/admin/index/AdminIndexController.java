@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import com.adhocmaster.context.SecurityContextFacade;
+import com.adhocmaster.controller.MvcUserController;
 import com.adhocmaster.mongo.user.UserHelper;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminIndexController {
+public class AdminIndexController extends MvcUserController {
     
     private static final Logger logger = LoggerFactory.getLogger( AdminIndexController.class );
     
@@ -48,9 +50,9 @@ public class AdminIndexController {
         WebRequest webRequest,
         HttpSession httpSession
         
-        ) {
-
-        logger.debug( principal.toString() );
+        ) throws UserNotFoundInSessionException {
+        model.addAttribute("userName", getUser(httpSession).getName());
+        
         
         //logger.debug( userHelper.getFromSession( httpSession, principal ).toString() ); // not needed.
         
@@ -71,6 +73,12 @@ public class AdminIndexController {
         return "admin/index";
         
     }
+
+	@Override
+	protected void generateControllerPaths() {
+		// TODO Auto-generated method stub
+		
+	}
     
 
 }
