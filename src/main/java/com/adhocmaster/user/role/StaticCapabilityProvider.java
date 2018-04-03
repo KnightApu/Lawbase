@@ -60,11 +60,6 @@ public class StaticCapabilityProvider implements CapabilityProvider {
     protected static Capability[] editorCapabilities = new Capability[] {
 
             Capability.EDITOR,
-            Capability.MANAGE_CASE,
-            Capability.MANAGE_ACT,
-            Capability.MANAGE_COURT,
-            Capability.MANAGE_JOURNAL,
-            Capability.MANAGE_ARTICLE
                 
         };
     
