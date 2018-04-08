@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,11 @@ import javassist.NotFoundException;
 public class CourtBookService extends RepositoryService<CourtBook> {
 
     private static final Logger logger = LoggerFactory.getLogger( CourtBookService.class );
-    
+
     @Autowired
     private CourtBookRepository courtBookRepository;
+    @Autowired
+    private CourtBookSearchRepository courtBookSearchRepository;
     
     @Cacheable( cacheNames = "courtBooksById", key = "#id", sync = true )
     public CourtBook findOne( ObjectId id ) {
@@ -97,6 +100,19 @@ public class CourtBookService extends RepositoryService<CourtBook> {
         return courtBookRepository.findAll( pageable );
         
     }
+
+	public Page<CourtBookSearchProjection> findAllSearchProjections(int offSet, int size) {
+
+        int page = offSet / size;
+        PageRequest pageRequest = new PageRequest(page, size);
+        return findAllSearchProjections( pageRequest );
+        
+	}
+    public Page<CourtBookSearchProjection> findAllSearchProjections( Pageable pageable ) {
+
+        return courtBookSearchRepository.findAll( pageable );
+        
+    }
     
     public Page<CourtBook> findByTitleStartingWith( String title, Pageable pageable ) {
 
@@ -127,4 +143,5 @@ public class CourtBookService extends RepositoryService<CourtBook> {
         return courtBook;
         
     }
+
 }

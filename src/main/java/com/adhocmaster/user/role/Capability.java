@@ -11,6 +11,8 @@ public enum Capability {
     ROLE_ENTERPRISE,
     SUPER_ADMIN,
     ROLE_SUPER_ADMIN,
+    EDITOR,
+    ROLE_EDITOR,
 
     READ_CASE,
     ADD_CASE,
@@ -22,7 +24,21 @@ public enum Capability {
     EDIT_ACT,
     MANAGE_ACT,
     
-
+    READ_JOURNAL,
+    ADD_JOURNAL,
+    EDIT_JOURNAL,
+    MANAGE_JOURNAL,
+    
+    READ_ARTICLE,
+    ADD_ARTICLE,
+    EDIT_ARTICLE,
+    MANAGE_ARTICLE,
+    
+    READ_USER,
+    ADD_USER,
+    EDIT_USER,
+    MANAGE_USER,
+    
     READ_COURT,
     ADD_COURT,
     EDIT_COURT,

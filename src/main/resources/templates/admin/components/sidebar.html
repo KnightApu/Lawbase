@@ -23,14 +23,14 @@
                       <div class="menu_section">
                           <h3>NAVIGATION</h3>
                           <ul class="nav side-menu">
-                              <li>
+                              <li sec:authorize="hasAuthority('MANAGE_COURT')">
                                   <a><i class="fa fa-home"></i> Court books <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/courtbook/add}">Add</a></li>
                                       <li><a th:href="@{/admin/courtbook/index}">Manage</a></li>
                                   </ul>
                               </li>
-                              <li>
+                              <li sec:authorize="hasAuthority('MANAGE_ACT')">
                                   <a><i class="fa fa-home"></i> Acts <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/act/add}">Add</a></li>
@@ -48,7 +48,7 @@
                                       </li>
                                   </ul>
                               </li>
-                              <li>
+                              <li sec:authorize="hasAuthority('MANAGE_CASE')">
                                   <a><i class="fa fa-edit"></i> Cases <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/case/index}">Manage</a></li>
@@ -66,7 +66,7 @@
                                   </ul>
                               </li>
                               
-                              <li>
+                              <li sec:authorize="hasAuthority('MANAGE_JOURNAL')">
                                   <a><i class="fa fa-desktop"></i> Journals <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/journal/add}">Add</a></li>
@@ -84,7 +84,7 @@
                                       </li>
                                   </ul>
                               </li>
-                               <li>
+                               <li sec:authorize="hasAuthority('MANAGE_ARTICLE')">
                                   <a><i class="fa fa-edit"></i> Articles <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/article/index}">Manage</a></li>
@@ -119,7 +119,7 @@
                                       </li>
                                   </ul>
                               </li>
-                              <li>
+                              <li sec:authorize="hasAuthority('MANAGE_USER')">
                                   <a><i class="fa fa-bar-chart-o"></i> Users <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/user/add}">Add</a></li>
@@ -144,7 +144,7 @@
                                   </ul>
                               </li>
                               
-                              <li>
+                              <li sec:authorize="hasAuthority('SUPER_ADMIN')">
                                   <a><i class="fa fa-archive"></i> Search Engine <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
                                       <li><a th:href="@{/admin/searchIndexing/index}">Manage</a></li>
