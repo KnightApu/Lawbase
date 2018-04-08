@@ -129,7 +129,7 @@ public class AdminActController extends MvcUserController {
     	
     	SimpleBook act = actRepository.findOne( id );
         model.addAttribute( "act", act );
-        addCommonModelAttributes( model, "edit" ); 
+        addCommonModelAttributes( model, "edit" );
         addUserInfoAttribute(model, httpSession);
         return viewRoot + "index";
         
