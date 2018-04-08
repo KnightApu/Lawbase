@@ -16,9 +16,9 @@
     
             <!-- page content -->
             <div class="right_col" role="main">
-                              
+                <div sec:authorize="hasAuthority('MANAGE_ACT')">             
                 <div th:replace = "'admin/components/act-' + ${templatePart}" ></div>
-    
+    			</div> 
             </div>
             <!-- /page content -->
     

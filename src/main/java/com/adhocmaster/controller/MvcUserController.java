@@ -3,6 +3,7 @@ package com.adhocmaster.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserHelper;
@@ -18,6 +19,12 @@ abstract public class MvcUserController extends MvcController {
         
         return userHelper.getFromSession( httpSession );
         
+    }
+    
+    protected void addUserInfoAttribute(Model model, HttpSession httpSession) throws UserNotFoundInSessionException {
+    	
+    	model.addAttribute("userName", getUser(httpSession).getName());
+    	
     }
     
 

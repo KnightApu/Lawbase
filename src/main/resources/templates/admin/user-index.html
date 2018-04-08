@@ -17,8 +17,9 @@
             <!-- page content -->
             <div class="right_col" role="main">
               
-                
+                <div sec:authorize="hasAuthority('MANAGE_USER')"> 
                 <div th:replace = "'admin/components/user-' + ${templatePart}" ></div>
+                </div>
                 
                 <div th:replace = "'admin/components/content-loader'" ></div> 
                 

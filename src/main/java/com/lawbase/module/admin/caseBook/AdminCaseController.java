@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adhocmaster.controller.MvcUserController;
+import com.adhocmaster.mongo.user.User;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
+import com.book.exceptions.NotSuchAuthorException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.cases.Case;
@@ -48,19 +53,20 @@ public class AdminCaseController extends MvcUserController {
 
     @GetMapping( value = { "", "/", "/index" } )
     public String index(
-
+    		
+    		HttpSession httpSession,
             Model model, 
             @RequestParam Map<String, String> params
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
         // TODO make is paginated
         
         List<Case> books = caseRepository.findAll();
         
         model.addAttribute( "books", books );
-        
-        addCommonModelAttributes( model, "index" );  
+        addUserInfoAttribute(model, httpSession);
+        addCommonModelAttributes( model, "index" ); 
         
         return viewRoot + "index";
         
@@ -68,19 +74,22 @@ public class AdminCaseController extends MvcUserController {
 
     @GetMapping("/edit")
     public String edit(
-
+    		
+    		HttpSession httpSession,
             Model model, 
             @RequestParam ObjectId id
             
-            ) {
+            ) throws UserNotFoundInSessionException, NotSuchAuthorException {
 
+        User user = getUser(httpSession);
         
         SimpleBook caseBook = caseRepository.findOne( id );
-        
+
         if( null == caseBook )
             caseBook = new SimpleMissingBook();
         
         model.addAttribute( "caseBook", caseBook );
+        addUserInfoAttribute(model, httpSession);
         addCommonModelAttributes( model, "edit" );    
         
         return viewRoot + "index";

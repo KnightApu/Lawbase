@@ -28,6 +28,7 @@ import com.book.BookNode;
 import com.lawbase.cases.Case;
 import com.lawbase.cases.CaseService;
 import com.lawbase.court.CourtBook;
+import com.lawbase.court.CourtBookSearchProjection;
 import com.lawbase.court.CourtBookService;
 import com.lawbase.module.admin.book.RestHelper;
 
@@ -60,7 +61,7 @@ public class AdminCourtBookRestController extends MongoRestController<CourtBook>
     }
     
     @RequestMapping( "/" )
-    public @ResponseBody DataTableResponseEntity<CourtBook> index(
+    public DataTableResponseEntity<CourtBookSearchProjection> index(
 
             @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
             @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
@@ -70,9 +71,9 @@ public class AdminCourtBookRestController extends MongoRestController<CourtBook>
 
         try {
 
-        	 Page<CourtBook> courtPage = courtBookService.findAll( offSet, size );
+        	 Page<CourtBookSearchProjection> courtPage = courtBookService.findAllSearchProjections( offSet, size );
         	 
-        	 return new DataTableResponseEntity<CourtBook>( courtPage, sEcho );
+        	 return new DataTableResponseEntity<CourtBookSearchProjection>( courtPage, sEcho );
         	
         	
         } catch ( Exception e ) {
