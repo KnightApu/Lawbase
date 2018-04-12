@@ -1,11 +1,14 @@
 package com.adhocmaster.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import com.book.simpleBook.SimpleBook;
 import com.solr.core.BaseSolrRepository;
 import com.solr.core.IndexStats;
 import com.solr.core.SolrEntity;
+import com.solr.lawbase.search.cases.CaseSearchRestController;
 import com.solr.lawbase.search.framework.BookIndexService;
 
 import util.restApi.RestBadDataException;
@@ -17,6 +20,8 @@ public abstract class SolrRestController<MongoEntity extends SimpleBook, T exten
     /**
      * What doesn't break you, makes you.
      */
+	
+	private static final Logger logger = LoggerFactory.getLogger( CaseSearchRestController.class );
 
     abstract protected BaseSolrRepository<T, String> getRepository();
     abstract protected BookIndexService<MongoEntity, T> getIndexService();
@@ -64,6 +69,8 @@ public abstract class SolrRestController<MongoEntity extends SimpleBook, T exten
             int page = offset / size;
                     
             Page<T> casePage = getRepository().findByField( field, value, page, size );
+            
+            logger.info(casePage.getContent().toString());
             
             return new DataTableResponseEntity<T>( casePage, sEcho );  
             
