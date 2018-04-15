@@ -4,8 +4,6 @@
         "ADMIN",
         "ENTERPRISE",
         "SUPER_ADMIN",
-        "TEACHER",
-        "STUDENT",
         "EDITORS"
     ],
     
@@ -25,24 +23,6 @@
     
     ],
     
-    "TEACHER" : [
-    
-        "ADD_CONTENT",
-        "EDIT_CONTENT",
-        "DELETE_CONTENT",
-            
-        "ADD_ACTIVITY",
-        "EDIT_ACTIVITY",
-        "DELETE_ACTIVITY",
-        "MANAGE_ACTIVITY",
-        
-        "ADD_STUDENT",
-        "EDIT_STUDENT",
-        
-        "ADD_PERIOD",
-        "EDIT_PERIOD"
-    
-    ],
     
     "ADMIN" : [
     
@@ -67,7 +47,9 @@
         
         "MANAGE_ACT",
         
-        "MANAGE_COURT"
+        "MANAGE_COURT",
+        
+      	"ACTUATOR"
     
     ],
     
@@ -92,11 +74,13 @@
         
         "MANAGE_ACT",
         
-        "MANAGE_COURT"
+        "MANAGE_COURT",
+        
+        "ACTUATOR"
     
     ],
     
-    "EDITORS" : [
+   	"EDITORS" : [
     
         "READ_CASE",
         
