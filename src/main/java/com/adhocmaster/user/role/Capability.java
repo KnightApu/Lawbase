@@ -42,7 +42,9 @@ public enum Capability {
     READ_COURT,
     ADD_COURT,
     EDIT_COURT,
-    MANAGE_COURT;
+    MANAGE_COURT,
+    
+    ACTUATOR;
     
     public static Capability findByName( String name ) throws CapabilityNotFoundException {
         

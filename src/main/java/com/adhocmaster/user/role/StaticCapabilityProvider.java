@@ -40,7 +40,8 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             Capability.MANAGE_COURT,
             Capability.MANAGE_JOURNAL,
             Capability.MANAGE_ARTICLE,
-            Capability.MANAGE_USER
+            Capability.MANAGE_USER,
+            Capability.ACTUATOR
                 
         };
     
@@ -53,7 +54,8 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             Capability.MANAGE_COURT,
             Capability.MANAGE_JOURNAL,
             Capability.MANAGE_ARTICLE,
-            Capability.MANAGE_USER
+            Capability.MANAGE_USER,
+            Capability.ACTUATOR
                 
         };
     
