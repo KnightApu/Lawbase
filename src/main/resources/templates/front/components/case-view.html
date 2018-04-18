@@ -9,12 +9,15 @@
                -->
                
                 <div class="clearfix"></div>
+                <button type="button" class="btn btn-primary pull-right print" onClick="print();">Print</button>
                 <br>
                 
                 <!-- overlay section --> 
                 <div class="position-relative">
                     
                    <div class='x_panel'>
+                   
+                   		
                    
                         <div class='x_title'>
                             <h4>Basic information</h4>
@@ -162,7 +165,7 @@
                         </div>
                         
 						
-						<div class="x_content">
+						<div class="x_content existing-file">
 					    	<div class="ln_solid"></div>
 						
 							<table class="table table-striped" th:object="${caseBook}">

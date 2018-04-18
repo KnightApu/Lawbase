@@ -2,7 +2,7 @@
 <header>
 
 	<!-- *** TOP *** -->
-	<div id="top">
+	<div id="top" class="authenticaDiv">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-2 contact">
@@ -16,7 +16,7 @@
 					</p>
 				</div>
 
-				<div sec:authorize="isAuthenticated()" class="col-md-10">
+				<div  sec:authorize="isAuthenticated()" class="col-md-10">
 					<div class="logout">
 						
 						<a href="front/user/edit"><i class="fa fa-user"></i> <span
@@ -29,7 +29,7 @@
 					
 				</div>
 
-				<div sec:authorize="isAnonymous()" class="col-md-10">
+				<div  sec:authorize="isAnonymous()" class="col-md-10">
 					<div class="social">
 						<a href="#" class="external facebook" data-animate-hover="pulse"><i
 							class="fa fa-facebook"></i></a> <a href="#" class="external gplus"
@@ -74,7 +74,7 @@
 
 					<a class="navbar-brand home" href="index.html"> <img
 						th:src="@{/public/img/logomarch29-2.png}" alt="Universal logo"
-						class="hidden-xs hidden-sm"> <img
+						class="hidden-xs hidden-sm logo"> <img
 						th:src="@{/public/img/logomarch29-2.png}" alt="Universal logo"
 						class="visible-xs visible-sm"><span class="sr-only">Lawbase
 							- go to homepage</span>

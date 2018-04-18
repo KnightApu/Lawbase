@@ -1,0 +1,42 @@
+@media print {
+	.print {
+		display: none;
+	}
+	header h1, header nav, footer, img {
+		display: none;
+	}
+	.security {
+		display: none;
+	}
+	.authenticaDiv {
+		display: none;
+	}
+	.footer, #copyright {
+		display: none;
+	}
+	.existing-file {
+		display: none;
+	}
+	.panel_toolbox {
+		display: none;
+	}
+	header .logo {
+		display: block;
+	}
+	img {
+		max-width: 500px;
+	}
+	body {
+		font: 8pt Georgia, "Times New Roman", Times, serif;
+		line-height: 1.3;
+	}
+	header:after {
+		content: "www.legislib.com";
+	}
+	@page {
+    margin-top: 0.5in;
+    margin-bottom: 0.5in;
+    margin-left: 0.5in;
+    margin-right: 0.5in;    
+}
+	
