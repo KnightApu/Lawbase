@@ -1,0 +1,8 @@
+db.getCollection('user').find().forEach( function(user) {
+
+	if (user.role == "USER")
+		user.role = "INDIVIDUAL";
+	
+	db.getCollection('user').save( user );
+
+})
