@@ -1,40 +1,50 @@
 package com.lawbase.module.front.registration;
 
-import java.io.Serializable;
+
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.PasswordException;
 import com.adhocmaster.mongo.user.User;
-import com.adhocmaster.mongo.user.UserException;
 import com.adhocmaster.mongo.user.UserService;
 
-import util.restApi.RestBadDataException;
-import util.restApi.RestInternalServerException;
-import util.restApi.RestSuccess;
 
 @RestController
-@RequestMapping( "front/rest/registration" )
+@RequestMapping( "public/rest/registration" )
 public class RegistrationRestController {
+	
+	private static final Logger logger = LoggerFactory.getLogger( RegistrationRestController.class );
 	
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping( "/add" )
-    public Serializable add(HttpSession httpSession,
-            @RequestParam Map<String, String> params) throws RestBadDataException, RestInternalServerException, PasswordException, PersistenceException  {
-			System.out.println("controller is printing in system console");     
+	@PostMapping( "/add" )
+    public User add(HttpSession httpSession,
+            @RequestParam Map<String, String> params) throws PasswordException, PersistenceException  {
 			
-			userService.registrationFromFormData( params );
+			User user =  new User();
+			try {
+				
+				user = userService.registrationFromFormData( params );
+				
+			} catch (PasswordException e) {
+				
+				logger.debug(e.toString());
+				
+			} catch (PersistenceException e) {
+				
+				logger.debug(e.toString());
+			}
 			
-			return new RestSuccess( RestSuccess.Codes.SAVE_DB );
+			
+			return user;
 			
 			
     }

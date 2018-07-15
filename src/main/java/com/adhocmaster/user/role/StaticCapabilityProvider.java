@@ -14,7 +14,21 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             Capability.ROLE_INDIVIDUAL,
             Capability.READ_CASE,
             Capability.READ_ACT,
-            Capability.READ_COURT
+            Capability.READ_COURT,
+            Capability.READ_JOURNAL,
+            Capability.READ_ARTICLE
+            
+        };
+    
+    protected static Capability[] enterpriseCapabilities = new Capability[] {
+
+            Capability.ENTERPRISE,
+            Capability.ROLE_ENTERPRISE,
+            Capability.READ_CASE,
+            Capability.READ_ACT,
+            Capability.READ_COURT,
+            Capability.READ_JOURNAL,
+            Capability.READ_ARTICLE
             
         };
     
@@ -23,24 +37,31 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             Capability.ADMIN,
             Capability.MANAGE_CASE,
             Capability.MANAGE_ACT,
-            Capability.MANAGE_COURT
+            Capability.MANAGE_COURT,
+            Capability.MANAGE_JOURNAL,
+            Capability.MANAGE_ARTICLE,
+            Capability.MANAGE_USER,
+            Capability.ACTUATOR
                 
         };
     
-    protected static Capability[] enterpriseCapabilities = new Capability[] {
-
-            Capability.ENTERPRISE,
-            Capability.ROLE_ENTERPRISE,
-            Capability.READ_CASE
-            
-        };
-    
+       
     protected static Capability[] superAdminCapabilities = new Capability[] {
 
             Capability.SUPER_ADMIN,
             Capability.MANAGE_CASE,
             Capability.MANAGE_ACT,
-            Capability.MANAGE_COURT
+            Capability.MANAGE_COURT,
+            Capability.MANAGE_JOURNAL,
+            Capability.MANAGE_ARTICLE,
+            Capability.MANAGE_USER,
+            Capability.ACTUATOR
+                
+        };
+    
+    protected static Capability[] editorCapabilities = new Capability[] {
+
+            Capability.EDITOR,
                 
         };
     
@@ -85,6 +106,14 @@ public class StaticCapabilityProvider implements CapabilityProvider {
         superAdminCapabilitiesSet.addAll( Arrays.asList( superAdminCapabilities ) );
                
         capabilities.put( Role.SUPER_ADMIN, superAdminCapabilitiesSet );
+        
+        
+        // EDITOR
+        Set<Capability> editorCapabilitiesSet = new HashSet<Capability>();
+        
+        editorCapabilitiesSet.addAll( Arrays.asList( editorCapabilities ) );
+               
+        capabilities.put( Role.EDITOR, editorCapabilitiesSet );
         
     }
     

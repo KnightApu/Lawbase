@@ -22,6 +22,8 @@ public class UserCreator {
         user.setEmail( email );
         
     }
+	
+
 
     
     
@@ -60,7 +62,7 @@ public class UserCreator {
     }
     public void setPassword( String password ) throws PasswordException {
     
-        user.setPasswordHash( PasswordHelper.getHash( password ) );
+        user.setPasswordHashFromPassword(  password  );
     }
     public void setIpAddress( String ipAddress ) {
 		

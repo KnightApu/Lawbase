@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adhocmaster.controller.MvcUserController;
 import com.adhocmaster.mongo.user.UserHelper;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.book.simpleBook.SimpleBook;
 import com.lawbase.act.Act;
 import com.lawbase.act.ActRepository;
@@ -75,8 +76,8 @@ public class AdminActController extends MvcUserController {
             Model model, 
             HttpSession httpSession
             
-            ) {
-        
+            ) throws UserNotFoundInSessionException {
+    	addUserInfoAttribute(model, httpSession);
         return manage(model, httpSession);
         
     }
@@ -87,14 +88,14 @@ public class AdminActController extends MvcUserController {
             Model model, 
             HttpSession httpSession 
             
-            ) {
+            ) throws UserNotFoundInSessionException {
     	
     	List <Act> acts = actRepository.findAll();
         
         logger.debug( acts.toString() );
         
         model.addAttribute( "books", acts );
-        
+        addUserInfoAttribute(model, httpSession);
         model.addAttribute( "templatePart", "manage" );
         addCommonModelAttributes( model, "manage" );  
         
@@ -108,9 +109,10 @@ public class AdminActController extends MvcUserController {
             Model model, 
             HttpSession httpSession 
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
-    	 addCommonModelAttributes( model, "add" );    
+    	 addCommonModelAttributes( model, "add" );
+    	 addUserInfoAttribute(model, httpSession);
          return viewRoot + "index";
         
     
@@ -123,11 +125,12 @@ public class AdminActController extends MvcUserController {
             HttpSession httpSession,
             @RequestParam ObjectId id
             
-            ) {
+            ) throws UserNotFoundInSessionException {
     	
     	SimpleBook act = actRepository.findOne( id );
         model.addAttribute( "act", act );
-        addCommonModelAttributes( model, "edit" ); 
+        addCommonModelAttributes( model, "edit" );
+        addUserInfoAttribute(model, httpSession);
         return viewRoot + "index";
         
     

@@ -108,6 +108,11 @@
 									              		SUSPENDED									                
 	             							</div>
 	             							
+	             							<div >
+	             								<input type="radio" th:name = "@{ status }" value="PENDING"  
+									              		th:checked = "${ user.getStatus().toString() == 'PENDING' }" />
+									              		PENDING									                
+	             							</div>
 	            
 	       								</div>
 	

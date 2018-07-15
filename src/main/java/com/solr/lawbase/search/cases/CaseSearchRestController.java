@@ -1,5 +1,7 @@
 package com.solr.lawbase.search.cases;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.adhocmaster.controller.DataTableResponseEntity;
 import com.adhocmaster.controller.SolrRestController;
 import com.lawbase.cases.Case;
+import com.lawbase.module.admin.act.AdminActController;
 import com.solr.core.BaseSolrRepository;
 import com.solr.core.IndexStats;
 import com.solr.lawbase.search.framework.BookIndexService;
@@ -20,6 +23,8 @@ import util.restApi.RestSuccess;
 @RestController
 @RequestMapping( "/search-engine/case" )
 public class CaseSearchRestController extends SolrRestController<Case, SolrCase> {
+	
+	private static final Logger logger = LoggerFactory.getLogger( CaseSearchRestController.class );
     
     @Autowired
     CaseSolrRepository caseSolrRepository;
@@ -70,7 +75,7 @@ public class CaseSearchRestController extends SolrRestController<Case, SolrCase>
             
             ) throws RestInternalServerException, RestBadDataException {
         
-
+    	logger.info("Inside Case Search rest controller/findByFieldMethod");
         return super.findByFieldForDataTable( field, value, sEcho, offSet, size );
 
     }
@@ -93,6 +98,8 @@ public class CaseSearchRestController extends SolrRestController<Case, SolrCase>
             @RequestParam( value = "iDisplayLength", required = false, defaultValue = "10" ) int size
             
             ) throws RestInternalServerException, RestBadDataException {
+    	
+    	
         
         return super.findByFieldForDataTable( "all", value, sEcho, offset, size );
 

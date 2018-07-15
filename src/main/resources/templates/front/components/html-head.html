@@ -16,7 +16,11 @@
          <script th:src="@{/public/vendors/jquery/dist/jquery.min.js}"></script>
          <script th:src="@{/public/js/user.js}"> </script>
 		<script th:src="@{/public/js/utility-adhocmaster.js}"> </script>
-         
+		
+   
+    
+    	<!-- Pricing Table -->
+   		 <link href="/public/css/pricing-table.css" rel="stylesheet">
         <!-- Bootstrap -->
         <link th:href="@{/public/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
         <!-- Font Awesome -->
@@ -42,6 +46,7 @@
 	<!-- i added -->
 	
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> </link>
 
     <!-- Bootstrap and Font Awesome css -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -56,8 +61,12 @@
     <!-- Custom stylesheet - for your changes -->
     <link th:href="@{/public/css/custom.css}" rel="stylesheet">
     <link th:href="@{/public/css/lawbase.css}" rel="stylesheet">
+    <link th:href="@{/public/css/media-print.css}" rel="stylesheet">
+    
     
      <!-- gentelella-master files -->
+     
+    
 
 
     <!-- Responsivity for older IE -->
@@ -80,10 +89,12 @@
 
     <link th:href="@{/public/css/owl.carousel.css}" rel="stylesheet">
     <link th:href="@{/public/css/owl.theme.css}" rel="stylesheet">
+   
 </head>
 
 <body>
 
-    <div th:include="front/components/test-security :: security"></div>
+    <div class="security" th:include="front/components/test-security :: security"></div>
 
     <div id="all">
+    

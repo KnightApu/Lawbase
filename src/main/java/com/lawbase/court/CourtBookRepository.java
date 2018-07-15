@@ -8,8 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface CourtBookRepository extends MongoRepository<CourtBook, ObjectId> {
     
     public Page<CourtBook> findByTitleStartingWith( String title, Pageable pageable );
-    
-
-
 
 }

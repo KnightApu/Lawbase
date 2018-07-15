@@ -1,351 +1,406 @@
-        <header>
 
-            <!-- *** TOP *** -->
-            <div id="top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-5 contact">
-                            <p class="hidden-sm hidden-xs">Contact us on +880 00000 000 000 or hello@muktadir.com.</p>
-                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                            </p>
-                        </div>
-                        <div class="col-xs-7">
-                            <div class="social">
-                                <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
-                                <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
-                                <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                            </div>
+<header>
 
-                            <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="/registration"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
-                            </div>
+	<!-- *** TOP *** -->
+	<div id="top" class="authenticaDiv">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2 contact">
+					<p class="hidden-sm hidden-xs">
+						<b>Contact us on <i>+8801828128129</i></b>
+					</p>
+					<p class="hidden-md hidden-lg">
+						<a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>
+						<a href="#" data-animate-hover="pulse"><i
+							class="fa fa-envelope"></i></a>
+					</p>
+				</div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div  sec:authorize="isAuthenticated()" class="col-md-10">
+					<div class="logout">
+						
+						<a href="front/user/edit"><i class="fa fa-user"></i> <span
+							class="hidden-xs text-uppercase">Profile</span></a>
+							
+						<a href="#" onclick="document.getElementById('logOutForm').submit();"><i class="fa fa-sign-out"></i> <span
+							class="hidden-xs text-uppercase">Sign out</span></a>
+						
+					</div>
+					
+				</div>
 
-            <!-- *** TOP END *** -->
+				<div  sec:authorize="isAnonymous()" class="col-md-10">
+					<div class="social">
+						<a href="#" class="external facebook" data-animate-hover="pulse"><i
+							class="fa fa-facebook"></i></a> <a href="#" class="external gplus"
+							data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+						<a href="#" class="external twitter" data-animate-hover="pulse"><i
+							class="fa fa-twitter"></i></a> <a href="#" class="email"
+							data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+					</div>
 
-            <!-- *** NAVBAR *** -->
-
-            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
-
-                <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-
-                    <div class="container">
-                        <div class="navbar-header">
-
-                            <a class="navbar-brand home" href="index.html"> 
-                                <img th:src="@{/public/img/logo1.gif}" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img th:src="@{/public/img/logo1.gif}"alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Lawbase - go to homepage</span>
-                            </a>
-                            <div class="navbar-buttons">
-                                <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <i class="fa fa-align-justify"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!--/.navbar-header -->
-
-                        <div class="navbar-collapse collapse" id="navigation">
-
-                            <ul class="nav navbar-nav navbar-right">
-                                <li > <!-- class="active" // i removed so that it's not highlighted always -->
-                                    <a href="/index"> Home </a>
-                                </li>
-                                <li class="dropdown use-yamm yamm-fw">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Legislation<b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="yamm-content">
-                                                <div class="heading">
-                                                    <h3>Browse</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-4 year-browser">
-                                                        <h5>By year</h5>
-                                                        <h6>2010 - NOW</h6>
-                                                        <div th:replace="front/components/menu-parts :: yearsAct">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <h5>Title</h5>
-                                                        <ul class="title-browser">
-                                                            <li>
-                                                                 <div th:replace="front/components/menu-parts :: alphabets">
-                                                                 </div>
-                                                            </li>
-                                                        </ul>
-                                                        <h5>Topics</h5>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#">Commercial law</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Family and private life</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Finance</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Crime</a>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" class="btn btn-template-main ">view all</button> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <h5>Search Acts</h5>
-                                                        <div th:replace = "front/components/search-blocks :: search-legislation-short" >Search Form</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                                <li class="dropdown use-yamm yamm-fw">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cases <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="yamm-content">
-                                                <div class="row">
-                                                
-                                                    <div class="col-sm-4 year-browser">
-                                                        <h5>By year</h5>
-                                                        <h6>2010 - NOW</h6>
-                                                        <div th:replace="front/components/menu-parts :: yearsCase">
-                                                        </div>
-                                                        <h5>By Category</h5>
-                                                         <ul>
-                                                            <li>
-                                                                <a href="/front/case/">Criminal Cases</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="/front/case/">Civil Cases</a>
-                                                            </li>
-                                                         </ul>   
-                                                        
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <h5>Courts</h5>
-                                                        <ul th:replace="front/components/menu-parts :: courts">
-                                                        </ul>  
-                                                        <h5>Topics</h5>   
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#">Commercial law</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Family and private life</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Finance</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Crime</a>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" class="btn btn-template-main ">view all</button> 
-                                                            </li>
-                                                        </ul>                                                            
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <h5>Search Cases</h5>
-                                                        <div th:replace = "front/components/search-blocks :: search-case-short" >Search Form</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.yamm-content -->
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ========== FULL WIDTH MEGAMENU END ================== -->
-
-                                <li>
-                                    <a href=""> Constitution </a>
-                                </li>
-                                <li>
-                                    <a href=""> Journals </a>
-                                </li>
-                                <li>
-                                    <a href=""> Insight </a>
-                                </li>
-                                <li>
-                                    <a href=""> Books </a>
-                                </li>
-                                
-                            </ul>
-
-                        </div>
-                        <!--/.nav-collapse -->
+					<div class="login">
+						<a href="#" data-toggle="modal" data-target="#login-modal"><i
+							class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign
+								in</span></a> 
+						<a href="/registration"><i class="fa fa-user"></i> <span
+							class="hidden-xs text-uppercase">Sign up</span></a>
+					</div>
 
 
+				</div>
 
-                        <div class="collapse clearfix" id="search">
-
-                            <form class="navbar-form" role="search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <span class="input-group-btn">
-
-				                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
-				
-				                </span>
-                                </div>
-                            </form>
-
-                        </div>
-                        <!--/.nav-collapse -->
-
-                    </div>
+				<form th:action="@{/logout}" method="POST" id="logOutForm">
+					<!-- <input type="submit" th:value="logout" />  -->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
 
 
-                </div>
-                <!-- /#navbar -->
+			</div>
+		</div>
+	</div>
 
-            </div>
+	<!-- *** TOP END *** -->
 
-            <!-- *** NAVBAR END *** -->
+	<!-- *** NAVBAR *** -->
 
-        </header>
+	<div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
 
-        <!-- *** LOGIN MODAL ***
+		<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+			<div class="container">
+				<div class="navbar-header">
+
+					<a class="navbar-brand home" href="index.html"> <img
+						th:src="@{/public/img/logomarch29-2.png}" alt="Universal logo"
+						class="hidden-xs hidden-sm logo"> <img
+						th:src="@{/public/img/logomarch29-2.png}" alt="Universal logo"
+						class="visible-xs visible-sm"><span class="sr-only">Lawbase
+							- go to homepage</span>
+					</a>
+					<div class="navbar-buttons">
+						<button type="button" class="navbar-toggle btn-template-main"
+							data-toggle="collapse" data-target="#navigation">
+							<span class="sr-only">Toggle navigation</span> <i
+								class="fa fa-align-justify"></i>
+						</button>
+					</div>
+				</div>
+				<!--/.navbar-header -->
+
+				<div class="navbar-collapse collapse" id="navigation">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<!-- class="active" // i removed so that it's not highlighted always -->
+							<a href="/index"> Home </a>
+						</li>
+						<li class="dropdown use-yamm yamm-fw"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown">Legislation<b
+								class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="yamm-content">
+										<div class="heading">
+											<h3>Browse</h3>
+										</div>
+										<div class="row">
+											<div class="col-sm-4 year-browser">
+												<h5>By year</h5>
+												<h6>2010 - NOW</h6>
+												<div th:replace="front/components/menu-parts :: yearsAct">
+												</div>
+											</div>
+											<div class="col-sm-3">
+												<h5>Title</h5>
+												<ul class="title-browser">
+													<li>
+														<div th:replace="front/components/menu-parts :: alphabets">
+														</div>
+													</li>
+												</ul>
+												<h5>Topics</h5>
+												<ul>
+													<li><a href="#">Commercial law</a></li>
+													<li><a href="#">Family and private life</a></li>
+													<li><a href="#">Finance</a></li>
+													<li><a href="#">Crime</a></li>
+													<li>
+														<button type="button" class="btn btn-template-main ">view
+															all</button>
+													</li>
+												</ul>
+											</div>
+											<div sec:authorize="isAuthenticated()" class="col-sm-5">
+												<h5>Search Acts</h5>
+												<div
+													th:replace="front/components/search-blocks :: search-legislation-short">Search
+													Form</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul></li>
+						<!-- ========== FULL WIDTH MEGAMENU ================== -->
+						<li class="dropdown use-yamm yamm-fw"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"
+							data-hover="dropdown" data-delay="200">Cases <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="yamm-content">
+										<div class="row">
+
+											<div class="col-sm-4 year-browser">
+												<h5>By year</h5>
+												<h6>2010 - NOW</h6>
+												<div th:replace="front/components/menu-parts :: yearsCase">
+												</div>
+												<h5>By Category</h5>
+												<ul>
+													<li><a href="/front/case/">Criminal Cases</a></li>
+													<li><a href="/front/case/">Civil Cases</a></li>
+												</ul>
+
+											</div>
+											<div class="col-sm-3">
+												<h5>Courts</h5>
+												<ul th:replace="front/components/menu-parts :: courts">
+												</ul>
+												<h5>Topics</h5>
+												<ul>
+													<li><a href="#">Commercial law</a></li>
+													<li><a href="#">Family and private life</a></li>
+													<li><a href="#">Finance</a></li>
+													<li><a href="#">Crime</a></li>
+													<li>
+														<button type="button" class="btn btn-template-main ">view
+															all</button>
+													</li>
+												</ul>
+											</div>
+											<div sec:authorize="isAuthenticated()" class="col-sm-5">
+												<h5>Search Cases</h5>
+												<div
+													th:replace="front/components/search-blocks :: search-case-short">Search
+													Form</div>
+											</div>
+										</div>
+									</div> <!-- /.yamm-content -->
+								</li>
+							</ul></li>
+						<!-- ========== FULL WIDTH MEGAMENU END ================== -->
+
+						<li><a href=""> Constitution </a></li>
+						<li><a href=""> Journals </a></li>
+						<li><a href=""> Insight </a></li>
+						<li><a href=""> Books </a></li>
+
+					</ul>
+
+				</div>
+				<!--/.nav-collapse -->
+
+
+
+				<div class="collapse clearfix" id="search">
+
+					<form class="navbar-form" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search">
+							<span class="input-group-btn">
+
+								<button type="submit" class="btn btn-template-main">
+									<i class="fa fa-search"></i>
+								</button>
+
+							</span>
+						</div>
+					</form>
+
+				</div>
+				<!--/.nav-collapse -->
+
+			</div>
+
+
+		</div>
+		<!-- /#navbar -->
+
+	</div>
+
+	<!-- *** NAVBAR END *** -->
+
+</header>
+
+<!-- *** LOGIN MODAL ***
 _________________________________________________________ -->
 
-        <div class="modal fade" id="login-modal" tabindex="1" role="dialog" aria-labelledby="Login" aria-hidden="true" data-backdrop="false">
-            <div class="modal-dialog modal-sm">
+<div class="modal fade" id="login-modal" tabindex="1" role="dialog"
+	aria-labelledby="Login" aria-hidden="true" data-backdrop="false">
+	<div class="modal-dialog modal-sm">
 
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="Login">Sign In</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/login" method="post">
-                            <div>
-							<label> User Name : <input type="text" class="form-control" placeholder="User Name" name="username"
-								required=""></label>
-						</div>
-                           <div>
-							<label> Password: <input type="password" class="form-control" placeholder="Password" name="password"
-								required=""></label>
-						</div>
+		<div class="modal-content" >
+			<div class="modal-header" class="heading text-center">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+					<br>
+				<h4 class="modal-title" id="Login">Sign In</h4>
+			</div>
+			<div class="modal-body" class="heading text-center">
+				<form action="/login" method="post">
+					<div>
+						<label class="p-3 mb-2 bg-primary text-white"> User Name : <input type="text"
+							class="form-control" placeholder="User Name" name="username"
+							required=""></label>
+					</div>
+					<div>
+						<label class="p-3 mb-2 bg-primary text-white"> Password: <input type="password"
+							class="form-control" placeholder="Password" name="password"
+							required=""></label>
+					</div>
 
-                            <p class="text-center">
-                                <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
-                            </p>
-							<input type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}"/>
-                        </form>
+					<p class="text-center">
+						<button class="btn btn-template-main">
+							<i class="fa fa-sign-in"></i> Log in
+						</button>
+					</p>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
 
-                        <p class="text-center text-muted">Not registered yet?</p>
-                        <p class="text-center text-muted"><a href="/register"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
+				<p class="text-center text-muted">Not registered yet?</p>
+				<p class="text-center text-muted">
+					<a href="/registration"><strong>Register now</strong></a>! It is easy
+					and done in 1&nbsp;minute and gives you access to special discounts
+					and much more!
+				</p>
 
-                    </div>
-                </div>
-            </div>
-        </div>
+			</div>
+		</div>
+	</div>
+</div>
 
-        <!-- *** LOGIN MODAL END *** -->
+<!-- *** LOGIN MODAL END *** -->
 <script>
-$(document).ready(function(e){
-	
-	console.log("inside section head document ready");
-	
-	
-	$( "#searchCaseButton" ).click( function() {
-	    
-		var dataFromForm = $("#searchCaseModalForm").serialize();
-		
-		var inputWord = dataFromForm; 
-		console.log("the value from case modal:"+inputWord);
-		
-		var paramValue = "";
-		
-		if( ( $("#firstParty").val() != "" ) || ( $("#secondParty").val() != "" ) || ( $("#caseYear").val() != "" ) || ( $("#caseSource").val() != "" ) || ( $("#caseCourtBook").val() != "" ) || ( $("#caseSearchTerm").val() != "" ) )
-		{
-			paramValue = $("#firstParty").val() + " " +  $("#secondParty").val() + " " + $("#caseYear").val() + " " + $("#caseSource").val() + " " + $("#caseCourtBook").val() + " " + $("#caseSearchTerm").val() ;
-		
-			console.log( "th param value for case" + paramValue );
-			
-			window.location.replace("/front/case?field=all&value=" + paramValue);
-		}
-		
-	});
-	
-	$( "#searchActButton" ).click( function() {
-	    
-		var dataFromForm = $("#searchActModalForm").serialize();
-		
-		var inputWord = dataFromForm; 
-		console.log("the value from ACT modal:"+inputWord);
-		
-		var paramValue = "";
-		
-		if( ( $("#actTitle").val() != "" ) || ( $("#actYear").val() != "" ) || ( $("#actSection").val() != "" ) || ( $("#actSearchTerms").val() != "" ) )
-		{
-			paramValue = $("#actTitle").val() + " " +  $("#actYear").val() + " " + $("#actSection").val() + " " + $("#actSearchTerms").val()  ;
-		
-			console.log( "th param value for act" + paramValue );
-			
-			window.location.replace("/front/act?field=all&value=" + paramValue);
-		}
-		
-	});
-	
-});
+	$(document).ready(
+			function(e) {
+
+				console.log("inside section head document ready");
+
+				$("#searchCaseButton").click(
+						function() {
+
+							var dataFromForm = $("#searchCaseModalForm")
+									.serialize();
+
+							var inputWord = dataFromForm;
+							console.log("the value from case modal:"
+									+ inputWord);
+
+							var paramValue = "";
+
+							if (($("#firstParty").val() != "")
+									|| ($("#secondParty").val() != "")
+									|| ($("#caseYear").val() != "")
+									|| ($("#caseSource").val() != "")
+									|| ($("#caseCourtBook").val() != "")
+									|| ($("#caseSearchTerm").val() != "")) {
+								paramValue = $("#firstParty").val() + " "
+										+ $("#secondParty").val() + " "
+										+ $("#caseYear").val() + " "
+										+ $("#caseSource").val() + " "
+										+ $("#caseCourtBook").val() + " "
+										+ $("#caseSearchTerm").val();
+
+								console.log("th param value for case"
+										+ paramValue);
+
+								window.location
+										.replace("/front/case?field=all&value="
+												+ paramValue);
+							}
+
+						});
+
+				$("#searchActButton").click(
+						function() {
+
+							var dataFromForm = $("#searchActModalForm")
+									.serialize();
+
+							var inputWord = dataFromForm;
+							console
+									.log("the value from ACT modal:"
+											+ inputWord);
+
+							var paramValue = "";
+
+							if (($("#actTitle").val() != "")
+									|| ($("#actYear").val() != "")
+									|| ($("#actSection").val() != "")
+									|| ($("#actSearchTerms").val() != "")) {
+								paramValue = $("#actTitle").val() + " "
+										+ $("#actYear").val() + " "
+										+ $("#actSection").val() + " "
+										+ $("#actSearchTerms").val();
+
+								console.log("th param value for act"
+										+ paramValue);
+
+								window.location
+										.replace("/front/act?field=all&value="
+												+ paramValue);
+							}
+
+						});
+
+			});
 </script>
 
 <script>
-	function convertToHtml( json ){
-		
-		var result="";
-		
-		console.log( "size" + json.length );
-		
-		for( i = 0; i < json.length; i++){
+	function convertToHtml(json) {
+
+		var result = "";
+
+		console.log("size" + json.length);
+
+		for (i = 0; i < json.length; i++) {
 			result += "<li><a href='#'>" + json[i].title + "</a></li>";
-						
+
 		}
 		return result;
 	}
-</script>	
-	
+</script>
+
 <script>
-	function loadCourtBookNames()
-	{
+	function loadCourtBookNames() {
 		var jsonData;
 		//alert("hello");
-	
-		$.getJSON('/admin/rest/courtbook/', function( data ) {
-		
+
+		$.getJSON('/admin/rest/courtbook/', function(data) {
+
 			//alert(data);
 			jsonData = data;
-			
+
 			//console.log(JSON.stringify(data));
-			
-			var result = convertToHtml( jsonData['aaData'] );
-			
+
+			var result = convertToHtml(jsonData['aaData']);
+
 			console.log("loaded data:" + result);
-			
+
 			document.getElementById('outputCourts').innerHTML = result;
-			
+
 		});
-	
+
 	}
 </script>
 <script>
-/*
-$(".courtNameAnchor").click(function(){
+	/*
+	 $(".courtNameAnchor").click(function(){
 	
-	alert("i clicked");
+	 alert("i clicked");
 	
-});
-*/
-
+	 });
+	 */
 </script>

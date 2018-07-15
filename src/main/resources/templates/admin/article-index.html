@@ -17,9 +17,9 @@
             <!-- page content -->
             <div class="right_col" role="main">
               
-                
+               <div sec:authorize="hasAuthority('MANAGE_ARTICLE')"> 
                <div th:replace = "'admin/components/article-' + ${templatePart}" ></div>
-                    
+               </div>   
                 
             </div>
             <!-- /page content -->

@@ -1,6 +1,7 @@
 package com.lawbase.module.admin.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,103 +28,116 @@ import com.adhocmaster.user.role.UserExpirableCapabilityAuthorityProvider;
 import com.lawbase.module.admin.journal.AdminJournalController;
 
 @Controller
-@RequestMapping( "/admin/user" )
+@RequestMapping("/admin/user")
 public class AdminUserController extends MvcController {
 
-	private static final Logger logger = LoggerFactory.getLogger( AdminJournalController.class );
-    
-    private static final String viewRoot = "admin/user-";
-    private static final String pathRoot = "/admin/user";
-	
-    
-    @Autowired
-    UserService userService;
-    
-    @Autowired
-    UserExpirableCapabilityAuthorityProvider userExpirableAuthorityProvider;
-    
-    
+	private static final Logger logger = LoggerFactory.getLogger(AdminJournalController.class);
+
+	private static final String viewRoot = "admin/user-";
+	private static final String pathRoot = "/admin/user";
+
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	UserExpirableCapabilityAuthorityProvider userExpirableAuthorityProvider;
+
 	@Override
 	protected void generateControllerPaths() {
-		 controllerPaths = new HashMap<>();
+		controllerPaths = new HashMap<>();
 
-		 controllerPaths.put( "index", pathRoot );
-	     controllerPaths.put( "add", pathRoot + "/add" );
-	     controllerPaths.put( "edit", pathRoot + "/edit?id=" );
-	     controllerPaths.put( "delete", pathRoot + "/delete?id=" );
-	     controllerPaths.put( "manage", pathRoot + "/manage" );   
-	     controllerPaths.put( "error", pathRoot + "/error" ); 
-	        
-		
+		controllerPaths.put("index", pathRoot);
+		controllerPaths.put("add", pathRoot + "/add");
+		controllerPaths.put("edit", pathRoot + "/edit?id=");
+		controllerPaths.put("delete", pathRoot + "/delete?id=");
+		controllerPaths.put("manage", pathRoot + "/manage");
+		controllerPaths.put("error", pathRoot + "/error");
+
 	}
-	
-	 @GetMapping( value = { "", "/", "/index" } )
-	 public String index(
 
-	            Model model, 
-	            @RequestParam Map<String, String> params
-	            
-	            ) {
+	@GetMapping(value = { "", "/", "/index" })
+	public String index(
+
+			Model model, @RequestParam Map<String, String> params
+
+	) {
+
+		Page<User> users = userService.findAll(new PageRequest(1, 5));
+
+		logger.debug(users.toString());
+
+		model.addAttribute("users", users);
+
+		addCommonModelAttributes(model, "index");
+
+		return viewRoot + "index";
+
+	}
+
+	@GetMapping(value = { "/pending" })
+	public String pending(
+
+			Model model, @RequestParam Map<String, String> params
+
+	) {
+		
 		 
-		 	
-		 Page<User> users = userService.findAll( new PageRequest( 1, 5 ) );
-		 
-		 logger.debug( users.toString() );
-		    
-	     model.addAttribute( "users", users );
-	        
-	     addCommonModelAttributes( model, "index" );  
-	        
-	     return viewRoot + "index";
-	        
-	 }
-	 
-	 @GetMapping("/edit")
-	 public String edit(
+		try {
 
-	            Model model, 
-	            @RequestParam ObjectId id
-	            
-	            ) throws CapabilityNotFoundException, RoleNotFoundException, RoleCapabilitiesNotFoundException {
+			List<User> users = userService.findByStatus("PENDING");
+			
+			logger.debug(users.toString());
+			model.addAttribute("users", users);
+			
+		} catch (NullPointerException e) {
 
-	        
-		 User user = userService.findOne( id );
-	       
-		 
-	     if( null == user )
-	     {
-	    	 addCommonModelAttributes( model, "error" ); 
-	    	 model.addAttribute( "message", "The user is null" );
-			 
-	    	 return viewRoot + "index";
-	    	 
-	     }	
-	     
-	     Set<CapabilityAuthority> authorities = userExpirableAuthorityProvider.getAuthorities( user );
-	    
-	     model.addAttribute( "user", user );
-	     model.addAttribute( "authorities", authorities );
-	     
-	     addCommonModelAttributes( model, "edit" );    
-	        
-	     return viewRoot + "index";
-	        
-	 }
-	 
-	 	
-	 @GetMapping("/add")
-	 public String add(
+			logger.debug(e.toString());
+		}
+		
+		addCommonModelAttributes(model, "pending");
+		return viewRoot + "index";
 
-	            Model model
-	            
-	            ) {
+	}
 
-		 addCommonModelAttributes( model, "add" );        
-	     
-		 return viewRoot + "index";
-	    	 
-	        
-	 }
+	@GetMapping("/edit")
+	public String edit(
 
-	
+			Model model, @RequestParam ObjectId id
+
+	) throws CapabilityNotFoundException, RoleNotFoundException, RoleCapabilitiesNotFoundException {
+
+		User user = userService.findOne(id);
+
+		if (null == user) {
+			addCommonModelAttributes(model, "error");
+			model.addAttribute("message", "The user is null");
+
+			return viewRoot + "index";
+
+		}
+
+		Set<CapabilityAuthority> authorities = userExpirableAuthorityProvider.getAuthorities(user);
+
+		model.addAttribute("user", user);
+		model.addAttribute("authorities", authorities);
+
+		addCommonModelAttributes(model, "edit");
+
+		return viewRoot + "index";
+
+	}
+
+	@GetMapping("/add")
+	public String add(
+
+			Model model
+
+	) {
+
+		addCommonModelAttributes(model, "add");
+
+		return viewRoot + "index";
+
+	}
+
 }

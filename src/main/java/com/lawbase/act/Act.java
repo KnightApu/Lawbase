@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.book.Author;
 import com.book.simpleBook.SimpleBook;
-import com.book.simpleBook.Status;
 import com.mongo.media.Media;
 
 @Document

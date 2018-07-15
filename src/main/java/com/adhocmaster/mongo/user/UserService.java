@@ -1,5 +1,6 @@
 package com.adhocmaster.mongo.user;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,6 @@ import com.adhocmaster.service.RepositoryService;
 import com.adhocmaster.user.role.Role;
 import com.adhocmaster.user.role.RoleNotFoundException;
 import com.utility.form.FormValidationException;
-
 import javassist.NotFoundException;
 
 @Service
@@ -72,8 +72,8 @@ public class UserService extends RepositoryService<User> {
         UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
 
         userCreator.setRole( Role.findByName( role ) );
-
-       // userCreator.setPassword( password );
+        
+        userCreator.setPassword(password);
 
         User user = userCreator.createAndPersist();
 
@@ -87,8 +87,6 @@ public class UserService extends RepositoryService<User> {
     	 UserCreator userCreator = new UserCreator( sequenceDao, userRepository, name, userName, email );
 
          userCreator.setRole( Role.findByName( role ) );
-
-        // userCreator.setPassword( password );
 
          userCreator.setIpAddress( ipAddress );
          
@@ -124,6 +122,16 @@ public class UserService extends RepositoryService<User> {
     public User findByUserName( String userName ) {
 
         return userRepository.findByUserName( userName );
+    }
+    
+    public List<User> findByStatus( String status ) {
+
+        return  userRepository.findByStatus(status);
+    }
+    
+    public User findById( String id ) {
+    	
+    	return userRepository.findById(id);
     }
 
     /**
@@ -248,7 +256,7 @@ public class UserService extends RepositoryService<User> {
      * @throws NotFoundException
      * @throws PersistenceException
      */
-    public void updateBasicInformation( ObjectId userId, Map<String, String> params )
+    public User updateBasicInformation( ObjectId userId, Map<String, String> params )
             throws FormValidationException, NotFoundException, PersistenceException {
 
         User user = findOne( userId );
@@ -298,6 +306,7 @@ public class UserService extends RepositoryService<User> {
             throw new PersistenceException( e.getMessage() );
 
         }
+        return user;
 
     }
 
@@ -325,7 +334,7 @@ public class UserService extends RepositoryService<User> {
     }
 
 
-	public void registrationFromFormData(Map<String, String> params) throws PasswordException, PersistenceException {
+	public User registrationFromFormData(Map<String, String> params) throws PasswordException, PersistenceException {
 		
 		if ( StringUtils.isBlank( params.get( "userName" ) ) )
             throw new PersistenceException( "userName not set" );
@@ -377,7 +386,8 @@ public class UserService extends RepositoryService<User> {
 	
         }
 			
-			createUserfromRegistrationForm(name, userName, email, contactNo, password, occupation, institute);
+			User user = createUserfromRegistrationForm(name, userName, email, contactNo, password, occupation, institute);
+			return user;
 		
 	}
 

@@ -24,7 +24,7 @@ var actProcessor = {
 	
 	updateBasicInformation: function( actTitle, actNumber, actPublishedDate, sources, treatment, status,  actId) {
 		var data = {"title": actTitle, "number" : actNumber, "publishedDate" : actPublishedDate, "actDescription": sources, "treatment": treatment, "status":status, "updateType" : "basicInfo" };
-		console.log(this.restPaths.edit);
+		console.log(this.restPaths.edit+"/"+actId);
 		console.log(data);
 		mApp.callAjax( this.restPaths.edit+"/"+actId, data, "post", this, "actBasicInfoUpdated" );
 		 

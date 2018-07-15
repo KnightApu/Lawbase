@@ -52,7 +52,7 @@
 
   <field name="year" type="tint"/>
   <field name="title" type="text_general"/>
-  <field name="subject" type="text_general" indexed="true" stored="false" />
+  <field name="subject" type="text_general"/>
   <field name="courtBookTitle" type="text_general"/>
 
   <field name="firstParty" type="text_general"/>

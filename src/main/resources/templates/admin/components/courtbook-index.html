@@ -6,8 +6,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <br>
+                
                  
                 <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                
              
              
              <!-- This table don't use data table 
@@ -20,7 +22,7 @@
                             <th>action</th>
                            
                          </tr>
-                       </thead>
+                       </thead>you
  
                   <tbody>
                        
@@ -75,6 +77,7 @@
                 /*<![CDATA[*/
                  
                     var action = /*[[@{ ${ controllerPaths['add'] } }]]*/ '';
+                	var authorities = /*[[ ${ authorities } ]]*/ 0;
                     
                     var controllerPaths = {
                          
@@ -114,8 +117,23 @@
   	    		  		{
   	    		    		"mData": "id",
   	    		  			"mRender": function ( id, type, full )  
-  	    		  			{
-  	    		      			return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a><a href="' + controllerPaths.edit +  id + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
+  	    		  			{	
+  	    		  				if(authorities=="SUPER_ADMIN") {
+  	    		  					
+  	    		  					
+  	    		  				return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a><a href="' 
+  	    		  					+ controllerPaths.edit 
+  	    		  					+ id 
+  	    		  					+ '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> <span><a href="#" onclick="anchorDeleteAction(\'' 
+  	    		  							+ id + '\');" class="btn btn-danger btn-xs courtbookDelete"><i class="fa fa-trash"></i> Delete </a></span>';
+  	    		  				
+  	    		  				
+  	    		  				}
+  	    		  				else {
+  	    		  				
+  	    		  				return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> <a href="' + controllerPaths.edit +  id + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
+  	    		      			
+  	    		  				}
   	    		   
   	    		  			}
   	    		  		}
@@ -125,6 +143,7 @@
     	    	
     	    }		
     );
+   				
   })
   
   
@@ -133,7 +152,51 @@
     $("#normalDataTable").dataTable();
   })
   </script> 
-                   
+  
+  <script>
+
+	  
+	  function anchorDeleteAction(id) {
+		  
+		   	  console.log("delete");
+		   	  console.log(id);
+			  mApp.showDeleteModal();
+			  
+			  
+			  $("#delete-yes").click( function() {
+				  
+          		mApp.setUpRestPaths ( courtBookProcessor, controllerPaths, "/admin/", "/admin/rest/" );
+          		courtBookProcessor.delete(id);
+          		
+          	});
+	      
+	  }
+		
+	  
+	 
+	   
+ 
+  
+  </script>
+  
+  <script type="text/javascript">
+                
+                    
+                
+                    $( document ).ready( function() {
+                    	
+                    	console.log( "courtbook index" );
+                    	console.log( authorities );
+                    	
+                    	
+
+                      
+                            
+                        });
+                   	 
+                  
+                
+                </script>
                    
                    
                     

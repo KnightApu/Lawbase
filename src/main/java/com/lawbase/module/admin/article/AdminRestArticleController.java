@@ -22,7 +22,6 @@ import com.mongo.media.MediaRepository;
 
 import util.restApi.RestBadDataException;
 import util.restApi.RestInternalServerException;
-import util.restApi.RestSuccess;
 
 @RestController
 @RequestMapping( "/admin/rest/article" )
@@ -56,9 +55,7 @@ public class AdminRestArticleController extends MongoRestController<Article> {
             ) throws RestBadDataException, RestInternalServerException { 
                 
         try {
-
-            System.out.println("update form date call hoy nai");
-            
+        	
             return articleService.updateFromFormData( id, params);
             
             //System.out.println("update form date call hoise");
