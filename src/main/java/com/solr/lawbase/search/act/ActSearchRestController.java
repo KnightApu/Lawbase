@@ -94,7 +94,7 @@ public class ActSearchRestController extends SolrRestController<Act, SolrAct> {
 
     }
     
-    @PreAuthorize( "hasAuthority('ADMIN')" ) 
+    @PreAuthorize( "hasAuthority('REBUILD_INDEX')" ) 
     @RequestMapping( "/rebuildIndex" )
     public RestSuccess rebuildIndex() throws RestInternalServerException {
         
@@ -102,7 +102,7 @@ public class ActSearchRestController extends SolrRestController<Act, SolrAct> {
         
     }
 
-    @PreAuthorize( "hasAuthority('ADMIN')" ) 
+    @PreAuthorize( "hasAuthority('REBUILD_INDEX')" ) 
     @RequestMapping( "/statsIndex" )
     public IndexStats statsIndex() throws RestInternalServerException {
         
