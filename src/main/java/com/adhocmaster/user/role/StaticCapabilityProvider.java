@@ -55,7 +55,8 @@ public class StaticCapabilityProvider implements CapabilityProvider {
             Capability.MANAGE_JOURNAL,
             Capability.MANAGE_ARTICLE,
             Capability.MANAGE_USER,
-            Capability.ACTUATOR
+            Capability.ACTUATOR,
+            Capability.REBUILD_INDEX
                 
         };
     

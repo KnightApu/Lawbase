@@ -44,7 +44,8 @@ public enum Capability {
     EDIT_COURT,
     MANAGE_COURT,
     
-    ACTUATOR;
+    ACTUATOR,
+    REBUILD_INDEX;
     
     public static Capability findByName( String name ) throws CapabilityNotFoundException {
         
