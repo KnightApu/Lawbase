@@ -1,7 +1,6 @@
 package com.lawbase.module.admin.caseBook;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +9,8 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ import com.book.exceptions.NotSuchAuthorException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.cases.Case;
-import com.lawbase.cases.CaseRepository;
+import com.lawbase.cases.CaseService;
 
 @Controller
 @RequestMapping( "/admin/case" )
@@ -35,7 +36,7 @@ public class AdminCaseController extends MvcUserController {
     private static final String pathRoot = "/admin/case";
 
     @Autowired
-    private CaseRepository caseRepository;
+    private CaseService caseService;
     
     @Override
     protected void generateControllerPaths() {
@@ -60,16 +61,19 @@ public class AdminCaseController extends MvcUserController {
             
             ) throws UserNotFoundInSessionException {
 
-        // TODO make is paginated
         
-        List<Case> books = caseRepository.findAll();
-        
-        model.addAttribute( "books", books );
+    	Page<Case> casebooks = caseService.findAll( new PageRequest( 0, 5 ) );
+
+		logger.debug( casebooks.toString() );
+
+		model.addAttribute("casebooks", casebooks);
+		
         addUserInfoAttribute(model, httpSession);
-        addCommonModelAttributes( model, "index" ); 
+		addCommonModelAttributes(model, "index");
+
+		return viewRoot + "index";
         
-        return viewRoot + "index";
-        
+		
     }
 
     @GetMapping("/edit")
@@ -81,15 +85,16 @@ public class AdminCaseController extends MvcUserController {
             
             ) throws UserNotFoundInSessionException, NotSuchAuthorException {
 
-        User user = getUser(httpSession);
+        User user = getUser( httpSession );
         
-        SimpleBook caseBook = caseRepository.findOne( id );
+        SimpleBook caseBook = caseService.findOne( id );
 
         if( null == caseBook )
             caseBook = new SimpleMissingBook();
         
         model.addAttribute( "caseBook", caseBook );
-        addUserInfoAttribute(model, httpSession);
+        
+        addUserInfoAttribute( model, httpSession);
         addCommonModelAttributes( model, "edit" );    
         
         return viewRoot + "index";
