@@ -24,18 +24,17 @@ import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.adhocmaster.service.RepositoryService;
 import com.book.BookNode;
 import com.lawbase.article.Article;
-import com.lawbase.article.ArticleRepository;
 import com.lawbase.article.ArticleService;
 import com.lawbase.journal.Journal;
 import com.lawbase.journal.JournalFactory;
 import com.lawbase.journal.JournalRepository;
 import com.lawbase.journal.JournalService;
 import com.lawbase.module.admin.book.RestHelper;
-import com.mongo.media.MediaRepository;
 
 
 import util.restApi.RestBadDataException;
 import util.restApi.RestInternalServerException;
+
 
 @RestController
 @RequestMapping( "/admin/rest/journal" )
@@ -47,10 +46,6 @@ public class AdminJournalRestController extends MongoRestController<Journal>{
     private JournalRepository journalRepository;
     @Autowired
     private RestHelper<Journal> restHelper;
-    @Autowired
-    private ArticleRepository articleRepository;
-    @Autowired
-    private MediaRepository mediaRepository;
     @Autowired
     JournalService journalService;
     
