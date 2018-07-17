@@ -2,7 +2,10 @@ package com.adhocmaster.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 abstract public class MvcController {
 
@@ -39,6 +42,15 @@ abstract public class MvcController {
         
         return controllerPaths.get( methodName );
         
+    }
+    
+    @ExceptionHandler(Exception.class)
+	public String handleError( HttpServletRequest req, Exception ex, Model model) {
+	    
+	    model.addAttribute( "exception", ex );
+	    
+	    return "forward:/error";
+    
     }
     
     abstract protected void generateControllerPaths();
