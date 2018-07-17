@@ -17,8 +17,8 @@ public class JournalService extends RepositoryService<Journal> {
     @Override
     public Journal findOne( ObjectId id ) {
 
-        
         return journalRepository.findOne(id);
+        
     }
 
     @Override
@@ -32,15 +32,15 @@ public class JournalService extends RepositoryService<Journal> {
     @Override
     public void delete( Journal book ) {
 
-        // TODO Auto-generated method stub
+    	journalRepository.delete( book );
         
     }
 
     @Override
     public Page<Journal> findAll( Pageable pageable ) {
 
-        // TODO Auto-generated method stub
-        return null;
+        return journalRepository.findAll( pageable );
+
     }
 
 }

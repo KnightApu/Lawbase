@@ -80,8 +80,8 @@ public class ArticleService extends RepositoryService<Article> {
     @Override
     public Page<Article> findAll( Pageable pageable ) {
 
-        // TODO Auto-generated method stub
-        return null;
+        return articleRepository.findAll(pageable);
+
     }
     
     public Article createFromMap( User user, Map<String, String> params ) throws PersistenceException {
