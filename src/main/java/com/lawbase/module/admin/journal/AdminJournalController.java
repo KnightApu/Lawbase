@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adhocmaster.controller.MvcUserController;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.journal.Journal;
@@ -73,11 +75,12 @@ public class AdminJournalController extends MvcUserController{
 
     @GetMapping( value = { "", "/", "/index" } )
     public String index(
-
+    		
+    		HttpSession httpSession,
             Model model, 
              @RequestParam Map<String, String> params
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
         Page<Journal> journal = journalService.findAll( new PageRequest ( 1, 5 ) );
       
@@ -85,6 +88,8 @@ public class AdminJournalController extends MvcUserController{
         
         model.addAttribute( "books", journal );
         
+
+        addUserInfoAttribute( model, httpSession );
         addCommonModelAttributes( model, "index" );  
         
         return viewRoot + "index";
@@ -95,10 +100,12 @@ public class AdminJournalController extends MvcUserController{
     @GetMapping("/add")
     public String add(
 
+    		HttpSession httpSession,
             Model model
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
+    	addUserInfoAttribute( model, httpSession );
         addCommonModelAttributes( model, "add" );        
         
         return viewRoot + "index";
