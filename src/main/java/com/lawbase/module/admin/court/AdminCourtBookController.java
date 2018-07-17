@@ -83,12 +83,16 @@ public class AdminCourtBookController extends MvcUserController {
 		try {
 
 			model.addAttribute("authorities", getUser(httpSession).getRole().name());
+			
+			addUserInfoAttribute( model, httpSession );
 
 			logger.debug(getUser(httpSession).getRole().name());
 
 		} catch (UserNotFoundInSessionException e) {
 
-			e.printStackTrace();
+			e.printStackTrace(); //TODO forward error view.
+			
+			
 		}
 
 		addCommonModelAttributes(model, "index");
@@ -101,10 +105,12 @@ public class AdminCourtBookController extends MvcUserController {
 	@GetMapping("/add")
 	public String add(
 
+			HttpSession httpSession,
 			Model model
 
-	) {
+	) throws UserNotFoundInSessionException {
 
+		addUserInfoAttribute( model, httpSession );
 		addCommonModelAttributes(model, "add");
 		return viewRoot + "index";
 
@@ -113,16 +119,21 @@ public class AdminCourtBookController extends MvcUserController {
 	@GetMapping("/edit")
 	public String edit(
 
+			HttpSession httpSession,
 			Model model, @RequestParam ObjectId id
 
-	) {
+	) throws UserNotFoundInSessionException {
 
 		SimpleBook courtBook = courtBookService.findOne(id);
 
 		if (null == courtBook)
 			courtBook = new SimpleMissingBook();
+		
 		model.addAttribute("courtBook", courtBook);
+		
+		addUserInfoAttribute( model, httpSession );
 		addCommonModelAttributes(model, "edit");
+		
 		return viewRoot + "index";
 
 	}
