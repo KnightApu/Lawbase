@@ -4,12 +4,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.lawbase.error.CustomErrorController;
 
 abstract public class MvcController {
 
     protected Map<String, String> controllerPaths;
+    
+    private static final Logger logger = LoggerFactory.getLogger( CustomErrorController.class );
+	
     
     public MvcController() {
 
@@ -44,12 +52,17 @@ abstract public class MvcController {
         
     }
     
+    
     @ExceptionHandler(Exception.class)
 	public String handleError( HttpServletRequest req, Exception ex, Model model) {
 	    
 	    model.addAttribute( "exception", ex );
 	    
-	    return "forward:/error";
+	    String errorControllerMapping = CustomErrorController.class.getAnnotation( RequestMapping.class ).value() [ 0 ];
+        
+        logger.debug( "the error controller url " + errorControllerMapping );
+	    
+	    return "forward:" + errorControllerMapping;
     
     }
     
