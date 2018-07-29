@@ -27,6 +27,7 @@ import com.lawbase.article.Article;
 import com.lawbase.article.ArticleService;
 import com.lawbase.journal.Journal;
 import com.lawbase.journal.JournalFactory;
+import com.lawbase.journal.JournalManagementProjection;
 import com.lawbase.journal.JournalRepository;
 import com.lawbase.journal.JournalService;
 import com.lawbase.module.admin.book.RestHelper;
@@ -60,7 +61,7 @@ public class AdminJournalRestController extends MongoRestController<Journal>{
     }
 	
 	@RequestMapping( "/" )
-    public @ResponseBody DataTableResponseEntity<Journal> index(
+    public @ResponseBody DataTableResponseEntity<JournalManagementProjection> index(
 
             @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
             @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
@@ -73,9 +74,9 @@ public class AdminJournalRestController extends MongoRestController<Journal>{
         	 int page = offSet / size;
         	 PageRequest pageRequest = new PageRequest(page, size);
         	 
-        	 Page<Journal> journalPage = journalRepository.findAll(pageRequest);
+        	 Page<JournalManagementProjection> journalPage = journalService.findAllManagementProjection(pageRequest);
         	 
-        	 return new DataTableResponseEntity<Journal>( journalPage, sEcho );
+        	 return new DataTableResponseEntity<JournalManagementProjection>( journalPage, sEcho );
         	
         	
         } catch ( Exception e ) {
