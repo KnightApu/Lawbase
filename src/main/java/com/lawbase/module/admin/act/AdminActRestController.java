@@ -26,6 +26,7 @@ import com.adhocmaster.mongo.user.UserHelper;
 import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.adhocmaster.service.RepositoryService;
 import com.lawbase.act.Act;
+import com.lawbase.act.ActManagementProjection;
 import com.lawbase.act.ActService;
 
 import util.restApi.RestBadDataException;
@@ -72,7 +73,7 @@ public class AdminActRestController extends MongoRestController<Act> {
     }
     
     @RequestMapping( "/" )
-    public DataTableResponseEntity<Act> index(
+    public DataTableResponseEntity<ActManagementProjection> index(
 
             @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
             @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
@@ -82,9 +83,9 @@ public class AdminActRestController extends MongoRestController<Act> {
 
         try {
 
-        	 Page<Act> actPage = actService.findAll( offSet, size );
+        	 Page<ActManagementProjection> actPage = actService.findAllManagementProjection( offSet, size );
         	 
-        	 return new DataTableResponseEntity<Act>( actPage, sEcho );
+        	 return new DataTableResponseEntity<ActManagementProjection>( actPage, sEcho );
         	
         	
         } catch ( Exception e ) {

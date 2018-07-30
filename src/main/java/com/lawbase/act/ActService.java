@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.service.RepositoryService;
 import com.book.simpleBook.Status;
+import com.lawbase.journal.JournalManagementProjection;
 import com.mongo.media.Media;
 import com.mongo.media.MediaRepository;
 import com.utility.form.FormValidationException;
@@ -36,6 +38,9 @@ public class ActService extends RepositoryService<Act> {
     private ActRepository actRepository;
 
     private MediaRepository mediaRepository;
+    
+    @Autowired
+    private ActManagementProjectionRepository actManagementProjectionRepository;
 
     @Autowired
     @Qualifier( "actSavedPublisher" )
@@ -324,6 +329,22 @@ public class ActService extends RepositoryService<Act> {
 		
 		return actRepository.findAll( pageable );
 	
+	}
+	
+	 public Page<ActManagementProjection> findAllManagementProjection( Pageable pageable ) {
+
+	        return actManagementProjectionRepository.findAll( pageable );
+
+	 }
+	    
+	 public Page<ActManagementProjection> findAllManagementProjection( int offSet, int size ) {
+
+	        int page = offSet / size;
+	        
+	        PageRequest pageRequest = new PageRequest( page, size );
+	        
+	        return findAllManagementProjection( pageRequest );
+	        
 	}
 
 }
