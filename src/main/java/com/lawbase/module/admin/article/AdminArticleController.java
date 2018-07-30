@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adhocmaster.controller.MvcUserController;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.article.Article;
 import com.lawbase.article.ArticleRepository;
+import com.lawbase.article.ArticleService;
+import com.lawbase.cases.Case;
 
 @Controller
 @RequestMapping( "/admin/article" )
@@ -29,8 +36,9 @@ public class AdminArticleController  extends MvcUserController {
     private static final String viewRoot = "admin/article-";
     private static final String pathRoot = "/admin/article";
     
+    
     @Autowired
-    private ArticleRepository articleRepository;
+    private ArticleService articleService;
 
 	@Override
 	protected void generateControllerPaths() {
@@ -48,13 +56,25 @@ public class AdminArticleController  extends MvcUserController {
 	@GetMapping( value = { "", "/", "/index" } )
     public String index(
 
+    		HttpSession httpSession,
             Model model, 
             @RequestParam Map<String, String> params
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
-        // TODO make is paginated
-        
+		
+		Page<Article> articlebooks = articleService.findAll( new PageRequest( 0, 5 ) );
+
+		logger.debug( articlebooks.toString() );
+
+		model.addAttribute("articlebooks", articlebooks);
+		
+        addUserInfoAttribute(model, httpSession);
+		addCommonModelAttributes(model, "index");
+
+		return viewRoot + "index";
+
+        /*
         List<Article> books = articleRepository.findAll();
         
         model.addAttribute( "books", books );
@@ -62,6 +82,7 @@ public class AdminArticleController  extends MvcUserController {
         addCommonModelAttributes( model, "index" );  
         
         return viewRoot + "index";
+        */
         
     }
 
@@ -72,7 +93,7 @@ public class AdminArticleController  extends MvcUserController {
 
 	) {
 
-		SimpleBook articleBook = articleRepository.findOne(id);
+		SimpleBook articleBook = articleService.findOne(id);
 
 		if (null == articleBook)
 			articleBook = new SimpleMissingBook();

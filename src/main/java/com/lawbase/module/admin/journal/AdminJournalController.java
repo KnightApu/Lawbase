@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -18,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adhocmaster.controller.MvcUserController;
+import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.journal.Journal;
-import com.lawbase.journal.JournalRepository;
 import com.lawbase.journal.JournalService;
 import com.lawbase.module.admin.article.AdminArticleController;
 
@@ -33,8 +34,6 @@ public class AdminJournalController extends MvcUserController{
     
     private static final String viewRoot = "admin/journal-";
     private static final String pathRoot = "/admin/journal";
-    @Autowired
-    private JournalRepository journalRepository;
     
     @Autowired
     private JournalService journalService;
@@ -76,38 +75,39 @@ public class AdminJournalController extends MvcUserController{
 
     @GetMapping( value = { "", "/", "/index" } )
     public String index(
-
+    		
+    		HttpSession httpSession,
             Model model, 
              @RequestParam Map<String, String> params
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
-        // TODO make is paginated
-    	
-    	
-    	//List <CourtBook> courtBooks = courtRepository.findAll();
-    	Page<Journal> journal = journalRepository.findAll(new PageRequest(1,5));
+        Page<Journal> journal = journalService.findAll( new PageRequest ( 1, 5 ) );
       
         logger.debug( journal.toString() );
         
-       model.addAttribute( "books", journal );
+        model.addAttribute( "books", journal );
         
-       addCommonModelAttributes( model, "index" );  
+
+        addUserInfoAttribute( model, httpSession );
+        addCommonModelAttributes( model, "index" );  
         
         return viewRoot + "index";
-        //return "index";
-       
+        
         
     }
     
     @GetMapping("/add")
     public String add(
 
+    		HttpSession httpSession,
             Model model
             
-            ) {
+            ) throws UserNotFoundInSessionException {
 
+    	addUserInfoAttribute( model, httpSession );
         addCommonModelAttributes( model, "add" );        
+        
         return viewRoot + "index";
     	 
         
@@ -129,8 +129,10 @@ public class AdminJournalController extends MvcUserController{
         
         if( null == journal )
             journal = new SimpleMissingBook();
+        
         model.addAttribute( "journal", journal );
         addCommonModelAttributes( model, "edit" );        
+        
         return viewRoot + "index";
         
     }

@@ -23,9 +23,21 @@
 	            <!-- page content -->
 					
 				<div class="col-md-12" role="main">		
-						   
+					
+					<div th:if=" ${ null != templatePart } ">
+					
+                    	<div th:replace = "'front/components/error-' + ${templatePart}" ></div>
+                  	
+                  	</div>
+                   	<div th:if=" ${ null == templatePart } ">
+                    	
+                    	<div th:replace = "'front/components/error-' + 'index'" ></div>
+                  	
+                  	</div>	   
+					
+					<!-- 	   
 					<div th:replace = "'front/components/error-' + ${templatePart}" ></div>
-					   
+					    -->
 					<!--                 
 					<div th:replace = "front/components/error-index" ></div>
 					-->

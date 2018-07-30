@@ -23,20 +23,21 @@
                        </thead>
  
                        <tbody>
-                       
-                          <tr th:each=" book : ${ books } ">
-                              <td th:text=" ${ '' != book.secondParty }? ${ book.firstParty } + ' vs ' + ${ book.secondParty } : ${ book.firstParty } ">firstParty</td>
+                       	
+                          <tr th:each=" casebook : ${ casebooks } ">
+                              <td th:text=" ${ '' != casebook.secondParty }? ${ casebook.firstParty } + ' vs ' + ${ casebook.secondParty } : ${ casebook.firstParty } ">firstParty</td>
                               
-                              <td th:text=" ${ book.courtBookTitle } ">courtBookTitle</td>
-                              <td th:text=" ${ book.year } ">year</td>
-                              <td th:text=" ${ book.volume } ">volume</td>
-                              <td th:text=" ${ book.status } ">status</td>
+                              <td th:text=" ${ casebook.courtBookTitle } ">courtBookTitle</td>
+                              <td th:text=" ${ casebook.year } ">year</td>
+                              <td th:text=" ${ casebook.volume } ">volume</td>
+                              <td th:text=" ${ casebook.status } ">status</td>
                               
                               <td>
                                   <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                  <a th:href="@{ ${ controllerPaths['edit'] } + ${ book.id } }" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                  <a th:href="@{ ${ controllerPaths['edit'] } + ${ casebook.id } }" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                               </td>
                           </tr>
+                           
     
                          </tbody> 
                          
@@ -65,7 +66,7 @@
 
                 /*]]>*/
                 </script>
-                
+                <!--  
                 <script type="text/javascript">
                 
                     var dataTableSelector = "#datatable";
@@ -73,6 +74,69 @@
                     $( document ).ready( function() {
                     
                     	$( dataTableSelector ).DataTable();
+                    	
+                    });
+                </script>
+                -->
+                
+                <script type="text/javascript">
+                
+                    var dataTableSelector = "#datatable";
+                
+                    $( document ).ready( function() {
+                    
+                    //	$( dataTableSelector ).DataTable();
+                    	
+                    	$("#datatable").dataTable(
+                        		{	
+                        	    	"bServerSide": true,
+                        	    	
+                        	    	
+                        	    	
+                        	    	  "sAjaxSource": "/admin/rest/case/",
+                        	    	  "aoColumns": [
+                        	    		  	{
+                      	    		    		"mData": "firstParty" + " vs " + "secondParty",
+                      	    		    		"mRender" : function( data, type, full )
+                      	    		    		{
+                      	    		    			
+                      	    		    	       return full.firstParty + " vs " + full.secondParty;
+                      	    		    	    
+                      	    		    		}
+                      	    		    
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "courtBookTitle",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "year",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "volume",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "status",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "id",
+                      	    		  			"mRender": function ( id, type, full )  
+                      	    		  			{
+                      	    		  				
+                      	    		      			return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a><a href="' + controllerPaths.edit +  id + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
+                      	    		   
+                      	    		  			}
+                      	    		  		}
+                      	    		
+                      	    		  ]
+                      	    	
+                        	    	
+                        	    }		
+                        );
+                    	
                     	
                     });
                 </script>

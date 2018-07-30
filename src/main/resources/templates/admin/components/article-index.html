@@ -24,17 +24,17 @@
  
                        <tbody>
                        
-                          <tr th:each=" book : ${ books } ">
-                              <td th:text=" ${  book.title } ">firstParty</td>
+                          <tr th:each=" articlebook : ${ articlebooks } ">
+                              <td th:text=" ${  articlebook.title } ">title</td>
                               
-                              <td th:text=" ${ book.journalTitle } ">courtBookTitle</td>
-                              <td th:text=" ${ book.year } ">year</td>
-                              <td th:text=" ${ book.volume } ">volume</td>
-                              <td th:text=" ${ book.status } ">status</td>
+                              <td th:text=" ${ articlebook.journalTitle } ">journalTitle</td>
+                              <td th:text=" ${ articlebook.year } ">year</td>
+                              <td th:text=" ${ articlebook.volume } ">volume</td>
+                              <td th:text=" ${ articlebook.status } ">status</td>
                               
                               <td>
                                   <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                  <a th:href="@{ ${ controllerPaths['edit'] } + ${ book.id } }" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                  <a th:href="@{ ${ controllerPaths['edit'] } + ${ articlebook.id } }" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                               </td>
                           </tr>
     
@@ -65,7 +65,7 @@
 
                 /*]]>*/
                 </script>
-                
+                <!-- 
                 <script type="text/javascript">
                 
                     var dataTableSelector = "#datatable";
@@ -76,6 +76,60 @@
                     	
                     });
                 </script>
+                -->
+                
+                <script type="text/javascript">
+                
+                    var dataTableSelector = "#datatable";
+                
+                    $( document ).ready( function() {
+                    	
+                    	$("#datatable").dataTable(
+                        		{	
+                        	    	"bServerSide": true,
+                               	    	
+                        	    	  "sAjaxSource": "/admin/rest/article/",
+                        	    	  "aoColumns": [
+                        	    		  	{
+                      	    		    		"mData": "title",
+                      	    		    		                      	    		    
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "journalTitle",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "year",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "volume",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "status",
+                      	    		   
+                      	    		  		},
+                      	    		  		{
+                      	    		    		"mData": "id",
+                      	    		  			"mRender": function ( id, type, full )  
+                      	    		  			{
+                      	    		  				
+                      	    		      			return  ' <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a><a href="' + controllerPaths.edit +  id + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
+                      	    		   
+                      	    		  			}
+                      	    		  		}
+                      	    		
+                      	    		  ]
+                      	    	
+                        	    	
+                        	    }		
+                        );
+                    	
+                    	
+                    });
+                </script>
+                
                 
                 <!-- Datatables -->
                 <script th:src="@{/admin/vendors/datatables.net/js/jquery.dataTables.min.js}"></script>

@@ -19,8 +19,8 @@ import com.adhocmaster.user.role.StaticCapabilityAuthorityProvider;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource( locations = "classpath:application-test.properties" )
+@SpringBootTest(classes=com.adhocmaster.user.role.StaticCapabilityAuthorityProvider.class)
+@TestPropertySource( locations = "classpath:application-farin.properties" )
 public class StaticCapabilityAuthorityProviderTest {
     
     @Autowired
@@ -29,8 +29,8 @@ public class StaticCapabilityAuthorityProviderTest {
     @Test
     public void test() throws RoleNotFoundException, RoleCapabilitiesNotFoundException {
 
-        Set<CapabilityAuthority> capabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( "INDIVIDUAL" );
-        Set<CapabilityAuthority> roleCapabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( Role.INDIVIDUAL );
+        Set<CapabilityAuthority> capabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( "SUPER_ADMIN" );
+        Set<CapabilityAuthority> roleCapabilityAuthorities = staticCapabilityAuthorityProvider.getAuthorities( Role.SUPER_ADMIN );
         
         assertTrue( capabilityAuthorities.equals( roleCapabilityAuthorities ) );
         

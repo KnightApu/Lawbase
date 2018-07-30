@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adhocmaster.controller.DataTableResponseEntity;
+import com.adhocmaster.controller.MongoRestController;
 import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.mongo.user.UserHelper;
 import com.adhocmaster.mongo.user.UserNotFoundInSessionException;
+import com.adhocmaster.service.RepositoryService;
 import com.lawbase.act.Act;
+import com.lawbase.act.ActManagementProjection;
 import com.lawbase.act.ActService;
 
 import util.restApi.RestBadDataException;
@@ -30,7 +35,7 @@ import util.restApi.RestInternalServerException;
 
 @RestController
 @RequestMapping( "/admin/rest/act" )
-public class AdminActRestController {
+public class AdminActRestController extends MongoRestController<Act> {
 	
 	
 	@Autowired
@@ -61,7 +66,34 @@ public class AdminActRestController {
         
     }
     
+    @Override
+    protected RepositoryService<Act> getService() {
+
+        return actService;
+    }
     
+    @RequestMapping( "/" )
+    public DataTableResponseEntity<ActManagementProjection> index(
+
+            @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
+            @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
+            @RequestParam( value = "iDisplayLength", required = false, defaultValue = "10" ) int size
+
+    		) throws RestInternalServerException {
+
+        try {
+
+        	 Page<ActManagementProjection> actPage = actService.findAllManagementProjection( offSet, size );
+        	 
+        	 return new DataTableResponseEntity<ActManagementProjection>( actPage, sEcho );
+        	
+        	
+        } catch ( Exception e ) {
+
+            throw new RestInternalServerException( e );
+            
+        }
+    }
     
     
 	

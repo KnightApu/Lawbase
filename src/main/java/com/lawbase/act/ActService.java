@@ -13,11 +13,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.User;
+import com.adhocmaster.service.RepositoryService;
 import com.book.simpleBook.Status;
+import com.lawbase.journal.JournalManagementProjection;
 import com.mongo.media.Media;
 import com.mongo.media.MediaRepository;
 import com.utility.form.FormValidationException;
@@ -25,7 +30,7 @@ import io.reactivex.subjects.Subject;
 import javassist.NotFoundException;
 
 @Service
-public class ActService {
+public class ActService extends RepositoryService<Act> {
 
     private static Logger logger = LoggerFactory.getLogger( ActService.class );
 
@@ -33,6 +38,9 @@ public class ActService {
     private ActRepository actRepository;
 
     private MediaRepository mediaRepository;
+    
+    @Autowired
+    private ActManagementProjectionRepository actManagementProjectionRepository;
 
     @Autowired
     @Qualifier( "actSavedPublisher" )
@@ -49,10 +57,12 @@ public class ActService {
 
     }
 
-    public void save( Act act ) {
+    public Act save( Act act ) {
 
         actRepository.save( act );
         actSavedPublisher.onNext( act );
+        
+        return act;
 
     }
 
@@ -306,5 +316,35 @@ public class ActService {
         }
 
     }
+
+	@Override
+	public Act findOne(ObjectId id) {
+		
+		return actRepository.findOne( id );
+	
+	}
+
+	@Override
+	public Page<Act> findAll(Pageable pageable) {
+		
+		return actRepository.findAll( pageable );
+	
+	}
+	
+	 public Page<ActManagementProjection> findAllManagementProjection( Pageable pageable ) {
+
+	        return actManagementProjectionRepository.findAll( pageable );
+
+	 }
+	    
+	 public Page<ActManagementProjection> findAllManagementProjection( int offSet, int size ) {
+
+	        int page = offSet / size;
+	        
+	        PageRequest pageRequest = new PageRequest( page, size );
+	        
+	        return findAllManagementProjection( pageRequest );
+	        
+	}
 
 }
