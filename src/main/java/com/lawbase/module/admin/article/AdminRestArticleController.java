@@ -18,6 +18,7 @@ import com.adhocmaster.controller.DataTableResponseEntity;
 import com.adhocmaster.controller.MongoRestController;
 import com.adhocmaster.service.RepositoryService;
 import com.lawbase.article.Article;
+import com.lawbase.article.ArticleManagementProjection;
 import com.lawbase.article.ArticleService;
 
 import util.restApi.RestBadDataException;
@@ -39,7 +40,7 @@ public class AdminRestArticleController extends MongoRestController<Article> {
     }
     
 	@RequestMapping( "/" )
-    public @ResponseBody DataTableResponseEntity<Article> index(
+    public @ResponseBody DataTableResponseEntity<ArticleManagementProjection> index(
 
             @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
             @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
@@ -49,9 +50,9 @@ public class AdminRestArticleController extends MongoRestController<Article> {
 
         try {
 
-        	 Page<Article> articlePage = articleService.findAll( offSet, size );
+        	 Page<ArticleManagementProjection> articlePage = articleService.findAllManagementProjection( offSet, size );
         	 
-        	 return new DataTableResponseEntity<Article>( articlePage, sEcho );
+        	 return new DataTableResponseEntity<ArticleManagementProjection>( articlePage, sEcho );
         	
         	
         } catch ( Exception e ) {

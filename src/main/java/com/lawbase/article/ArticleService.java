@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import com.book.BookNode;
 import com.book.exceptions.NoSuchNodeException;
 import com.book.exceptions.NotALeafNodeException;
 import com.book.simpleBook.Status;
+import com.lawbase.act.ActManagementProjection;
 import com.lawbase.journal.Journal;
 import com.lawbase.journal.JournalRepository;
 import com.mongo.media.MediaRepository;
@@ -39,6 +41,9 @@ public class ArticleService extends RepositoryService<Article> {
     private JournalRepository journalRepository;
     @Autowired
     private MediaRepository mediaRepository;
+    
+    @Autowired
+    private ArticleManagementProjectionRepository articleManagementProjectionRepository;
     
   
     
@@ -422,6 +427,22 @@ public class ArticleService extends RepositoryService<Article> {
 
     	
     }
+    
+    public Page<ArticleManagementProjection> findAllManagementProjection( Pageable pageable ) {
+
+        return articleManagementProjectionRepository.findAll( pageable );
+
+    }
+    
+    public Page<ArticleManagementProjection> findAllManagementProjection( int offSet, int size ) {
+
+        int page = offSet / size;
+        
+        PageRequest pageRequest = new PageRequest( page, size );
+        
+        return findAllManagementProjection( pageRequest );
+        
+}
     
     
 }
