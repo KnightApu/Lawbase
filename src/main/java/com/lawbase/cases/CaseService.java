@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,9 @@ public class CaseService extends RepositoryService<Case> {
     private CourtBookService courtBookService;
     @Autowired
     private MediaRepository mediaRepository;
+    
+    @Autowired
+    private CaseManagementProjectionRepository caseManagementProjectionRepository;
 
 	private CategoryRepository categoryRepository;
 
@@ -605,5 +609,21 @@ public class CaseService extends RepositoryService<Case> {
         
         
     }
+    
+    public Page<CaseManagementProjection> findAllManagementProjection( Pageable pageable ) {
+
+        return caseManagementProjectionRepository.findAll( pageable );
+
+    }
+    
+    public Page<CaseManagementProjection> findAllManagementProjection( int offSet, int size ) {
+
+        int page = offSet / size;
+        
+        PageRequest pageRequest = new PageRequest( page, size );
+        
+        return findAllManagementProjection( pageRequest );
+        
+}
 
 }
