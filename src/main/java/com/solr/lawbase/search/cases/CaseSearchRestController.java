@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.adhocmaster.controller.DataTableResponseEntity;
 import com.adhocmaster.controller.SolrRestController;
 import com.lawbase.cases.Case;
-import com.lawbase.module.admin.act.AdminActController;
 import com.solr.core.BaseSolrRepository;
 import com.solr.core.IndexStats;
 import com.solr.lawbase.search.framework.BookIndexService;

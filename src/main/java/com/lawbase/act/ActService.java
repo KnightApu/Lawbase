@@ -22,7 +22,6 @@ import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.user.User;
 import com.adhocmaster.service.RepositoryService;
 import com.book.simpleBook.Status;
-import com.lawbase.journal.JournalManagementProjection;
 import com.mongo.media.Media;
 import com.mongo.media.MediaRepository;
 import com.utility.form.FormValidationException;

@@ -18,6 +18,7 @@ import com.adhocmaster.controller.DataTableResponseEntity;
 import com.adhocmaster.controller.MongoRestController;
 import com.adhocmaster.service.RepositoryService;
 import com.lawbase.cases.Case;
+import com.lawbase.cases.CaseManagementProjection;
 import com.lawbase.cases.CaseService;
 
 import util.restApi.RestBadDataException;
@@ -36,7 +37,7 @@ public class AdminRestCaseController extends MongoRestController<Case> {
     }
     
 	@RequestMapping( "/" )
-    public @ResponseBody DataTableResponseEntity<Case> index(
+    public @ResponseBody DataTableResponseEntity<CaseManagementProjection> index(
 
             @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
             @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
@@ -46,9 +47,9 @@ public class AdminRestCaseController extends MongoRestController<Case> {
 
         try {
 
-        	 Page<Case> casePage = caseService.findAll( offSet, size );
+        	 Page<CaseManagementProjection> casePage = caseService.findAllManagementProjection( offSet, size );
         	 
-        	 return new DataTableResponseEntity<Case>( casePage, sEcho );
+        	 return new DataTableResponseEntity<CaseManagementProjection>( casePage, sEcho );
         	
         	
         } catch ( Exception e ) {

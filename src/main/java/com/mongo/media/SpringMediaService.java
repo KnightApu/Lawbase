@@ -18,13 +18,14 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.adhocmaster.mongo.PersistenceException;
 import com.adhocmaster.mongo.sequence.SequenceDao;
 
 @Component
 
 public class SpringMediaService {
 
-	private static final Logger logger = LoggerFactory.getLogger(SpringMediaService.class);
+	private static final Logger logger = LoggerFactory.getLogger( SpringMediaService.class );
 
 	@Autowired
 	MediaRepository mediaRepository;
@@ -70,7 +71,8 @@ public class SpringMediaService {
 
 	}
 
-	public Media save(MultipartFile file) throws Exception {
+	
+	public Media save( MultipartFile file ) throws Exception {
 
 		// String port = env.getProperty( "server.port" );
 		//
@@ -82,11 +84,11 @@ public class SpringMediaService {
 		// "upload.folder" );
 	
 				
-		String rootPath="";
-		String relativeUrl="";
+		String rootPath = "";
+		String relativeUrl = "";
 		
-		rootPath = env.getProperty("upload.folder");
-		relativeUrl = env.getProperty("media.relative.url");
+		rootPath = env.getProperty( "upload.folder" );
+		relativeUrl = env.getProperty( "media.relative.url" );
 		
 		MediaService mediaService = new MediaService( sequenceDao, mediaRepository, rootPath, relativeUrl );
 
@@ -96,32 +98,33 @@ public class SpringMediaService {
 		String MIMEtype = file.getContentType();
 
 
-		Media media = mediaService.save(
-
-				inputStream, fileName, MIMEtype
-
-		);
+		Media media = mediaService.save( inputStream, fileName, MIMEtype );
 
 		return media;
 
 	}
 
+	
 	public Set<Media> validateAndPopulateFromFormData(
 
 			MultipartFile imageFile, MultipartFile audioFile, MultipartFile videoFile
 
-	) {
+			) throws PersistenceException {
 
 		Set<Media> mediaSet = new HashSet<Media>();
+		
 		if (imageFile != null && imageFile.isEmpty() != true) {
 
 			Media image;
+			
 			try {
-				image = save(imageFile);
-				mediaSet.add(image);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+				image = save( imageFile );
+				mediaSet.add( image );
+			
+			} catch ( Exception e ) {
+				
+				throw new PersistenceException( "Error in saving image file" );
 			}
 
 		}
@@ -129,39 +132,51 @@ public class SpringMediaService {
 		if (audioFile != null && audioFile.isEmpty() != true) {
 
 			Media audio;
+			
 			try {
-				audio = save(audioFile);
-				mediaSet.add(audio);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+				audio = save( audioFile );
+				mediaSet.add( audio );
+			
+			} catch ( Exception e ) {
+			
+				throw new PersistenceException( "Error in saving audio file" );
+			
 			}
 
 		}
 
 		if (videoFile != null && videoFile.isEmpty() != true) {
+			
 			Media video;
+			
 			try {
 
-				video = save(videoFile);
-				mediaSet.add(video);
+				video = save( videoFile );
+				mediaSet.add( video );
 
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch ( Exception e ) {
+				
+				throw new PersistenceException( "Error in saving video file" );
+			
 			}
 
 		}
 
 		if (mediaSet.size() > 0)
+	
 			return mediaSet;
+		
 		else
+			
 			return null;
+		
 	}
 
-	public void delete(long id) {
+	
+	public void delete( long id ) {
 
-		mediaRepository.delete(id);
+		mediaRepository.delete( id );
 	}
 
 }

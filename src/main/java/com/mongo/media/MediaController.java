@@ -1,5 +1,6 @@
 package com.mongo.media;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,6 @@ public class MediaController extends MvcController {
 	@Autowired
 	MediaRepository mediaRepository;
 
-//	@Autowired
-//	WordRepository wordRepository;
-
 	@Autowired
 	SpringMediaService mediaManager;
 
@@ -34,7 +32,7 @@ public class MediaController extends MvcController {
 
 	}
 
-	@RequestMapping("/media")
+	@RequestMapping( "/media" )
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(
 
@@ -42,38 +40,36 @@ public class MediaController extends MvcController {
 
 	) throws Exception {
 
-		String id = param.get("mediaId");
+		String id = param.get( "mediaId" );
 
-		if (null == id) {
+		if ( null == id ) {
 
-			id = param.get("id");
+			id = param.get( "id" );
 
 		}
 
-		if (null == id)
-			throw new Error("Media id not found in id or mediaId");
+		if ( null == id )
+			throw new Error( "Media id not found in id or mediaId" );
 
-		Media media = mediaRepository.findOne(Long.valueOf(id));
+		Media media = mediaRepository.findOne( Long.valueOf( id ) );
 
 		try {
 
-			// System.out.println(" Serving media :" + media.getId());
-
-			Resource file = mediaManager.loadAsResource(media);
+			Resource file = mediaManager.loadAsResource( media );
 			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-					.body(file);
+					.header( HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"" )
+					.body( file );
 
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch ( Exception e ) {
+			
+			throw new IOException( "Error in serving media file" );
 
-			return null;
 		}
 
 	}
 
 	
-	@RequestMapping("/mediaOpen")
+	@RequestMapping( "/mediaOpen" )
 	@ResponseBody
 	public ResponseEntity<Resource> openFile(
 
@@ -81,33 +77,33 @@ public class MediaController extends MvcController {
 
 	) throws Exception {
 
-		String id = param.get("mediaId");
+		String id = param.get( "mediaId" );
 
-		if (null == id) {
+		if ( null == id ) {
 
-			id = param.get("id");
+			id = param.get( "id" );
 
 		}
 
-		if (null == id)
-			throw new Error("Media id not found in id or mediaId");
+		if ( null == id )
+			throw new Error( "Media id not found in id or mediaId" );
 
-		Media media = mediaRepository.findOne(Long.valueOf(id));
+		Media media = mediaRepository.findOne( Long.valueOf( id ) );
 
 		try {
 
 			// System.out.println(" Serving media :" + media.getId());
 
-			Resource file = mediaManager.loadAsResource(media);
+			Resource file = mediaManager.loadAsResource( media );
 			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
-					.header(HttpHeaders.CONTENT_TYPE, media.getMimeType())
-					.body(file);
+					.header( HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"" )
+					.header( HttpHeaders.CONTENT_TYPE, media.getMimeType() )
+					.body( file );
 
-		} catch (Exception e) {
-			// TODO: handle exception
-
-			return null;
+		} catch ( Exception e ) {
+			
+			throw new IOException( "Error in opening media file" );
+			
 		}
 
 	}

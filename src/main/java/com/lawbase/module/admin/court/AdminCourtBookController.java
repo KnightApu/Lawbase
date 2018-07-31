@@ -71,9 +71,7 @@ public class AdminCourtBookController extends MvcUserController {
 
 	) {
 
-		// TODO make is paginated
-
-		// List <CourtBook> courtBooks = courtRepository.findAll();
+		
 		Page<CourtBook> courtBooks = courtBookService.findAll(new PageRequest(1, 5));
 
 		logger.debug(courtBooks.toString());
