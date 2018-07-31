@@ -20,13 +20,12 @@ import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.cases.Case;
 import com.lawbase.cases.CaseService;
 import com.lawbase.controller.FrontCommonController;
-import com.lawbase.module.admin.caseBook.AdminCaseController;
 
 @Controller
 @RequestMapping( "/front/case" )
 public class FrontCaseController extends FrontCommonController {
 
-	private static final Logger logger = LoggerFactory.getLogger( AdminCaseController.class );
+	private static final Logger logger = LoggerFactory.getLogger( FrontCaseController.class );
 
     private static final String viewRoot = "front/case-";
     private static final String pathRoot = "/front/case";
