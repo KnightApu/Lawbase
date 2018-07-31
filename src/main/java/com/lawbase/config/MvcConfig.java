@@ -34,17 +34,17 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }*/
 	
 	@Override
-	 public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	 
-		 registry.addResourceHandler( "/**" )
+		registry.addResourceHandler( "/**" )
 		 		.addResourceLocations( "classpath:/static/" )
 		 		.setCacheControl( CacheControl.maxAge( 1, TimeUnit.DAYS ) );
 		 
-		 registry.addResourceHandler( "/admin/js/**" )
+		registry.addResourceHandler( "/admin/js/**" )
 		 		.addResourceLocations( "classpath:/static/admin/js/" )
 		 		.setCacheControl( CacheControl.maxAge( 5, TimeUnit.MINUTES ) );
 		 
-		 registry.addResourceHandler( "/public/js/**" )
+		registry.addResourceHandler( "/public/js/**" )
 	 			.addResourceLocations( "classpath:/static/public/js/" )
 	 			.setCacheControl( CacheControl.maxAge( 5, TimeUnit.MINUTES ) );
 		 
