@@ -1,13 +1,14 @@
 package com.lawbase.module.front.act;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,21 +18,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.book.simpleBook.SimpleBook;
 import com.book.simpleBook.SimpleMissingBook;
 import com.lawbase.act.Act;
-import com.lawbase.act.ActRepository;
+import com.lawbase.act.ActService;
 import com.lawbase.controller.FrontCommonController;
-import com.lawbase.module.admin.act.AdminActController;
 
 @Controller
 @RequestMapping( "/front/act" )
 public class FrontActController extends FrontCommonController {
 
-	private static final Logger logger = LoggerFactory.getLogger( AdminActController.class );
+	private static final Logger logger = LoggerFactory.getLogger( FrontActController.class );
 
     private static final String viewRoot = "front/act-";
     private static final String pathRoot = "/front/act";
 
     @Autowired
-    private ActRepository actRepository;
+    private ActService actService;
     
     @Override
     protected void generateControllerPaths() {
@@ -55,9 +55,8 @@ public class FrontActController extends FrontCommonController {
             
             ) {
 
-        // TODO make is paginated
         
-        List<Act> acts = actRepository.findAll();
+    	Page<Act> acts = actService.findAll( new PageRequest( 0, 5 ) );
         
         model.addAttribute( "acts", acts );
         
@@ -78,7 +77,7 @@ public class FrontActController extends FrontCommonController {
             ) {
 
         
-        SimpleBook actBook = actRepository.findOne( id );
+        SimpleBook actBook = actService.findOne( id );
         
         if( null == actBook )
             actBook = new SimpleMissingBook();
