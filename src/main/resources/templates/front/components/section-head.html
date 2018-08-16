@@ -354,6 +354,28 @@ _________________________________________________________ -->
 							}
 
 						});
+				
+				$("#searchCaseByYearButton").click(
+						function() {
+
+							var dataFromForm = $("#searchCaseByYearModalForm")
+									.serialize();
+
+							var inputWord = dataFromForm;
+							console.log("the value from case by year modal:"
+									+ inputWord);
+
+							var paramValue = $("#yearSelection").val();
+							console.log("th param value for case"
+									+ paramValue);
+							
+							window.location
+							.replace("/front/case?field=year&value="
+									+ paramValue);
+
+
+						});
+				
 
 			});
 </script>
