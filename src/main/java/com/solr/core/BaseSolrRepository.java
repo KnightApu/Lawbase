@@ -73,7 +73,7 @@ public class BaseSolrRepository<T, ID>{
         Pageable pageable = new SolrPageRequest( page, size );
 
         //Criteria criteria = new Criteria( fieldName ).is( FieldValue );
-        Criteria criteria = new Criteria( fieldName ).expression( "(" + FieldValue + ")" );
+        Criteria criteria = new Criteria( fieldName ).expression( "(\"" + FieldValue + "\")" );
         
         Query query = new SimpleQuery( criteria );
         
