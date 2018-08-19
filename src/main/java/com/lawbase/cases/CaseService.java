@@ -103,6 +103,11 @@ public class CaseService extends RepositoryService<Case> {
 
         return caseRepository.findAll( pageable );
     }
+    
+    public int getSizeOfRepository(){
+    	
+    	return (int) caseRepository.count();
+    }
 
     public Case getCaseBook( ObjectId caseId ) throws FormValidationException, NotFoundException {
 
