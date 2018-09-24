@@ -144,4 +144,10 @@ public class CourtBookService extends RepositoryService<CourtBook> {
         
     }
 
+	public int getSizeOfRepository() {
+		
+		return (int) courtBookRepository.count();
+	
+	}
+
 }
