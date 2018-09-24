@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,7 +84,9 @@ public class AdminActRestController extends MongoRestController<Act> {
 
         try {
 
-        	 Page<ActManagementProjection> actPage = actService.findAllManagementProjection( offSet, size );
+        	// Page<ActManagementProjection> actPage = actService.findAllManagementProjection( offSet, size );
+        	 
+        	 Page<ActManagementProjection> actPage = actService.findAllManagementProjection( new PageRequest( 0, actService.getSizeOfRepository() ) );
         	 
         	 return new DataTableResponseEntity<ActManagementProjection>( actPage, sEcho );
         	
