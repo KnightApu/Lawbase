@@ -247,6 +247,12 @@ public class UserService extends RepositoryService<User> {
             	updateServices( userId, params );
 
                 break;
+                
+            case "password" :
+
+            	updatePassword( userId, params );
+
+                break;
         }
 
         return user;
@@ -324,6 +330,29 @@ public class UserService extends RepositoryService<User> {
         if ( StringUtils.isNotBlank( params.get( "duePayment" ) ) ) {
 
             user.setDuePayment( Integer.parseInt( params.get( "duePayment" ) ) );
+
+        }
+
+        try {
+
+            save( user );
+
+        } catch ( Exception e ) {
+
+            throw new PersistenceException( e.getMessage() );
+
+        }
+
+    }
+    
+    public void updatePassword( ObjectId userId, Map<String, String> params )
+            throws FormValidationException, NotFoundException, PersistenceException {
+
+        User user = findOne( userId );
+
+        if ( StringUtils.isNotBlank( params.get( "userPassword" ) ) ) {
+
+        	user.setPasswordHashFromPassword( params.get( "userPassword" ) );
 
         }
 
