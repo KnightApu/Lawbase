@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +57,9 @@ public class AdminUserRestController extends MongoRestController<User> {
 
         try {
 
-        	 Page<User> userPage = userService.findAll( offSet, size );
+        	 //Page<User> userPage = userService.findAll( offSet, size );
+        	 
+        	 Page<User> userPage = userService.findAll( new PageRequest( 0, userService.getSizeOfRepository() ) );
         	 
         	 return new DataTableResponseEntity<User>( userPage, sEcho );
         	
