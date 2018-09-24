@@ -65,6 +65,12 @@ public class UserService extends RepositoryService<User> {
 		return userRepository.save( user );
 		
 	}
+	
+	@Override
+	public int getSizeOfRepository() {
+		
+		return (int) userRepository.count();
+	} 
 
     public User createUser( String name, String userName, String email, String role, String password )
             throws RoleNotFoundException, PasswordException, PersistenceException {

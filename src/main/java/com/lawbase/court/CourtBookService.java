@@ -144,6 +144,7 @@ public class CourtBookService extends RepositoryService<CourtBook> {
         
     }
 
+    @Override
 	public int getSizeOfRepository() {
 		
 		return (int) courtBookRepository.count();

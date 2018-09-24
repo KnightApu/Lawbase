@@ -346,6 +346,7 @@ public class ActService extends RepositoryService<Act> {
 	        
 	}
 
+	@Override
 	public int getSizeOfRepository() {
 		
 		return  (int) actRepository.count();

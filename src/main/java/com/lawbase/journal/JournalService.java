@@ -64,6 +64,7 @@ public class JournalService extends RepositoryService<Journal> {
         
 	}
 
+    @Override
 	public int getSizeOfRepository() {
 		
 		return (int) journalRepository.count();

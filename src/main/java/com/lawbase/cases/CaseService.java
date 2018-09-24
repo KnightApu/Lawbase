@@ -104,6 +104,7 @@ public class CaseService extends RepositoryService<Case> {
         return caseRepository.findAll( pageable );
     }
     
+    @Override
     public int getSizeOfRepository(){
     	
     	return (int) caseRepository.count();
