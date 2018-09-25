@@ -114,12 +114,12 @@
                   	  	
                         $("#datatable").dataTable(
                         		{	
-	                        	    //"bServerSide": true,
+	                        	    "bServerSide": true,
                          			"destroy": true,
                          			"bFilter":false,
                          			//"bProcessing":true,
-                        	    	//"sAjaxSource": "/search-engine/case/findByField?" + param,
-                        	    	"sAjaxSource": "/front/rest/case/findByField?" + param,
+                        	    	"sAjaxSource": "/search-engine/case/findByField?" + param,
+                        	    	//"sAjaxSource": "/front/rest/case/findByField?" + param,
                         	    	"aoColumns": 
                         	    	[
                         	    		{
