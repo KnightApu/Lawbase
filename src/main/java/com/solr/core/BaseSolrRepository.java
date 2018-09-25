@@ -117,9 +117,31 @@ public class BaseSolrRepository<T, ID>{
         
         Pageable pageable = new SolrPageRequest( page, size );
         
-        Query query = new SimpleQuery();
+        Query query = buildQueryFromParameters( params );
+       
+        query.setPageRequest( pageable );
         
-        if ( StringUtils.isNoneBlank( params.get( "courtBookTitle" ) ) )
+        query.setTimeAllowed( timeout );
+        
+        SolrOperations solrOperations = getSolrOperations();
+        Class<T> entityClass = getEntityClass();
+        
+        return solrOperations.query(  query, entityClass );
+        
+    }
+    
+    /**
+     * 
+     * @param params
+     * @return
+     */
+    private Query buildQueryFromParameters( Map< String, String > params )
+    {
+    	
+    	Query query = new SimpleQuery();
+    	
+    	
+    	if ( StringUtils.isNoneBlank( params.get( "courtBookTitle" ) ) )
         {
         	Criteria criteria = new Criteria( "courtBookTitle" ).expression( "(\"" + params.get( "courtBookTitle" ) + "\")" );
             query.addCriteria( criteria );
@@ -161,15 +183,9 @@ public class BaseSolrRepository<T, ID>{
             query.addCriteria( criteria );
         }
         
-        query.setPageRequest( pageable );
-        
-        query.setTimeAllowed( timeout );
-        
-        SolrOperations solrOperations = getSolrOperations();
-        Class<T> entityClass = getEntityClass();
-        
-        return solrOperations.query(  query, entityClass );
-        
+    	    	
+    	return query;
+    	
     }
 
     public T findById(ID id) {
