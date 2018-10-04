@@ -8,6 +8,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.adhocmaster.mongo.PersistenceException;
@@ -345,27 +347,44 @@ public class UserService extends RepositoryService<User> {
 
     }
     
-    public void updatePassword( ObjectId userId, Map<String, String> params )
-            throws FormValidationException, NotFoundException, PersistenceException {
+    public void updatePassword( ObjectId userId, Map<String, String> params ) throws PersistenceException {
 
-        User user = findOne( userId );
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	
+    	String loggedInUserId = auth.getName();
+    	
+    	User loggedInUser = findOne( new ObjectId( loggedInUserId ) );
+    	
+    	if( loggedInUser.getRole() == Role.SUPER_ADMIN )
+    	{
+    		
+    		User user = findOne( userId );
 
-        if ( StringUtils.isNotBlank( params.get( "userPassword" ) ) ) {
+            if ( StringUtils.isNotBlank( params.get( "userPassword" ) ) ) {
 
-        	user.setPasswordHashFromPassword( params.get( "userPassword" ) );
+            	user.setPasswordHashFromPassword( params.get( "userPassword" ) );
 
-        }
+            }
 
-        try {
+            try {
 
-            save( user );
+                save( user );
 
-        } catch ( Exception e ) {
+            } catch ( Exception e ) {
 
-            throw new PersistenceException( e.getMessage() );
+                throw new PersistenceException( e.getMessage() );
 
-        }
+            }
 
+    	}
+    	else
+    	{
+    	//not the correct type of exception thrown
+    		throw new PersistenceException( "The password was not updated since you do not have the permission to change password" );
+    		
+    	}
+    	
+        
     }
 
 
