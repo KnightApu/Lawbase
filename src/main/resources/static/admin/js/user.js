@@ -1,4 +1,7 @@
-
+/**
+ * version 1.0
+ * @author Farin
+ */
 
 var user = {
 	
