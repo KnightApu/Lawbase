@@ -60,23 +60,23 @@
             <div class="form-group">
                 <label for="title" class="col-sm-5 control-label">Case name</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="firstParty" name="title1" placeholder="Claimant">
+                    <input type="text" class="form-control" id="firstParty" name="firstParty" placeholder="Claimant">
                     <div class="text-center">
                         VS
                     </div>
-                    <input type="text" class="form-control" id="secondParty" name="title2" placeholder="Defendant">
+                    <input type="text" class="form-control" id="secondParty" name="secondParty" placeholder="Defendant">
                 </div>
             </div>   
             <div class="form-group">
                 <label for="year" class="col-sm-5 control-label">Year</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="caseYear" name="year" placeholder="Year">
+                    <input type="text" class="form-control" id="year" name="year" placeholder="Year">
                 </div>
             </div>   
             <div class="form-group">
                 <label for="year" class="col-sm-5 control-label">Source</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="caseSource" name="source" placeholder="Source">
+                    <input type="text" class="form-control" id="sources" name="sources" placeholder="Source">
                 </div>
             </div>   
             <!-- 
@@ -91,7 +91,7 @@
             <div class="form-group" th:object="${courtBooks}">
                 <label for="treeTitle" class="col-sm-5 control-label">Court</label>
                 <div class="col-sm-7" >
-                	<select id="caseCourtBook">
+                	<select id="courtBookTitle" name="courtBookTitle">
                 		<ul th:each="court : ${courtBooks}">
 	                    	<option th:text=${court.getTitle()} th:value=${court.getTitle()}></option>
 	                 	</ul>
@@ -102,7 +102,7 @@
             <div class="form-group">
                 <label for="terms" class="col-sm-5 control-label">Search terms</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="caseSearchterms" name="terms" placeholder="will be searched in content">
+                    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="will be searched in content">
                 </div>
             </div>   
             <div class="form-group">

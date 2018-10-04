@@ -23,4 +23,6 @@ public abstract class RepositoryService<E> {
         
     }
     
+    abstract public int getSizeOfRepository();
+    
 }

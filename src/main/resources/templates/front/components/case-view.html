@@ -157,7 +157,14 @@
             				<table class="table table-striped" th:object="${caseBook}">
             					<tr>
                         			<td class="col-md-3 col-sm-3 col-xs-6" ><b>Transcript</b></td>
+                        		<!-- 
                         			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getTranscript()} id="transcript"></td>
+                        		 -->
+                        		</tr>
+                        		
+                        		<tr>
+                        			<td class="col-md-9 col-sm-9 col-xs-6" th:text=${caseBook.getTranscript()} id="transcript"></td>
+                        		
                         		</tr>
                     				
                    			</table>

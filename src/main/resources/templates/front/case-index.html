@@ -64,9 +64,15 @@
 			var parameter = "field="+field+"&value="+value;
 			console.log(parameter);
 			
+			
 			if(field != null)
 			{
-				dataTableLoadFromData(parameter);
+				dataTableLoadFromURL("/search-engine/case/findByField?"+parameter);
+			}
+			else
+			{
+				parameter = getFullUrlParams();
+				dataTableLoadFromURL("/search-engine/case/findByMultipleFields?"+parameter);	
 			}
 
 			
@@ -82,7 +88,7 @@
 	       		}
 	       		else
 	       		{
-	       			dataTableLoadFromData(dataFromForm);
+	       			dataTableLoadFromURL("/search-engine/case/findByField?"+dataFromForm);
 		         		
 	       		}
 	         	//alert("hi data from form"+dataFromForm )
@@ -114,6 +120,15 @@
 		       return decodeURI(results[1]) || 0;
 		    }
 		}
+		</script>
+		
+		<script>
+		function getFullUrlParams() {
+		    var params = {};
+		    var search = decodeURIComponent( window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ) );
+		    
+		    return search;
+		}    
 		</script>
 		
 

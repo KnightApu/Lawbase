@@ -70,11 +70,10 @@ public class AdminJournalRestController extends MongoRestController<Journal>{
     		) throws RestInternalServerException {
 
         try {
-        	
-        	 int page = offSet / size;
-        	 PageRequest pageRequest = new PageRequest(page, size);
+        	        	 
+        	 //Page<JournalManagementProjection> journalPage = journalService.findAllManagementProjection( offSet, size );
         	 
-        	 Page<JournalManagementProjection> journalPage = journalService.findAllManagementProjection(pageRequest);
+        	 Page<JournalManagementProjection> journalPage = journalService.findAllManagementProjection( new PageRequest( 0, journalService.getSizeOfRepository() ) );
         	 
         	 return new DataTableResponseEntity<JournalManagementProjection>( journalPage, sEcho );
         	

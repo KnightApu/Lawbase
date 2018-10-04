@@ -442,7 +442,14 @@ public class ArticleService extends RepositoryService<Article> {
         
         return findAllManagementProjection( pageRequest );
         
-}
+    }
+
+    @Override
+	public int getSizeOfRepository() {
+		
+		return (int) articleRepository.count();
+		
+	}
     
     
 }

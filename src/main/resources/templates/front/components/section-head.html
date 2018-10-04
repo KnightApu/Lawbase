@@ -297,7 +297,7 @@ _________________________________________________________ -->
 							var inputWord = dataFromForm;
 							console.log("the value from case modal:"
 									+ inputWord);
-
+							/*
 							var paramValue = "";
 
 							if (($("#firstParty").val() != "")
@@ -315,11 +315,15 @@ _________________________________________________________ -->
 
 								console.log("th param value for case"
 										+ paramValue);
+								
 
 								window.location
 										.replace("/front/case?field=all&value="
 												+ paramValue);
-							}
+								*/
+								window.location.replace("/front/case?"+ dataFromForm);
+						
+							//}
 
 						});
 
@@ -354,6 +358,28 @@ _________________________________________________________ -->
 							}
 
 						});
+				
+				$("#searchCaseByYearButton").click(
+						function() {
+
+							var dataFromForm = $("#searchCaseByYearModalForm")
+									.serialize();
+
+							var inputWord = dataFromForm;
+							console.log("the value from case by year modal:"
+									+ inputWord);
+
+							var paramValue = $("#yearSelection").val();
+							console.log("th param value for case"
+									+ paramValue);
+							
+							window.location
+							.replace("/front/case?field=year&value="
+									+ paramValue);
+
+
+						});
+				
 
 			});
 </script>

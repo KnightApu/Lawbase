@@ -1,5 +1,7 @@
 package com.solr.lawbase.search.cases;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +105,32 @@ public class CaseSearchRestController extends SolrRestController<Case, SolrCase>
         return super.findByFieldForDataTable( "all", value, sEcho, offset, size );
 
     }
+    
+    
+    /**
+     * 
+     * @param params comes from the parameters passed
+     * @param sEcho comes from datatable "sEcho"
+     * @param offSet comes from datatable "iDisplayStart"
+     * @param size comes from datatable "iDisplayLength"
+     * @return
+     * @throws RestInternalServerException, RestBadDataException
+     */
+    @RequestMapping( "/findByMultipleFields")
+    public DataTableResponseEntity<SolrCase> findByMultipleFields(
+
+    		@RequestParam Map<String, String> params,
+            @RequestParam( value = "sEcho", required = false, defaultValue = "1" ) int sEcho,
+            @RequestParam( value = "iDisplayStart", required = false, defaultValue = "0" ) int offSet,
+            @RequestParam( value = "iDisplayLength", required = false, defaultValue = "10" ) int size
+            
+            ) throws RestInternalServerException, RestBadDataException {
+        
+    	logger.info("Inside Case Search rest controller /findByMultipleFieldsMethod");
+        return super.findByMultipleFieldsForDataTable( params, sEcho, offSet, size );
+
+    }
+    
     
     @PreAuthorize( "hasAuthority('REBUILD_INDEX')" ) 
     @RequestMapping( "/rebuildIndex" )

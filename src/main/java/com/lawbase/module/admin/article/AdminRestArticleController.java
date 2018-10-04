@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,9 @@ public class AdminRestArticleController extends MongoRestController<Article> {
 
         try {
 
-        	 Page<ArticleManagementProjection> articlePage = articleService.findAllManagementProjection( offSet, size );
+        	// Page<ArticleManagementProjection> articlePage = articleService.findAllManagementProjection( offSet, size );
+        	 
+        	 Page<ArticleManagementProjection> articlePage = articleService.findAllManagementProjection( new PageRequest( 0, articleService.getSizeOfRepository() ));
         	 
         	 return new DataTableResponseEntity<ArticleManagementProjection>( articlePage, sEcho );
         	

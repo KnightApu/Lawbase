@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,10 @@ public class AdminRestCaseController extends MongoRestController<Case> {
 
         try {
 
-        	 Page<CaseManagementProjection> casePage = caseService.findAllManagementProjection( offSet, size );
+        	// Page<CaseManagementProjection> casePage = caseService.findAllManagementProjection( offSet, size );
+        	 
+        	 Page<CaseManagementProjection> casePage = caseService.findAllManagementProjection( new PageRequest( 0, caseService.getSizeOfRepository() ));
+
         	 
         	 return new DataTableResponseEntity<CaseManagementProjection>( casePage, sEcho );
         	

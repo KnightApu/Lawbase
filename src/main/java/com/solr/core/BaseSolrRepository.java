@@ -3,7 +3,9 @@ package com.solr.core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Page;
@@ -59,6 +61,21 @@ public class BaseSolrRepository<T, ID>{
         return findByField( SEARCH_TIME_OUT, fieldName, FieldValue, page, size );
         
     }
+    
+    /**
+     * default SEARCH_TIME_OUT is applied. If you need to change timeout please use the other method which allows overriding default search timeout.\n
+     * findByMultipleFields( int timeout, Map<String, String> params, int page, int size )
+     * @param params
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<T> findByMultipleFields( Map<String, String> params, int page, int size ) {
+        
+        return findByMultipleFields( SEARCH_TIME_OUT, params, page, size );
+        
+    }
+    
     /**
      * 
      * @param timeout 0 means unlimited time. given in miliseconds.
@@ -73,7 +90,7 @@ public class BaseSolrRepository<T, ID>{
         Pageable pageable = new SolrPageRequest( page, size );
 
         //Criteria criteria = new Criteria( fieldName ).is( FieldValue );
-        Criteria criteria = new Criteria( fieldName ).expression( "(" + FieldValue + ")" );
+        Criteria criteria = new Criteria( fieldName ).expression( "(\"" + FieldValue + "\")" );
         
         Query query = new SimpleQuery( criteria );
         
@@ -86,6 +103,89 @@ public class BaseSolrRepository<T, ID>{
         
         return solrOperations.query(  query, entityClass );
         
+    }
+    
+    /**
+     * 
+     * @param timeout 0 means unlimited time. given in miliseconds.
+     * @param params
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<T> findByMultipleFields( int timeout, Map<String, String> params, int page, int size ) {
+        
+        Pageable pageable = new SolrPageRequest( page, size );
+        
+        Query query = buildQueryFromParameters( params );
+       
+        query.setPageRequest( pageable );
+        
+        query.setTimeAllowed( timeout );
+        
+        SolrOperations solrOperations = getSolrOperations();
+        Class<T> entityClass = getEntityClass();
+        
+        return solrOperations.query(  query, entityClass );
+        
+    }
+    
+    /**
+     * 
+     * @param params
+     * @return
+     */
+    private Query buildQueryFromParameters( Map< String, String > params )
+    {
+    	
+    	Query query = new SimpleQuery();
+    	
+    	
+    	if ( StringUtils.isNoneBlank( params.get( "courtBookTitle" ) ) )
+        {
+        	Criteria criteria = new Criteria( "courtBookTitle" ).expression( "(\"" + params.get( "courtBookTitle" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "firstParty" ) ) )
+        {
+        	Criteria criteria = new Criteria( "firstParty" ).expression( "(\"" + params.get( "firstParty" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "secondParty" ) ) )
+        {
+        	Criteria criteria = new Criteria( "secondParty" ).expression( "(\"" + params.get( "secondParty" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "secondParty" ) ) )
+        {
+        	Criteria criteria = new Criteria( "secondParty" ).expression( "(\"" + params.get( "secondParty" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "year" ) ) )
+        {
+        	Criteria criteria = new Criteria( "year" ).expression( "(\"" + params.get( "year" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "sources" ) ) )
+        {
+        	Criteria criteria = new Criteria( "sources" ).expression( "(\"" + params.get( "sources" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+        if ( StringUtils.isNoneBlank( params.get( "keywords" ) ) )
+        {
+        	Criteria criteria = new Criteria( "keywords" ).expression( "(\"" + params.get( "keywords" ) + "\")" );
+            query.addCriteria( criteria );
+        }
+        
+    	    	
+    	return query;
+    	
     }
 
     public T findById(ID id) {

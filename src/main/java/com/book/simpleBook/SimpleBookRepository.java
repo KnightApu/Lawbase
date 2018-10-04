@@ -16,4 +16,6 @@ public interface SimpleBookRepository<T extends SimpleBook> extends MongoReposit
     
     public Page<T> findByStatus( Status status, Pageable page );
     
+    public Page<T> findByTitleContaining( String title, Pageable page );
+    
 }

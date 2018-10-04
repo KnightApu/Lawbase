@@ -8,6 +8,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.adhocmaster.mongo.PersistenceException;
@@ -65,6 +67,12 @@ public class UserService extends RepositoryService<User> {
 		return userRepository.save( user );
 		
 	}
+	
+	@Override
+	public int getSizeOfRepository() {
+		
+		return (int) userRepository.count();
+	} 
 
     public User createUser( String name, String userName, String email, String role, String password )
             throws RoleNotFoundException, PasswordException, PersistenceException {
@@ -241,6 +249,12 @@ public class UserService extends RepositoryService<User> {
             	updateServices( userId, params );
 
                 break;
+                
+            case "password" :
+
+            	updatePassword( userId, params );
+
+                break;
         }
 
         return user;
@@ -331,6 +345,46 @@ public class UserService extends RepositoryService<User> {
 
         }
 
+    }
+    
+    public void updatePassword( ObjectId userId, Map<String, String> params ) throws PersistenceException {
+
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	
+    	String loggedInUserId = auth.getName();
+    	
+    	User loggedInUser = findOne( new ObjectId( loggedInUserId ) );
+    	
+    	if( loggedInUser.getRole() == Role.SUPER_ADMIN )
+    	{
+    		
+    		User user = findOne( userId );
+
+            if ( StringUtils.isNotBlank( params.get( "userPassword" ) ) ) {
+
+            	user.setPasswordHashFromPassword( params.get( "userPassword" ) );
+
+            }
+
+            try {
+
+                save( user );
+
+            } catch ( Exception e ) {
+
+                throw new PersistenceException( e.getMessage() );
+
+            }
+
+    	}
+    	else
+    	{
+    	//not the correct type of exception thrown
+    		throw new PersistenceException( "The password was not updated since you do not have the permission to change password" );
+    		
+    	}
+    	
+        
     }
 
 

@@ -108,6 +108,8 @@ public class MongoAuthenticationProvider implements AuthenticationProvider {
 
 						return getAuthToken(user);
 					}
+					
+					throw new MongoAuthenticationException("User is not active");
 
 				}
 				if (user.getRole() == Role.findByName("ADMIN")) {

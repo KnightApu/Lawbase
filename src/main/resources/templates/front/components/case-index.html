@@ -106,7 +106,7 @@
                     	
                     });
                     */
-                    function dataTableLoadFromData (param){
+                    function dataTableLoadFromURL (param){
                   	  	//alert("the param in dataTable"+param);
                   	  	
                   	  	$("#tableTitle").show();
@@ -117,7 +117,9 @@
 	                        	    "bServerSide": true,
                          			"destroy": true,
                          			"bFilter":false,
-                        	    	"sAjaxSource": "/search-engine/case/findByField?" + param,
+                         			//"bProcessing":true,
+                        	    	"sAjaxSource": param,//"/search-engine/case/findByField?" + param,
+                        	    	//"sAjaxSource": "/front/rest/case/findByField?" + param,
                         	    	"aoColumns": 
                         	    	[
                         	    		{

@@ -103,6 +103,12 @@ public class CaseService extends RepositoryService<Case> {
 
         return caseRepository.findAll( pageable );
     }
+    
+    @Override
+    public int getSizeOfRepository(){
+    	
+    	return (int) caseRepository.count();
+    }
 
     public Case getCaseBook( ObjectId caseId ) throws FormValidationException, NotFoundException {
 
@@ -624,6 +630,122 @@ public class CaseService extends RepositoryService<Case> {
         
         return findAllManagementProjection( pageRequest );
         
-}
+    }
+    
+    public Page<Case> findByYear( int year, Pageable pageable)
+    {
+    	return caseRepository.findByYear( year, pageable );
+    }
+
+	public Page<Case> findByfield(String field, String value, int sEcho, int offSet, int size) throws PersistenceException {
+		// TODO Auto-generated method stub
+		
+		int page = offSet / size;
+		
+		PageRequest pageRequest = new PageRequest( page, size );
+		
+		Page<Case> casebook = null;
+		
+		 switch( field ) {
+
+         case "year":
+             
+             try { 
+                 
+            	 int tempPageSize = caseRepository.findByYear(Integer.parseInt(value)).size();
+            	
+            	 if( tempPageSize > 0 )
+            	 {
+            		 size = tempPageSize;
+            	 }
+            	 pageRequest = new PageRequest( page, size );
+         		
+            	 casebook = caseRepository.findByYear( Integer.parseInt( value ), pageRequest );
+                 
+             } catch ( Exception e ) {
+
+                 throw new PersistenceException( e.getMessage() );
+                 
+             }
+             
+             break;
+             
+         case "title":
+        	 
+        	 try {
+        		 
+        		 int tempPageSize = caseRepository.findByTitle( value ).size();
+             	
+        		 if( tempPageSize > 0 )
+            	 {
+            		 size = tempPageSize;
+            	 }
+            	 pageRequest = new PageRequest( page, size );
+                 
+            	 casebook = caseRepository.findByTitleContaining( value , pageRequest );
+                 
+             } catch ( Exception e ) {
+
+                 throw new PersistenceException( e.getMessage() );
+                 
+             }
+             
+             break;
+  
+         case "courtBookTitle":
+        	 
+        	 try { 
+                 
+        		 int tempPageSize = caseRepository.findByCourtBookTitleContaining( value ).size();
+             	
+        		 if( tempPageSize > 0 )
+            	 {
+            		 size = tempPageSize;
+            	 }
+        		 
+            	 pageRequest = new PageRequest( page, size );
+            	 casebook = caseRepository.findByCourtBookTitleContaining( value , pageRequest );
+                 
+             } catch ( Exception e ) {
+
+                 throw new PersistenceException( e.getMessage() );
+                 
+             }
+             
+             break;
+        /*
+         case "all":
+        	 
+        	 try { 
+                 
+        		 int tempPageSize = caseRepository.findByTitleOrCourtBookTitle( value ).size();
+             	
+        		 if( tempPageSize > 0 )
+            	 {
+            		 size = tempPageSize;
+            	 }
+        		 
+            	 pageRequest = new PageRequest( page, size );
+            	 casebook = caseRepository.findByTitleOrCourtBookTitle( value , pageRequest );
+                 
+             } catch ( Exception e ) {
+
+                 throw new PersistenceException( e.getMessage() );
+                 
+             }
+             
+             break;
+             */
+        	 
+		 }
+
+		return casebook;
+	}
+
+
+	public Page<Case> findByField(String field, String value, int page, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

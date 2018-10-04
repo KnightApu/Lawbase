@@ -1,5 +1,7 @@
 package com.adhocmaster.controller;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +83,51 @@ public abstract class SolrRestController<MongoEntity extends SimpleBook, T exten
         
 
     }
+    
+    /**
+     * 
+     * @param params contains the parameters passed and corresponding values of each parameter, paramater 'courtBookTitle' can not be blank
+     * @param sEcho
+     * @param offset
+     * @param size
+     * @return
+     * @throws RestInternalServerException
+     * @throws RestBadDataException
+     */
+    protected DataTableResponseEntity<T> findByMultipleFieldsForDataTable (
+
+            Map<String, String> params,
+            int sEcho,
+            int offset,
+            int size
+            
+            ) throws RestInternalServerException, RestBadDataException {
+        
+
+        if ( IsMaintenanceMode() )
+            throw new RestInternalServerException( new Exception( "search engine in maintenance mode." ) );
+
+        if ( StringUtils.isBlank( params.get( "courtBookTitle" ) ) )
+            throw new RestBadDataException( new Exception("court book title cannot be empty") );
+
+        try {
+
+            int page = offset / size;
+                    
+            Page<T> casePage = getRepository().findByMultipleFields( params, page, size );
+            
+            logger.info(casePage.getContent().toString());
+            
+            return new DataTableResponseEntity<T>( casePage, sEcho );  
+            
+        } catch ( Exception e ) {
+            
+            throw new RestInternalServerException( e );
+        }        
+        
+
+    }
+
 
     protected RestSuccess rebuildIndex() throws RestInternalServerException {
         
